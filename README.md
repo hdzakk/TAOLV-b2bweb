@@ -49,18 +49,21 @@ $ npm run start
         ├─components # ejs组件，比如头部、底部需要需要include的小模块
         │  ├─footer # 页尾
         │  ├─header # 页头
-        │  ├─side-menu # 侧边栏
-        │  └─top-nav # 顶部菜单
+        │  ├─top # 各页面头部菜单
+        │  ├─nav # 各页面头部顶部导航条
+        │  ├─aboutNav # 关于我们头部菜单
+        │  ├─userNav # 会员中心头部菜单
+        │  ├─zixunNav # 资讯头部菜单
+        │  └─userTemplate # 会员中心各个页面的模板
+        │  
         ├─config # 各种配置文件
         ├─iconfont # iconfont的字体文件
-        ├─imgs # 公用的图片资源
+        ├─images # 公用的图片资源
         ├─layout # UI布局，组织各个组件拼起来，因应需要可以有不同的布局套路
         │  ├─layout # 具体的布局套路
         │  └─layout-without-nav # 具体的布局套路
-        ├─less # less文件，用sass的也可以，又或者是纯css
-        │  ├─base-dir
-        │  ├─components-dir # 如果组件本身不需要js的，那么要加载组件的css比较困难，我建议可以直接用less来加载
-        │  └─base.less # 组织所有的less文件
+        ├─less # less文件
+        ├─script # 各页面的业务逻辑js文件
         ├─libs # 与业务逻辑无关的库都可以放到这里
-        └─logic # 业务逻辑
+        └─logic # 
 ```
