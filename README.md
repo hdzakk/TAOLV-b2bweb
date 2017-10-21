@@ -50,10 +50,6 @@ $ npm run start
         │  ├─footer # 页尾
         │  ├─header # 页头
         │  ├─side-menu # 侧边栏
-        │  ├─side-menu # 侧边栏
-        │  ├─side-menu # 侧边栏
-        │  ├─side-menu # 侧边栏
-        │  ├─side-menu # 侧边栏
         │  └─top-nav # 顶部菜单
         ├─config # 各种配置文件
         ├─iconfont # iconfont的字体文件
