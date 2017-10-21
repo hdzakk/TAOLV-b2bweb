@@ -1,4 +1,4 @@
-# webpack-seed
+# 淘绿web
 
 ## 注意
 本项目master分支已升级到`webpack2`版本，如需查看`webpack1`版本，请查看[webpack1_version](https://github.com/Array-Huang/webpack-seed/tree/webpack1_version)分支。
