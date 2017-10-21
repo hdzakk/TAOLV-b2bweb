@@ -28,7 +28,6 @@ $ npm run start
 ├─vendor # 所有不能用npm管理的第三方库
 ├─.babelrc # babel的配置文件
 ├─.eslintrc # ESLint的配置文件
-├─index.html # 仅作为重定向使用
 ├─package.json # npm的配置文件
 ├─webpack-config # 存放分拆后的webpack配置文件
 │   ├─base # 主要是存放一些变量
