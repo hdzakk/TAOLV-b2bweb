@@ -1,0 +1,20 @@
+<div id='user_header'>
+    <div class='tl_w warp_user_head'>
+        <a class='user_logo' href='/page/user/#/account/datum'><img src='<%= require('images/user/user_logo.png')%>' height='51' width='272'></a>
+        <ul class='user_nav_ul'>
+            <li><a href='/page/user/'>我的账户</a></li>
+            <li id='sales'><a href='/page/user/sales/'>委托销售</a></li>
+            <li id='purchase'><a href='/page/user/purchase/'>委托采购</a></li>
+            <!--<li id='assets'><a href='/page/user/assets'>我的资产</a></li>-->
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    !function(){
+        var c,e,f,a=window.location.href.match(/[^\/]\/page\/user\/([a-zA-Z]+)\//),
+        b=document.querySelector('.user_nav_ul'),d=b.children;
+        if (a) {if (a[1]=='a') return;};
+        for(e=0,f=d.length;f>e;e++)null!==a&&d[e].id===a[1]&&(c=e);c||(c=0),d[c].className="cur";
+    }();
+</script>
+<div class="page-loading" ng-hide="pageLoading">页面加载中...</div>

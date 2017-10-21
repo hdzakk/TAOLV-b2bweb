@@ -1,0 +1,57 @@
+<h3 class='box_head'>采购信息</h3>
+<div class='box_body pur_order'>
+	<div>
+		<h2 class='orderNum'>
+			采购单号：<span>{{cycleData.buyOrderSn}}</span>
+			订单状态：<span>{{cycleData.orderState}}</span>
+			采购总数：<span>{{cycleData.goodsTotalNum}}</span>
+			货款总额：<span>{{cycleData.goodsTotalPrice}}</span>
+			<!-- 会员名：<span>{{cycleData.menberName}}</span> -->
+		</h2>
+		<div class="pur_content">
+			<!-- <table class="info_table" cellspacing="0" cellpadding="0">
+				<tbody><tr>
+					<td style="" ><span style="width:auto;">采购总数：</span>{{cycleData.goodsTotalNum}}</td>
+					<td style="" ><span>货款总额：</span>{{cycleData.goodsTotalPrice}}元</td>
+					<td></td>
+					<td style="width:400px;" ><span>下单备注：</span>{{cycleData.paymentsRemark}}</td>
+				</tr>
+				<tr>
+					<td style="" ><span style="width:auto;">收货人：</span>{{cycleData.recoverUser}}</td>
+					<td style="" ><span style="text-align:right;">联系方式：</span> {{cycleData.recoverPhone}}</td>
+					<td style="width:400px;"><span>收货地址：</span>{{cycleData.recoverProvince}} {{cycleData.recoverCity}} {{cycleData.recoverArea}} {{cycleData.recoverAddress}}</td>
+				</tr>
+			</tbody></table> -->
+			<table cellspacing="0" cellpadding="0" class='cycle_table' style="margin-top:20px;">
+				<thead>
+					<tr>
+						<th>货物名称 </th>
+						<th>等级      </th>
+						<th>采购数量     </th>
+						<th>单位      </th>
+						<th>报价(元)  </th>
+						<th>总价(元) </th>
+						<th>采购周期(天) </th>
+						<th>货物说明</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="d in cycleData.shipmentForNum" ng-if="d.stateType!='3'">
+						<td style="min-width:100px;max-width:200px;">{{d.goodsName}}</td>
+						<td>{{d.gradeName}}</td>
+						<td>{{d.goodsNum}}</td>
+						<td>{{d.goodsUnit}}</td>
+						<td>{{(d.buyPrice*1||0).toFixed(2)}}</td>
+						<td>{{(d.buyPrice*d.goodsNum||0).toFixed(2)}}</td>
+						<td><input type="text" ng-model="d.addBuyCycle" class="cycleInput_{{$index}}"/></td>
+						<td style="max-width:200px;text-align: center;">{{d.withholdName | withhodName}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<p style="text-align: center;margin-top:30px;">
+			<a style="" class="btn_default" href="" ng-click="commitCycle();">确定周期</a>&nbsp;&nbsp;&nbsp;
+			<a style="" class="btn_default" href="javascript:history.go(-1);">返回列表</a>
+		</p>
+	</div>
+</div>

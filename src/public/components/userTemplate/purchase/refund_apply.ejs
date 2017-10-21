@@ -1,0 +1,110 @@
+<!-- 退款申请 -->
+<div class="details">
+	<h3  class='box_head'><span>退款申请</span> <a href="javascript:history.go(-1);" class='fr btn_default'>返回列表</a></h3>
+	<div class='box_body confirm_quotation refund_apply'>
+		<table class='quo_table' cellspacing="0" cellpadding="0">
+			<tr>
+				<td><em>采购单号：</em><span ng-bind="refundData.buyOrderSn"></span></td>
+				<td><em>下单时间：</em><span ng-bind="refundData.barnCreateDate"></span></td>
+				<td><em>状态进程：</em><span ng-bind="refundData.orderState"></span></td>
+			</tr>
+		</table>
+		<h3 class="title">下单信息：</h3>
+		<table cellspacing="0" cellpadding="0" style="margin-top:15px;">
+			<thead>
+				<tr>
+					<th>货物名称</th>
+					<th>等级</th>
+					<th>报价(元) </th>
+					<th>采购数量</th>
+					<th>单位</th>
+					<th>应付金额(元)</th>
+					<th>采购周期(天)</th>
+					<th>货物说明</th>
+					<th>审核报价（元）</th>
+					<th>审核金额（元）</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="d in refundData.shipmentForNum">
+					<td>{{d.goodsName}}</td>
+					<td>{{d.gradeName}}</td>
+					<td>{{(d.buyPrice*1).toFixed(2)}}</td>
+					<td>{{d.goodsNum | numFormat:d.goodsUnit}}</td>
+					<td>{{d.goodsUnit}}</td>
+					<td>{{(d.goodsNum*d.buyPrice).toFixed(2)}}</td>
+					<td>{{d.buyCycle}}</td>
+					<td>{{d.withholdName}}</td>
+					<td>{{(d.servicePrice*1).toFixed(2)}}</td>
+					<td>{{(d.goodsNum*d.servicePrice).toFixed(2)}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3 class="title">发货信息：</h3>
+		<p class="sign_info"><span>总数量：{{refundData.goodsTotalNum}}</span><span>货款金额：{{(refundData.goodsTotalPrice*1||0).toFixed(2)}}</span><span>下单备注：{{refundData.orderRemark}}</span></p>
+		<table cellspacing="0" cellpadding="0" style="margin-top:0px;">
+			<thead>
+				<tr>
+					<th>发货地区</th>
+					<th>详细地址</th>
+					<th>收货人</th>
+					<th>联系方式 </th>
+					<th>发货方式</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{refundData['sendProvince']}}-{{refundData['sendCity']}}-{{refundData['sendArea']}}</td>
+					<td>{{refundData['sendAddress']}}</td>
+					<td>{{refundData['recoverUser']}}</td>
+					<td>{{refundData['recoverTel']!=null&&refundData['recoverTel']!=""?refundData['recoverTel']+" / "+refundData['recoverPhone']:refundData['recoverPhone']}}</td>
+					<td>{{refundData['extractWay'] == "0" ? "快递" : "自提"}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="title">支付与费用信息：</p>
+		<table class='pay_info' cellspacing="0" cellpadding="0" style="margin-top:15px;">
+			<tbody>
+				<tr>
+					<td>支付方式：{{refundData['paymentsType']}}</td>
+					<td>定金：{{refundData['prepayFee']}}元</td>
+					<td>应退款：{{refundData['prepayFee']}} 元</td>
+					<!-- <td>实际退款：{{refundData['prepayFee']}} 元</td> -->
+				</tr>
+			</tbody>
+		</table>
+		<p class="title">申请原因：</p>
+		<div class="remarks">
+			<textarea id="textarea" placeholder="请填写订单备注信息"></textarea>
+		</div>
+
+
+	</div>
+	<div style="margin-top:30px;text-align: center;">
+		<a href="javascript:;" class="btn_default" ng-click="refund_apply_Prompt()">确认退款</a>&nbsp;&nbsp;
+		<a href="javascript:history.go(-1);" class="btn_default" ng-click="confirm_pay()">返回列表</a>
+	</div>
+</div>
+<style type="text/css">
+	.refund_apply .sign_info{
+		padding: 10px 0;
+		color:#999;
+		font-size:13px;
+	}
+	.refund_apply .sign_info span{
+		display:inline-block;
+		margin-right:30px;
+	}
+	.refund_apply .remarks{
+		margin-top: 10px;
+		width:100%;
+	}
+	.refund_apply .remarks textarea{
+		border:1px solid #DDDDDD;
+		width:100%;
+		height:80px;
+		outline:none;
+		padding: 5px;
+		max-width:100%;
+	}
+</style>

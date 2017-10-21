@@ -1,0 +1,454 @@
+/*!
+ * fullPage 2.8.9
+ * https://github.com/alvarotrigo/fullPage.js
+ * MIT licensed
+ *
+ * Copyright (C) 2013 alvarotrigo.com - A project by Alvaro Trigo
+ */
+html.fp-enabled,
+.fp-enabled body {
+    margin: 0;
+    padding: 0;
+    overflow:hidden;
+
+    /*Avoid flicker on slides transitions for mobile phones #336 */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+#superContainer {
+    height: 100%;
+    position: relative;
+
+    /* Touch detection for Windows 8 */
+    -ms-touch-action: none;
+
+    /* IE 11 on Windows Phone 8.1*/
+    touch-action: none;
+}
+.fp-section {
+    position: relative;
+    -webkit-box-sizing: border-box; /* Safari<=5 Android<=3 */
+    -moz-box-sizing: border-box; /* <=28 */
+    box-sizing: border-box;
+}
+.fp-slide {
+    float: left;
+}
+.fp-slide, .fp-slidesContainer {
+    height: 100%;
+    display: block;
+}
+.fp-slides {
+    z-index:1;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    -webkit-transition: all 0.3s ease-out; /* Safari<=6 Android<=4.3 */
+    transition: all 0.3s ease-out;
+}
+.fp-section.fp-table, .fp-slide.fp-table {
+    display: table;
+    table-layout:fixed;
+    width: 100%;
+}
+.fp-tableCell {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+}
+.fp-slidesContainer {
+    float: left;
+    position: relative;
+}
+.fp-controlArrow {
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    margin-top: -38px;
+    -webkit-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+.fp-controlArrow.fp-prev {
+    left: 15px;
+    width: 0;
+    border-width: 38.5px 34px 38.5px 0;
+    border-color: transparent #fff transparent transparent;
+}
+.fp-controlArrow.fp-next {
+    right: 15px;
+    border-width: 38.5px 0 38.5px 34px;
+    border-color: transparent transparent transparent #fff;
+}
+.fp-scrollable {
+    overflow: hidden;
+    position: relative;
+}
+.fp-scroller{
+    overflow: hidden;
+}
+.iScrollIndicator{
+    border: 0 !important;
+}
+.fp-notransition {
+    -webkit-transition: none !important;
+    transition: none !important;
+}
+#fp-nav {
+    position: fixed;
+    z-index: 100;
+    margin-top: -32px;
+    top: 50%;
+    opacity: 1;
+    -webkit-transform: translate3d(0,0,0);
+}
+#fp-nav.right {
+    right: 17px;
+}
+#fp-nav.left {
+    left: 17px;
+}
+.fp-slidesNav{
+    position: absolute;
+    z-index: 4;
+    left: 50%;
+    opacity: 1;
+    -webkit-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+.fp-slidesNav.bottom {
+    bottom: 17px;
+}
+.fp-slidesNav.top {
+    top: 17px;
+}
+#fp-nav ul,
+.fp-slidesNav ul {
+  margin: 0;
+  padding: 0;
+}
+#fp-nav ul li,
+.fp-slidesNav ul li {
+    display: block;
+    width: 14px;
+    height: 13px;
+    margin: 7px;
+    position:relative;
+}
+.fp-slidesNav ul li {
+    display: inline-block;
+}
+#fp-nav ul li a,
+.fp-slidesNav ul li a {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    text-decoration: none;
+}
+#fp-nav ul li a.active span,
+.fp-slidesNav ul li a.active span,
+#fp-nav ul li:hover a.active span,
+.fp-slidesNav ul li:hover a.active span{
+    height: 12px;
+    width: 12px;
+    margin: -6px 0 0 -6px;
+    border-radius: 100%;
+ }
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+    height: 4px;
+    width: 4px;
+    border: 0;
+    background: #fff;
+    left: 50%;
+    top: 50%;
+    margin: -2px 0 0 -2px;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+#fp-nav ul li:hover a span,
+.fp-slidesNav ul li:hover a span{
+    width: 10px;
+    height: 10px;
+    margin: -5px 0px 0px -5px;
+}
+#fp-nav ul li .fp-tooltip {
+    position: absolute;
+    top: -2px;
+    color: #fff;
+    font-size: 14px;
+    font-family: arial, helvetica, sans-serif;
+    white-space: nowrap;
+    max-width: 220px;
+    overflow: hidden;
+    display: block;
+    opacity: 0;
+    width: 0;
+    cursor: pointer;
+}
+#fp-nav ul li:hover .fp-tooltip,
+#fp-nav.fp-show-active a.active + .fp-tooltip {
+    -webkit-transition: opacity 0.2s ease-in;
+    transition: opacity 0.2s ease-in;
+    width: auto;
+    opacity: 1;
+}
+#fp-nav ul li .fp-tooltip.right {
+    right: 20px;
+}
+#fp-nav ul li .fp-tooltip.left {
+    left: 20px;
+}
+.fp-auto-height.fp-section,
+.fp-auto-height .fp-slide,
+.fp-auto-height .fp-tableCell{
+    height: auto !important;
+}
+
+.fp-responsive .fp-auto-height-responsive.fp-section,
+.fp-responsive .fp-auto-height-responsive .fp-slide,
+.fp-responsive .fp-auto-height-responsive .fp-tableCell {
+    height: auto !important;
+}
+
+//新增
+html,body{
+   overflow: hidden;;
+}
+ #fullpage{
+    opacity: 0;
+}
+
+#fullpage .section{
+    position: relative;
+}
+#topbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#header{
+    display: none;
+}
+.section .order_btn{
+    width: 100px;
+    padding-right: 20px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 16px;
+    color: #f62d13;
+    background: #FFFFFF url(../../images/zt/go.png) no-repeat 90px center;
+    border-radius: 3px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    margin: auto;
+    font-weight: bold;
+    &:hover{
+        background-color: #f1f1f1;
+    }
+}
+
+.transform(@form) {
+    -webkit-transform: e(@form);
+    -o-transform: e(@form);
+    -moz-transform: e(@form);
+    -ms-transform: e(@form);
+    transform: e(@form);
+}
+.transition(@form) {
+    -webkit-transition: e(@form);
+    -moz-transition: e(@form);
+    -ms-transition: e(@form);
+    -o-transition: e(@form);
+    transition: e(@form);
+}
+
+// 委托销售优势
+.section{
+    overflow: hidden;
+}
+.section .page{
+    max-width: 1200px;
+    min-width: 1024px;
+    min-height: 600px!important;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    &>div,&>img{
+        position: absolute;
+        z-index: 100;
+        .transition("all 1s");
+        opacity: 0;
+    }
+    // page1
+    .p1_text{
+        left: 0;
+        right: 0;
+        top: 10%;
+        margin: auto;
+        .transform("translate3d(0px,-50px,0) scale(0);");
+    }
+    .p1_y1{
+        left: 10%;
+        bottom: 20%;
+        .transform("translate3d(-50px,0px,0) scale(0);");
+    }
+    .p1_y2{
+        right: 10%;
+        bottom: 20%;
+        .transform("translate3d(50px,0px,0) scale(0);");
+    }
+    .p1_s{
+        left: 0;
+        right: 0;
+        top: 35%;
+        margin: auto;
+        .transform("translate3d(0px,-100px,0) scale(.6);");
+    }
+    .p1_text1{
+        text-align: center;
+        bottom: 30px;
+        width: 100%;
+        .transform("translate3d(0px,50px,0) scale(0);");
+        p{
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        span{
+            color: #999;
+            font-size: 14px;
+        }
+    }
+    // page2
+    .p2_text{
+        left: 0;
+        right: 0;
+        top: 10%;
+        margin: auto;
+        .transform("translate3d(0px,-50px,0) scale(0);");
+    }
+    .p2_left{
+        left: 50px;
+        bottom: 10%;
+        .transform("translate3d(-300px,0px,0) scale(1);");
+    }
+    .p2_right{
+        right: 50px;
+        bottom: 10%;
+        .transform("translate3d(300px,0px,0) scale(1);");
+    }
+    //page3
+    .p3_text{
+        left: 0;
+        right: 0;
+        top: 10%;
+        margin: auto;
+        .transform("translate3d(0px,-50px,0) scale(0);");
+    }
+    .p3_pic1{
+        left: 200px;
+        bottom: 0;
+        .transform("translate3d(0px,300px,0) scale(1);");
+    }
+    .p3_pic2{
+        left: 0px;
+        bottom: 0;
+        .transform("translate3d(0px,300px,0) scale(1);");
+    }
+    //page4
+    .p4_text{
+        left: 0;
+        right: 0;
+        top: 10%;
+        margin: auto;
+        .transform("translate3d(0px,-50px,0) scale(0);");
+    }
+    .p4_pic1{
+        left: 50px;
+        bottom: 10%;
+        .transform("translate3d(-300px,0px,0) scale(1);");
+    }
+     .p4_pic2{
+        right: 50px;
+        bottom: 10%;
+        .transform("translate3d(300px,0px,0) scale(1);");
+    }
+    // page5
+    .p5_text{
+        left: 0;
+        right: 0;
+        top: 10%;
+        margin: auto;
+        .transform("translate3d(0px,-50px,0) scale(0);");
+    }
+    .p5_pic1{
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        margin: auto;
+        .transform("translate3d(0px,0px,0) scale(0);");
+    }
+    .p5_text2{
+        left: 0;
+        right: 0;
+        bottom: 5%;
+        margin: auto;
+        .transform("translate3d(0px,100px,0) scale(0);");
+    }
+    //page6
+    .p6_text{
+        left: 0;
+        right: 0;
+        top: 10%;
+        margin: auto;
+        .transform("translate3d(0px,-50px,0) scale(0);");
+    }
+    .p6_pic1{
+        left: 0;
+        right: 0;
+        bottom: 5%;
+        margin: auto;
+        .transform("translate3d(0px,0px,0) scale(0);");
+    }
+}
+
+// 效果
+.section.active .page{
+    &>div,&>img{
+        opacity: 1;
+        .transform("translate3d(0px,0px,0) scale(1);");
+    }
+    .p1_s{
+         .transition("all .5s .5s");
+    }
+    // page3
+    .p3_pic1{
+         .transition("all .5s .5s");
+    }
+    // page5
+    .p5_pic1{
+        .transition("all .5s .5s");
+    }
+}

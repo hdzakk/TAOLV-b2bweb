@@ -1,0 +1,70 @@
+<h3 class='box_head'>出货记录</h3>
+<div class='box_body pur_order'>
+	<ul class="sales_head">
+		<li class="sales_noe">
+			<span>订单状态：</span>
+			<a href="" value="" class="cur">所有</a>
+			<a href="" value="1">待付款</a>
+			<a href="" value="2">未完成</a>
+			<a href="" value="3">已发货</a>
+		</li>
+		<li class="sales_two">
+			<span>发货日期：</span>
+			<input type="text" class="startDate" placeholder="请选择日期"> <i style="margin:0 5px;">-</i>
+			<input type="text" class="endDate" placeholder="请选择日期">
+			<span>最近：</span>
+			<a href="javascript:;" class="cur" data-day='-6' value="1">一周</a>
+			<a href="javascript:;" data-day='-30' value="2">1个月</a>
+			<a href="javascript:;" data-day='-90' value="3">3个月</a>
+			<a href="javascript:;" data-day='-365' value="4">1年</a>
+		</li>
+		<li>
+			<span class="fl">订单号：</span>
+			<div class="fl">
+				<input type="text" class="key" placeholder="请输入出货单号" ng-model="keyWord">
+				<a ng-click="check_polling()"><i></i></a>
+			</div>
+		</li>
+	</ul>
+	<div class="sales_list">
+		<p style="color:#999;">共 <span style="color:#666;">{{recordList.recordsFiltered||0}}</span> 条出货记录</p>
+		<table cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
+			<thead>
+				<tr><th>序号</th>
+				<th>出货单号</th>
+				<th>采购单号</th>
+				<th>发货时间</th>
+				<th>出货数量</th>
+				<th>出货总价(元)</th>
+				<!-- <th>支付方式</th> -->
+				<th>状态</th>
+				<th class="rigbor">操作</th>
+			</tr></thead>
+			<tbody>
+				<tr ng-if="!recordList.data.length">
+					<td colspan="14">暂无记录</td>
+				</tr>
+				<tr ng-repeat="d in recordList.data" ng-if="recordList.data.length">
+					<td>{{serialNumber+$index+1}}</td>
+					<td style="word-wrap: break-word;">{{d.shipmentSn}}</td>
+					<td style="word-wrap: break-word;">{{d.buyOrderSn}}</td>
+					<td>{{d.shipmentState=='已发货'||d.shipmentState=='已收货'?d.applyDate:'--'}}</td>
+					<td>{{d.shipmentRemark}}</td>
+					<td>{{d.depotSn}}</td>
+					<!-- <td>{{d.buyOrderPayments.paymentsType}}</td> -->
+					<td style="word-wrap: break-word;">{{d.shipmentState}}</td>
+					<td class='operation'>
+						<span>请选操作</span>
+						<div class='open_ul'>
+							<a href="#purchase/clear_details?shipmentSn={{d.shipmentSn}}&pay=0">出货单详情</a>
+							<a ng-show="d.stateType==5" ng-click="confirmGoodsReceipt(d.shipmentSn)">确认收货</a>
+							<a ng-show="d.stateType==2" href="#purchase/clear_details?shipmentSn={{d.shipmentSn}}">确认支付</a>
+							<!-- <a href="#purchase/pur_details?shipmentSn={{d.buyOrderSn}}">采购单详情</a> -->
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div id="Pagination" style="margin-top:25px;" class="page-pagination"></div>
+	</div>
+</div>

@@ -1,0 +1,293 @@
+<%= nav %>
+<div id="wrap_home" class='hide'>
+	<div id="banner">
+		<div class="home-slide slide">
+			<ul class='wrap-slide' id="home_banner">
+				<script type="text/html" id="script_banner">
+					(%
+						var b = SYLB.newsList;
+						var len = b.length;
+						for (var i = 0; i < len; i ++) {
+							var p = bannerParameter( b[i] , b[i].sn , b[i].showName );
+					%)
+						<li style="background: url((%=b[i].imageUrl%)) no-repeat center center;">
+							<a target="_blank" href="(%=p.url%)"></a>
+						</li>
+					(% } %)
+				</script>
+			</ul>
+		</div>
+		<div class="index_main_info" style="">
+			<a href="/page/sell/category.html">批量卖货</a>
+			<a href="/page/buy/category.html">批量买货</a>
+			<div class='wrap_icon'>
+				<p>
+					<a target="_blank" class='a1' href="/page/special/summary.html"><i></i>交易优势</a>
+					<a target="_blank" class='a2' href="/page/special/serviceCentre.html"><i></i>服务保障</a>
+				</p>
+				<p>
+					<a target="_blank" class='a3 homeQuote' href="javascript:;"><i></i>行情报价</a>
+					<a target="_blank" class='a4' href="/page/help/"><i></i>帮助中心</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div id="home_content">
+		<!-- 热门行情 -->
+		<div class='hot_market'>
+			<div class='con_title'>
+				<h1 class='fl'>热门行情</h1>
+				<!-- <a class='fr' href="">更多报价<span> ></span></a> -->
+			</div>
+			<div class='waste_phone'>
+				<p class='phone_title'>废旧手机</p>
+				<div class='phone_content waste_phone_slide'>
+					<div class='wrap-slide bd' id="waste_phone_ul">
+						<script type="text/html" id="script_waste">
+							<ul class='soll_ul'>
+								(% for (var i = 0; i < data.length; i ++) { 
+									var className = data[i].wavePrice<0?"fall":(data[i].wavePrice==0?"flat":"");
+									%)
+									<li>
+										<div class='up'>
+											<span title="(%=data[i].promodelName%)" class='fl'>(%=data[i].promodelName%)</span><p class='fr (%=className%)'><b>(%=data[i].weekPrice%)</b>元/(%=data[i].unit%)</p>
+										</div>
+										<div class='down'>
+											<i class='fl'>价格涨跌：</i>
+											<p class='fr (%=className%)'><font>(%=data[i].wavePrice%) &nbsp;&nbsp;(%=data[i].wavePercent%)% </font> <em>(%=data[i].wavePrice<0?"↓":(data[i].wavePrice==0?"－":"↑")%)</em></p>
+										</div>
+									</li>
+								(% } %)
+							</ul>
+						</script>
+					</div>
+					<span class="prev">&lt;</span>
+					<span class="next ">&gt;</span>
+				</div>
+			</div>
+			<div class='waste_phone'>
+				<p class='phone_title'>
+					<span class='fl'>二手手机（报价为A等级报价）</span>
+					<span class='fr tab_btn'></span>
+				</p>
+				<div class='phone_content second_phone second_phone_slide' style="display: block;">
+					<div class='wrap-slide bd' id="second_phone_ul">
+							<script type="text/html" id="script_second">
+								<ul class='soll_ul'>
+									(% for (var i = 0; i < data.length; i ++) { 
+										var className = data[i].wavePrice<0?"fall":(data[i].wavePrice==0?"flat":"");
+
+										%)
+										<li>
+											<div class='up'>
+												<span title="(%=data[i].brand%) (%=data[i].promodelName%)" class='fl'>(%=data[i].brand%) (%=data[i].promodelName%)</span><p class='fr (%=className%)'><b>(%=data[i].weekPrice%)</b>元/(%=data[i].unit%)</p>
+											</div>
+											<div class='down'>
+												<i class='fl'>价格涨跌：</i>
+												<p class='fr (%=className%)'><font>(%=data[i].wavePrice%) &nbsp;&nbsp;(%=data[i].wavePercent%)%</font> <em>(%=data[i].wavePrice<0?"↓":(data[i].wavePrice==0?"－":"↑")%)</em></p>
+											</div>
+										</li>
+									(% } %)
+								</ul>
+							</script>
+						
+					</div>
+					<span class="prev">&lt;</span>
+					<span class="next ">&gt;</span>
+				</div>
+			</div>
+		</div>
+		<!-- 我要买货 -->
+		<div class='buy_goods'>
+			<div class='con_title'>
+				<h1 class='fl'>我要买货</h1>
+				<a class='fr' href="/page/buy/">更多资源<span> ></span></a>
+			</div>
+			<div class='goods_content'>
+				<div class='fl buy_pic'>
+					<a href="/page/buy"><img src="<%= require('images/buy_pic.png') %>" height="318" width="490"></a>
+				</div>
+				<div class='good_info'>
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>货物名称</th>
+								<th>货物分类</th>
+								<th>数量</th>
+								<th>等级</th>
+								<th>单位</th>
+								<th>参考价（元）</th>
+								<th>所在地</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id="good_list_tbody">
+							
+							<script type="text/html" id="buyersGoods">
+								(% for (var i = 0; i < data.length; i ++) { %)
+									<tr>
+										<td style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;max-width: 150px;">(%=data[i].goodsName%)</td>
+										<td>(%=data[i].goodsCategory%)</td>
+										<td>(%=data[i].goodsNum%)</td>
+										<td>(%=data[i].gradeName%)</td>
+										<td>(%=data[i].goodsUnit%)</td>
+										<td style="width:110px;">(%=data[i].goodsPrice.toFixed(2)%)</td>
+										<td>(%=data[i].recoverCity%)</td>
+										<td><a data-index="(%=i%)" href="javascript:;">我要采购</a></td>
+									</tr>
+								(% } %)
+							</script>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- 我要卖货 -->
+		<div class='sale_goods'>
+			<div class='con_title'>
+				<h1 class='fl'>我要卖货</h1>
+				<a class='fr' href="/page/sell/">更多资源<span> ></span></a>
+			</div>
+			<div class='goods_content'>
+				<div class='fl sale_pic'>
+					<a href="/page/sell"><img src="<%= require('images/sale_pic.png') %>" height="380" width="490"></a>
+				</div>
+				<div class='good_info'>
+					<ul class='good_list_ul'>
+					<p style="text-align: center;height: 100%;line-height: 380px;">暂无数据！</p>
+						<script type="text/html" id="sellersGoods">
+						(%
+							for (var i = 0; i < data.length; i ++) {
+								var _name = filterName( data[i].BuyOrder.menberName || '--');//采购方
+								var _time = filterTime( data[i].gradeCreate );//采购时间
+						%)
+					 		<li>
+								<p class='info_title'>
+									<b>(%=data[i].buyOrderDetail.goodsName%)</b>&nbsp;&nbsp;&nbsp;
+									等级：<b style="font-weight: normal;margin: 0 50px 0 0px;">(%=data[i].gradeName%)</b>
+									剩余时间：
+									<span>(%=data[i].remainTime%)</span>
+									天
+
+								</p>
+								<p class='info_con'>
+									<span>采购方：(%=_name%)</span>
+									<span>采购数量：(%=data[i].buyNum%)(%=data[i].buyOrderDetail.goodsUnit%)</span>
+									<span>采购价格：(%=data[i].buyPrice.toFixed(2)%)元/(%=data[i].buyOrderDetail.goodsUnit%)</span>
+								</p>
+								<p class='info_con'>
+									<span>交货地：(%=data[i].buyOrderLogis.sendCity%)</span>
+									<span>发布时间：(%=data[i].gradeCreate.substring(0,10)%)</span>
+									<span>采购周期：(%=data[i].buyCycle%)天</span>
+								</p>
+								<a data-index="(%=i%)" class='(%=((data[i].remainTime==0&&data[i].finishDegree<100)||data[i].finishDegree==100||data[i].isStorage!=0?"not":"btn_supply")%)' href="javascript:;">我要供货</a>
+							</li>
+							(% } %)
+						</script>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- 公告动态 -->
+		<div class='tl_notice_quote'>
+			<div class='fl new_notice'>
+				<script type="text/html" id="tl_GGDT">
+					<div class='new_title'>
+						<p class='fl'>(%=GGDT.showName%)</p>
+						<a class='fr' href="/page/zixun/recommended_list.html?bitSn=(%=GGDT.sn%)&lm=(%=GGDT.showName%)" target="_blank">更多 +</a>
+					</div>
+					<div class='notice_list'>
+						(% 
+						var len = GGDT.newsList.length > 8 ? 8 : GGDT.newsList.length;
+						for (var i = 0; i < len; i ++) {
+							var p = parameter( GGDT.newsList[i] , GGDT.sn , GGDT.showName );
+						 %)
+							<a target="_blank" href='(%=p.url%)'>
+								<i class='fl'>【动态】(%=GGDT.newsList[i].newsTitle%)</i>
+								<span class='fr'>(%=p.time%)</span>
+							</a>
+
+						(%	} %)
+					</div>
+				</script>
+			</div>
+			<div class='fl everyday_quote'>
+				<div class='new_title'>
+					<p class='fl'>每日报价</p>
+					<span class='fr tab_nav'>
+						<a href="javascript:;" data-text="废旧手机">废旧手机</a>
+						<a href="javascript:;" data-text="废旧电脑">废旧电脑</a>
+						<a href="javascript:;" data-text="内存卡">内存卡</a>
+						<a class='dailyQuoteMore' target="_blank" href="/page/zixun/offer_list.html">更多 +</a>
+					</span>
+				</div>
+				<div class='everyday_list'>
+					<!-- <a href="">
+						<img src="images/quote.jpg" height="106" width="417">
+					</a> -->
+					<div class='txt_list' id="waste_phone" style="display: block;"></div>
+					<script type="text/html" id="dailyQuote">
+						(%
+							for (var i = 0; i < data.length; i ++) {
+						%)
+							<a target="_blank" href="/page/zixun/offer_details.html?time=(%=data[i].time%)&productCategory=(%=data[i].productCategory%)">
+								<i style="padding-left: 15px;" class='fl'>(%=data[i].title%)</i>
+								<span class='fr'>(%=data[i].time%)</span>
+							</a>
+						(% } %)
+					</script>
+				</div>
+			</div>
+			<div class='classify_quote'>
+				<div class='new_title'>
+					<p class='fl'>分类报价</p>
+					<a class='fr dailyQuoteMore' href="/page/zixun/offer_list.html" target="_blank">更多 +</a>
+				</div>
+				<div class='classify_con'>
+					<ul class='date_tab'></ul>
+					<div class='classify_list'>
+						
+					</div>
+					<script type="text/html" id="script_classified">
+						(% 
+					  		for (var i = 0; i < data.length; i ++) {
+						%)
+							<a>
+								<i style="padding-left: 15px;width:auto;" class='fl'>(%=data[i].classifyName%) </i>
+								<span class='fr'>(%=data[i].referencePrice||0%) 元/(%=data[i].unitValue%)</span>
+							</a>
+						(% } %)
+					</script>
+				</div>
+			</div>
+		</div>
+		<!-- 合作伙伴 -->
+		<div class='tl_partner'>
+			<div class='partner_head'>
+				<span class='fl'>合作伙伴</span>
+			</div>
+			<div class='wrap_partner partner_slide'>
+				<div class='wrap-slide' id="cooperationPartner">
+					<script type="text/html" id="tl_HZHB">
+					  (% 
+					  	for (var i = 0; i < HZHB.len; i ++) {
+						%)
+						<div class='partner_logo'>
+							(% 
+							var a_len = (i*10)+10;
+								a_len = a_len < HZHB.newsList.length ? a_len : HZHB.newsList.length;
+							for (var j = i*10; j < a_len; j ++) { 
+								var url = HZHB.newsList[j].url.indexOf('http://')==-1?'http://'+HZHB.newsList[j].url:HZHB.newsList[j].url;
+								%)
+								<a target="_blank" style="(%=((j+1)%5==0?'margin-right:0;':'')%)" href="(%=url%)"><img src="(%=HZHB.newsList[j].imageUrl%)" /></a>
+							(% } %)
+						</div>
+						(% } %)
+					</script>
+				</div>
+				<span class="last">&lt;</span>
+				<span class="next">&gt;</span>
+			</div>
+		</div>
+	</div>
+</div>

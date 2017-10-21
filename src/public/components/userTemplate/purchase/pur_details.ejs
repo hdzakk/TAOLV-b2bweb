@@ -1,0 +1,277 @@
+<!-- 销售订单详情 -->
+<div class="details">
+	<h3  class='box_head'>订单详情<a href="javascript:history.go(-1);" class="fr btn_default">返回列表</a></h3>
+	<div class='box_body'>
+		<ul class="pur_details">
+			<li>
+				<p class='title open'>
+					<span class='fl t_txt'>订单号：{{orderDetails.orderSn}}&nbsp;&nbsp;&nbsp;订单状态：{{orderDetails.orderState}}</span>
+				</p>
+				<div class='pur_content'>
+					<table class='or_table' cellspacing="0" cellpadding="0">
+						<tr>
+							<td>采购单号：<span>{{orderDetails.orderSn}}</span></td>
+							<td>下单时间：<span>{{orderDetails.orderDateCreate}}</span></td>
+							<td>订单状态：<span>{{orderDetails.orderState}}</span></td>
+							<!-- <td>发货方式：<span>分{{orderDetails.batchesNum}}批发货</span>&nbsp;&nbsp;
+								<span>{{orderDetails.extractWay == 0 ? '快递': '自提'}}</span></td> -->
+						</tr>
+					</table>
+					<p class='t_title'>订单状态：</p>
+					<table class='order_state' cellspacing="0" cellpadding="0">
+						<thead>
+							<tr>
+								<th class='state{{state_num}} {{orderType}}' colspan="6">&nbsp;</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td ng-repeat="d in logList">{{d.time}}</td>
+							</tr>
+						</tbody>
+					</table>
+					<p class='t_title'>付款信息：<!-- ：(未付货款=货款总额-已付货款-预付款金额） --></p>
+					<table cellspacing="0" cellpadding="0">
+						<thead>
+							<tr>
+								<!-- <th>订单总额（元）</th> -->
+								<th>实付总额（元）</th>
+								<th>定金方式</th>
+								<th>定金金额（元）</th>
+								<th>已付货款（元）</th>
+								<!-- <th>未付货款（元）</th>
+								<th>付款方式</th> -->
+								<th>服务费（元）</th>
+								<th>物流费（元）</th>
+								<th>送货费（元）</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<!-- <td>{{orderDetails.orderTotalPrice}}</td> -->
+								<td>{{(orderDetails.goodsTotalPrice*1||0).toFixed(2)}}</td>
+								<td> {{orderDetails.prepayRule}}</td>
+								<td>{{orderDetails.prepayFee != null ? (orderDetails.prepayFee*1).toFixed(2) : 0}}</td>
+								<td>{{(orderDetails.amountTotalPaid*1||0).toFixed(2)}}</td>
+								<!-- <td>{{orderDetails.surplusTotalPaid}}</td>
+								<td>{{orderDetails.paymentsType}}</td> -->
+								<td>{{(orderDetails.serviceCharge*1||0).toFixed(2)}}</td>
+								<td>{{(orderDetails.logisTotalPrice*1||0).toFixed(2)}}</td>
+								<td>{{(orderDetails.branTotalPrice*1||0).toFixed(2)}}</td>
+							</tr>
+						</tbody>
+					</table>
+					<!-- <div class='include'><em>订单总金额包括 </em> 
+						<span>服务费：{{orderDetails.serviceFee||0}} 元  </span>
+						<span>送货费：{{orderDetails.branTotalPrice||0}}元 </span>
+						<span>物流费：{{orderDetails.logisTotalPrice||0}} 元</span>
+					</div> -->
+					<p class='t_title'>出货信息：</p>
+					<table cellspacing="0" cellpadding="0">
+						<thead>
+							<tr>
+								<th>采购总数</th>
+								<th>发货方式</th>
+								<th>已出货数</th>
+								<th>未出货数</th>
+								<th>待出货数</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{orderDetails.orderTotalNum}}</td>
+								<td>分{{orderDetails.batchesNum}}批发货&nbsp;&nbsp;{{orderDetails.extractWay == 0 ? '快递': '自提'}}</td>
+								<td>{{orderDetails.alreadyShipmentNum}}</td>
+								<td>{{orderDetails.surplusTotalNum}}</td>
+								<td>{{orderDetails.waitShipmentNum}}</td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<!-- <p class="quick">
+						<span>快捷方式：</span>
+						<a ng-click="baojia('jiben')">下单信息</a>
+						<a ng-click="baojia('jieshou')">出货+付款记录</a>
+					</p> -->
+				</div>
+			</li>
+			<li>
+				<p class='title'>
+					<span class='fl t_txt'>下单信息</span>
+					<em class='fr r_txt'>采购总数：<b>{{orderDetails.orderTotalNum}}</b> &nbsp;&nbsp;&nbsp;货款总额：<b>{{(orderDetails.goodsTotalPrice*1||0).toFixed(2)}}</b> 元</em>
+				</p>
+				<div class='pur_content' style="display: none;">
+					<table class='info_table' cellspacing="0" cellpadding="0">
+						<tr>
+							<td style=""><span style="width:auto;">采购总数：</span>{{orderDetails.orderTotalNum}}</td>
+							<td style=""><span>货款总额：</span>{{(orderDetails.goodsTotalPrice*1||0).toFixed(2)}}元</td>
+							<td><span>下单备注：</span>{{orderDetails.orderRemark}}</td>
+						</tr>
+						<tr>
+							<td style=""><span style="width:auto;">收货人：</span>{{orderDetails.recoverUser}}</td>
+							<td style=""><span style="text-align:center;">联系方式：</span>{{orderDetails.recoverTel}} {{orderDetails.recoverPhone}}</td>
+							<td><span>收货地址：</span>{{orderDetails.recoverProvince}} {{orderDetails.recoverCity}} {{orderDetails.recoverArea}} {{orderDetails.recoverAddress}}</td>
+						</tr>
+					</table>
+					<table cellspacing="0" cellpadding="0">
+						<thead>
+							<tr>
+								<th>货物名称 </th>
+								<th>等级      </th>
+								<th>采购数量     </th>
+								<th>单位      </th>
+								<th>报价(元)  </th>
+								<th>总价(元) </th>
+								<th>采购周期(天) </th>
+								<th>{{goodsReason?'接受扣款原因':'货物说明'}}</th>
+							</tr>
+						</thead>
+						<tbody ng-repeat="d in applyShipment">
+							<tr>
+								<td>{{d.goodsName}}</td>
+								<td>{{d.gradeName}}</td>
+								<td>{{d.buyNum | numFormat:d.goodsUnit}}</td>
+								<td>{{d.goodsUnit}}</td>
+								<td>{{(d.goodsPrice||0).toFixed(2)}}</td>
+								<td>{{(d.gradeTotalPirce||0).toFixed(2)}}</td>
+								<td>{{d.buyCycle}}</td>
+								<td style="text-align: left;" ng-if="!goodsReason">{{d.gradeRemark}}</td>
+								<td style="text-align: left;" ng-if="goodsReason">{{d.gradeWithhold | debitReason}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</li>
+			<li>
+				<p class='title'>
+					<span class='fl t_txt'>出货+付款记录</span>
+					<em class='fr r_txt'>共 <b>{{shipmentList.totalCompleted||0}}</b> 条出货记录
+					&nbsp;&nbsp;&nbsp;&nbsp;未完成 <b>{{shipmentList.notCompleted||0}}</b> 条&nbsp;&nbsp;&nbsp;&nbsp;已完成 <b>{{shipmentList.completed||0}}</b> 条
+					</em>
+				</p>
+				<div class='pur_content' style="border:none;display: none;">
+					<!-- <table class='info_table' cellspacing="0" cellpadding="0">
+						<tr>
+							<td><span>采购总数：</span>{{orderDetails.orderTotalNum}}</td>
+							<td><span>已出货数：</span>{{orderDetails.alreadyShipmentNum}}</td>
+							<td><span>未出货数：</span>{{orderDetails.surplusTotalNum}}</td>
+							<td><span>待出货数：</span>{{orderDetails.waitShipmentNum}}</td>
+						</tr>
+						<tr>
+							<td><span>订单总额：</span>{{(orderDetails.factOrderTotalPrice*1||0).toFixed(2)}}元</td>
+							<td><span>货款总额：</span>{{(orderDetails.goodsTotalPrice*1||0).toFixed(2)}} 元</td>
+							<td><span>已付货款：</span>{{(orderDetails.amountTotalPaid*1||0).toFixed(2)}} 元</td>
+							<td><span>待付货款：</span>{{(orderDetails.waitShipmentPrice*1||0).toFixed(2)}}元</td>
+						</tr>
+						<tr>
+							<td><span>服务费总额：</span>{{(shipmentList.serviceTotalPrice != null ? shipmentList.serviceTotalPrice : 0).toFixed(2) }} 元</td>
+							<td><span>物流费总额：</span>{{(shipmentList.logisTotalPrice != null ? shipmentList.logisTotalPrice : 0).toFixed(2) }}元</td>
+							<td><span>送货费总额：</span>{{(shipmentList.branTotalPrice != null ? shipmentList.branTotalPrice : 0).toFixed(2) }} 元</td>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+					<p class='t_title'>采购品类出货汇总：</p>
+					<table cellspacing="0" cellpadding="0">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>货物名称</th>
+								<th>等级</th>
+								<th>采购数量</th>
+								<th>已出货数 </th>
+								<th>未出货数</th>
+								<th>待出货数</th>
+								<th>单位</th>
+								<th>报价（元）</th>
+								<th>剩余（天）</th>
+								<th>完成度</th>
+								<th>状态</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="d in shipmentList.shipmentApplyList">
+								<td>{{$index+1}}</td>
+								<td>{{d.goodsName}}</td>
+								<td>{{d.gradeName}}</td>
+								<td>{{d.goodsNum | numFormat:d.goodsUnit}}</td>
+								<td>{{d.alreadyShipmentNum | numFormat:d.goodsUnit}}</td>
+								<td>{{d.surplusShipmentNum | numFormat:d.goodsUnit}}</td>
+								<td>{{d.waitShipmentNum | numFormat:d.goodsUnit}}</td>
+								<td>{{d.goodsUnit}}</td>
+								<td>{{(d.servicePrice*1||0).toFixed(2)}}</td>
+								<td>{{d.remainTime}}</td>
+								<td>{{d.finishDegree}}%</td>
+								<td>{{d.gradeState}}</td>
+							</tr>
+							<tr ng-if="shipmentList.shipmentApplyList.length==0">
+								<td colspan="12">暂无记录</td>
+							</tr>
+						</tbody>
+					</table> -->
+					<p class='t_title' style="margin-top: 15px;">出货单记录：</p>
+					<table cellspacing="0" cellpadding="0">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>出货单号</th>
+								<th>发货时间</th>
+								<th>出货数量</th>
+								<th>货款总额(元)</th>
+								<th>费用总额(元)</th>
+								<th>实付金额(元)</th>
+								<th>状态</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody ng-repeat="d in shipmentList.shipmentList">
+							<tr>
+								<td>{{$index+1}}</td>
+								<td>{{d.shipmentSn}}</td>
+								<td>{{d.applyDate}}</td>
+								<td>{{d.goodsTotalNum}}</td>
+								<td>{{(d.goodsTotalFee*1||0).toFixed(2)}}</td>
+								<td>{{(d.otherTotalFee*1||0).toFixed(2)}}</td>
+								<td>{{(d.receivableTotalFee*1||0).toFixed(2)}}</td>
+								<td>{{d.shipmentState}}</td>
+								<td><a target='_blank' href="#/purchase/clear_details?shipmentSn=CH2017092001014&pay=0" class='tabBtn'>查看出货详情</a></td>
+							</tr>
+							<tr class='child'>
+								<td colspan="9">
+									<p style="text-align: left;width:98%;margin:0 auto;">
+										服务费：{{(d.serviceFee*1||0).toFixed(2)}}元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+										物流费：{{(d.logisFee*1||0).toFixed(2)}}元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										送货费：{{(d.barnFee*1||0).toFixed(2)}} 元
+									</p>
+									<table style="margin:10px auto 0 auto;width:98%;" cellspacing="0" cellpadding="0">
+										<thead>
+											<tr>
+												<th>序号</th>
+												<th>货物名称</th>
+												<th>等级</th>
+												<th>出货数量</th>
+												<th>单位</th>
+												<th>价格（元）</th>
+												<th>总价（元）</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="c in d.shipmentDetailList">
+												<td>{{$index+1}}</td>
+												<td>{{c.goodsName}}</td>
+												<td>{{c.gradeName}}</td>
+												<td>{{c.tradeNum | numFormat:c.goodsUnit}}</td>
+												<td>{{c.goodsUnit}}</td>
+												<td>{{(c.goodsPrice*1||0).toFixed(2)}}</td>
+												<td>{{(c.goodsTotalPrice*1||0).toFixed(2)}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

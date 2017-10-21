@@ -1,0 +1,165 @@
+<h3 class='box_head'>安全中心</h3>
+<div class='box_body security'>
+	<div class='safe_level'>
+		<div class='fl level_div'>
+			<em>安全级别</em>
+			<span class=''></span> &nbsp;&nbsp;<font>中</font>
+		</div>
+		<p class='fr level_p'>帐户安全等级低，请继续验证，提高安全等级!</p>
+	</div>
+	<ul class='safe_info_ul'>
+		<li class='s'>
+			<div class='safe_text'>
+				<span>登录密码</span>
+				<i>安全性高的密码可以使账号更安全，建议您定期更换密码，长度在6-20个字符，格式：“大小写字母+数字”</i>
+				<button class='revise_btn'>修改</button>
+			</div>
+			<div class='safe_revise' id="revise_password">
+				<ul class='pass_revise'>
+					<li>
+						<em>旧密码：</em>
+						<input id='usedPass' ng-model="usedPass" placeholder="请输入旧密码" type="password">
+					</li>
+					<li>
+						<em>新密码：</em>
+						<input ng-init="newPass=''" id='newPass' ng-model="newPass" placeholder="请输入新密码" type="password">
+					</li>
+					<li>
+						<em>确认密码：</em>
+						<input id='confirmPass' ng-model="confirmPass" placeholder="请再次输入新密码" type="password">
+					</li>
+					<li class='revise_btn_li'>
+						<em></em>
+						<a class='confirm' ng-click="safe.revisePassword()">确定</a>
+						<a class='cancel_btn'>取消</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li class='s' id="modifyPhone">
+			<div class='safe_text'>
+				<span>绑定手机</span>
+				<i>轻松找回密码，验证身份;已绑定：{{phone}}</i>
+				<button class='revise_btn'>修改</button>
+			</div>
+			<div class='safe_revise'>
+				<ul class='phone_revise' ng-show="!bangdingPhoneUl">
+					<li style="position: relative;">
+						<em>原验证绑定手机：</em>
+						<strong>{{phone}}</strong>
+						<a style="position: absolute;padding: 2px 10px;text-align: center;right: 335px;width: auto;" class='phone_code' href="javascript:;" ng-click="safe.get_phone_code($event,0)">获取验证码</a>
+					</li>
+					<li>
+						<em>手机验证码：</em>
+						<input id="primaryValidCode" placeholder="请输入正确的手机验证码" type="text">
+					</li>
+					<li class='revise_btn_li'>
+						<em></em>
+						<a class='confirm' ng-click="safe.bangdingPhone(0)">下一步</a>
+						<a class='cancel_btn'>取消</a>
+					</li>
+				</ul>
+				<ul class='phone_revise' ng-show="bangdingPhoneUl">
+					<li>
+						<em>新手机号：</em>
+						<input id="phone" ng-model="newPhone" placeholder="请输入新手机号" type="text">
+						<a class='phone_code' href="javascript:;" ng-click="safe.get_phone_code($event,1)">获取验证码</a>
+					</li>
+					<li>
+						<em>手机验证码：</em>
+						<input id="validCode" ng-model="validCode" placeholder="请输入正确的手机验证码" type="text">
+					</li>
+					<li class='revise_btn_li'>
+						<em></em>
+						<a class='confirm' ng-click="safe.bangdingPhone(1)">确定</a>
+						<a class='cancel_btn'>取消</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+	<!-- 	<li class='c' id="modifyMail">
+			<div class='safe_text'>
+				<span>验证邮箱</span>
+				<i><font>未认证</font> 您还未验证过邮箱，点击“立即启动”马上验证。</i>
+				<button class='revise_btn'>立即验证</button>
+			</div>
+			<div class='safe_revise'>
+				<ul class='mailbox_revise'>
+					<li>
+						<em>新绑定邮箱：</em>
+						<input placeholder="格式为：“xxx@xxxxx.com”" type="text">
+						<a class='phone_code' href="javascript:;">获取验证码</a>
+					</li>
+					<li>
+						<em>邮箱验证码：</em>
+						<input placeholder="输入正确的邮箱验证码" type="text">
+					</li>
+					<li class='revise_btn_li'>
+						<em></em>
+						<a class='confirm' ng-click="safe.bindingEmail()">确定</a>
+						<a class='cancel_btn'>取消</a>
+					</li>
+				</ul>
+			</div>
+		</li> -->
+		<li class="{{status=='1'?'s':'c'}}">
+			<div class='safe_text'>
+				<span>身份认证</span>
+				<i ng-if="status=='-1'"><font>未认证</font> 用于提升账号的安全性和信任级别,认证后有您的服务记录,所以不能修改认证信息。</i>
+				<i ng-if="status=='0'" style="color: #F68413;">您的身份信息正在审核中,请耐心等待</i>
+				<i ng-if="status=='1'">恭喜您实名认证成功,身份证号码（{{idCard}}）</i>
+				<i ng-if="status=='2'" style="color: #F62D13;">您的身份信息审核不通过，请重新上传身份信息。</i>
+
+				<button ng-if="status=='-1'" class='revise_btn'>立即认证</button>
+				<button ng-if="status=='2'" class='revise_btn'>重新审核</button>
+				<em ng-if="status=='0'" class='audit'>审核中</em>
+				<em ng-if="status=='1'" class='complete'>认证完成</em>
+			</div>
+			<div class='safe_revise safe_id'>
+				<ul class='identity_revise'>
+					<li>
+						<em>真实姓名：</em>
+						<input id="cardsName" value="{{cardData.name}}" placeholder="您的姓名" type="text">
+					</li>
+					<li>
+						<em>身份证号码：</em>
+						<input id="cardsCode" value="{{cardData.idCard}}" placeholder="请输入正确的身份证号码" type="text">
+					</li>
+					<li class='photo'>
+						<em class='fl'>身份证照片：</em>
+						<div class='fl id_pic'>
+							<div class='wrap_up'>
+								<span class='positive up_img'>
+								   <form id="frontPhotoUrlForm" enctype="multipart/form-data">
+								  		<input name="imagePath" value="idcard" type="hidden">
+								   		<input data-url="{{cardData.frontPhotoUrl}}" type="file" id="frontPhotoUrl" name="upfile" ng-click="safe.uploadCards('frontPhotoUrlForm',$event)"> 
+								   		<img class="{{status=='2'?'show':''}}"  src="{{cardData.frontPhotoUrl}}">
+								   </form>
+								</span>
+								<span class='opposite up_img'>
+									<form id="backPhotoUrlForm" enctype="multipart/form-data">
+										<input name="imagePath" value="idcard" type="hidden">
+										<input data-url="{{cardData.backPhotoUrl}}" type="file" id="backPhotoUrl" name="upfile" ng-click="safe.uploadCards('backPhotoUrlForm',$event)">
+										<img class="{{status=='2'?'show':''}}"  src="{{cardData.backPhotoUrl}}">
+									</form>
+								</span>
+							</div>
+							<p class='tips'>请上传身份证照片，身份证号码要清晰可见 [可联系客服协助上传照片]</p>
+						</div>
+					</li>
+					<li class='revise_btn_li'>
+						<em></em>
+						<a class='confirm' ng-click="safe.bindingCards()">确定</a>
+						<a class='cancel_btn'>取消</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</div>
+<script type="text/javascript">
+	function account_safe($scope){
+
+		
+	}
+</script>

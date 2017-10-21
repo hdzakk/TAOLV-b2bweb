@@ -1,0 +1,39 @@
+<div id="about_header">
+    <div class="about">
+        <p>
+            <a href="index.html?code=GYTL&lm=关于淘绿" ng-click="abuo()">
+                <img src="<%= require('images/about/about_logo.png')%>" alt="">
+            </a>
+        </p>
+        <ul id="gy_nav">
+        </ul>
+    </div>
+</div>
+<script id="aboutScript" type="text/javascript"></script>
+<script type="text/javascript">
+    document.getElementById('aboutScript').setAttribute('src',base_url + "/newsType/getDetailsNewsType.do?callback=getDetailsAboutType&code=GYWM")
+    function getDetailsAboutType(d){
+        var about = document.getElementById('gy_nav');
+        var li = '';
+        for (var i = 0,d = d.data.childrenNewsType, len = d.length; i < len; i++) {
+            var url = ''+d[i].code.toLowerCase()+'.html'
+            if (d[i].code == "GYTL") {
+                url = 'index.html';
+            };
+            li += "<li id="+d[i].code.toLowerCase()+"><a  ng-click='abuo()' href='"+url+"?typeSn="+d[i].sn+"&code="+d[i].code+"&lm="+encodeURIComponent(d[i].name)+"'>"+d[i].name+"</a></li>"
+        };
+        about.innerHTML = li;
+
+        !function(){
+            var c,e,f,a=window.location.href.match(/[^\/]\/page.+code=([a-zA-Z]+)&/),
+            b=document.querySelector('#gy_nav'),d=b.children;
+            if (!a) return;
+            for (var i = 0; i < d.length; i++) {
+                if (d[i].id == ''+a[1].toLowerCase()) {
+                    d[i].className = 'cur';
+                };
+            };
+        }();
+    }
+</script>
+<div class="page-loading" ng-hide="pageLoading">页面加载中...</div>

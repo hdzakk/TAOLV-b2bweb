@@ -1,0 +1,101 @@
+<!-- 销售订单详情 -->
+<div class="details">
+	<h3  class='box_head'><span>确认采购</span> <a href="javascript:history.go(-1);" class='fr btn_default'>返回列表</a></h3>
+	<div class='box_body confirm_quotation'>
+		<div class='countDown'>
+			<h3 class='title'>
+				您的订单报价已提交，报价24小时内有效，请在24小时内确认采购并支付定金。
+			</h3>
+			<p class='time'>注意：确认采购剩余时间 <em id="surplusTime">23时59分59秒</em>，如订单未能在指定时间内确认采购并支付定金，该订单将需要进行重新报价，谢谢~</p>
+		</div>
+		
+		<table class='quo_table' cellspacing="0" cellpadding="0">
+			<tr>
+				<td><em>采购单号：</em><span>{{orderQuotation.orderSn}}</span></td>
+				<td><em>下单时间：</em><span>{{orderQuotation.orderDateCreate}}</span></td>
+				<td><em>订单状态：</em><span>{{orderQuotation.orderState | orderState}}</span></td>
+				<td><em>发货方式：</em><span>分 {{orderQuotation.buyOrderLogis.batchesNum}} 批发货</span></td>
+			</tr>
+			<tr>
+				<td><em>收货人：</em><span>{{orderQuotation.buyOrderLogis.recoverUser}}</span></td>
+				<td><em>联系方式：</em><span>{{orderQuotation.buyOrderLogis.recoverPhone}}</span></td>
+				<td colspan="2"><em>收货地址：</em><span style="max-width:365px;">{{orderQuotation.buyOrderLogis.recoverProvince}}-{{orderQuotation.buyOrderLogis.recoverCity}}-{{orderQuotation.buyOrderLogis.recoverArea}}{{orderQuotation.buyOrderLogis.recoverAddress}}</span></td>
+			</tr>
+			<tr>
+				<td><em>采购总数：</em><span>{{orderQuotation.buyOrderTotal}}</span></td>
+				<td><em>货款总额：</em><span>{{(orderQuotation.totalMoney*1||0).toFixed(2)}}元</span></td>
+				<td colspan="2"><em>下单备注：</em><span>{{orderQuotation.orderRemark}}</span></td>
+			</tr>
+		</table>
+		<h3 class='title'>下单明细：</h3>
+		<table cellspacing="0" cellpadding="0" style="margin-top:10px;">
+			<thead>
+				<tr>
+					<th>货物名称 </th>
+					<th>等级</th>
+					<th>采购数量 </th>
+					<th>单位</th>
+					<th>客户报价(元)</th>
+					<th>客户总价(元) </th>
+					<th>审核报价(元) </th>
+					<th>审核总价(元)</th>
+					<th>采购周期(天) </th>
+					<th>货物说明</th>
+					
+				</tr>
+			</thead>
+			<tbody ng-repeat="d in orderQuotation.buyOrderEntrustDetailExtendList">
+				<tr ng-repeat="b in d.buyOrderEntrustDetailGradeList">
+					<td>{{d.goodsName}}</td>
+					<td>{{b.gradeName}}</td>
+					<td>{{b.buyNum}}</td>
+					<td>{{d.goodsUnit}}</td>
+					<td>{{(b.buyPrice*1||0).toFixed(2)}}</td>
+					<td>{{(b.buyPrice*b.buyNum||0).toFixed(2)}}</td>
+					<td>{{(b.servicePrice*1||0).toFixed(2)}}</td>
+					<td>{{(b.servicePrice*b.buyNum).toFixed(2)}}</td>
+					<td>{{b.buyCycle}}</td>
+					<td style="text-align: left;">{{(b.gradeRemark)}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>支付与费用信息： </p>
+		<table class='pay_info' cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<!-- <td>支付方式：{{orderQuotation.buyOrderPayments.paymentsType}}</td>
+					<td>使用卡券：无</td> -->
+					<td>服务费：{{(orderQuotation.buyOrderSummary.serviceFee*1||0).toFixed(2)}} 元</td>
+					<td>定金：{{(orderQuotation.buyOrderSummary.prepayFee*1||0).toFixed(2)}} 元</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<p class='list_btn'>
+			<a href="" ng-click="procu()">确认采购</a>
+			<!-- <a href="" ng-click="procug()">返回上一级</a> -->
+			<a href="" ng-click="order_cancel()">取消订单</a> 
+			<a href="javascript:history.go(-1);">返回</a>
+		</p>
+	</div>
+</div>
+<script type="text/html" id="procu">	
+	<div style='text-align:center;'>
+		<p style='font-size:20px;'>采购信息提交成功！</p>
+		<p style='margin-top:25px;'>温馨提示：采购信息已提交，请尽快支付定金，<br/>定金到账后我们的交易员才会为您备货~
+		</p>
+		<p style='margin-top:20px;'>定金：<span style="color: #F62D13;">{{(orderQuotation.buyOrderSummary.prepayFee*1||0).toFixed(2)}}元</span></p>
+		
+	</div>
+</script>
+<script type="text/html" id="order_cancel">	
+	<div style='text-align:center;'>
+		<p>您确定要取消订单吗？</p>
+		<p class='info'> 
+			<a>确认</a> <a href="javascript:layer.closeAll();">取消</a>
+		</p>
+	</div>
+</script>

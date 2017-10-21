@@ -1,0 +1,51 @@
+<%= nav %>
+<div id="buy_content" class='tl_w hide' :class="{show:pageLoading}">
+	<p class="prompt">提示操作：请在需要进行委托采购的货物后面输入对应的报价和采购数量，选择完了之后点击委托采购进行下单。</p>
+	<div class="navigation">
+		<a @click="clickSellClassifyInfo(d.typeName,$event,$index)" v-for="(d,$index) of categoryList" href="javascript:;"  :class="{noBor:categoryList.length-1==$index&&categoryList.length>11,'active':$index==0}">((d.typeName))</a>
+	</div>
+	<div id="gradeless" class='gradeless' v-show="!isSecond">
+		<table class="cargo_box" >
+			<thead>
+				<th>货物名称</th>
+				<th>货物说明</th>
+				<th>报价（元）</th>
+				<th>单位</th>
+				<th>采购数量</th>
+			</thead>
+			<tbody>
+				<tr v-for="d of typeList" is="tr-component" :obj="d"></tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="5" class=" view tc">
+						<a class='entrust' href="JavaScript:;" @click="go_order_info(1)">委托采购</a>
+						<a class='view' href="/page/buy/index.html">查看采购信息</a>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<!-- 二手 -->
+	<second-hand v-show="isSecond" style="display: none;" ref="second"></second-hand>
+</div>
+<!-- 接受扣款原因修改弹窗 -->
+<div class='larey_bg'  style="display: {{reason?'block':'none'}};">
+	<div class='debit_reason'>
+		<p class='t'>选择您可以接受的扣款原因</p>
+		<div class='reason_centent'>
+			<!-- <p style="color:#F6331A;">说明：默认选择1,2,3,4,5,8</p> -->
+			<div class='wrap_label'>
+				<label ng-repeat="d in reason track by $index">
+					<input value="checkbox" ng-checked="d.checked" ng-model="d.checked" type="checkbox"/>
+					<span ng-bind="d.name"></span>
+				</label>
+			</div>
+		</div>
+		<div class='reason_btn'>
+			<a href="javascript:;" ng-click="determineReason()">确定</a>
+			<a href="javascript:;" ng-click="reason=false">取消</a>
+		</div>
+		<a href="javascript:;" ng-click="reason=false" class='close iconfont'>&#xe652;</a>
+	</div>
+</div>

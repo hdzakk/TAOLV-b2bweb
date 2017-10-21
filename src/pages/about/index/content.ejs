@@ -1,0 +1,248 @@
+<%= nav %>
+<div style='min-height:600px;'>
+	<div class='hide'  ng-class="{show:pageLoading}">
+		<div class="about_banner">
+			<!-- <p >全面化的环保回收服务，推进中国再生资源产业发展</p> -->
+		</div>
+		<div  class="about_heade">
+			<ul style="width: 835px;">
+				<li ng-repeat="d in about_data" id="a_{{d.code.toLowerCase()}}" ng-click="about_click($event)">
+					<a href="#about_{{d.code.toLowerCase()}}/{{d.sn}}">{{d.name}}</a>
+				</li>
+				
+				<li id="a_{{tjData.FZLC.code.toLowerCase()}}" ng-click="about_click($event)">
+					<a href="#about_{{tjData.FZLC.code.toLowerCase()}}/{{tjData.FZLC.sn}}">{{tjData.FZLC.showName}}</a>
+				</li>
+				<!-- <li id="a_{{tjData.SHZR.code.toLowerCase()}}" >
+					<a href="{{tjData.SHZR.jumpUrl}}" target="_blank">{{tjData.SHZR.showName}}</a>
+				</li> -->
+				<li id="a_{{tjData.TLFC.code.toLowerCase()}}" ng-click="about_click($event)"class='lyshi'>
+					<a href="#about_{{tjData.TLFC.code.toLowerCase()}}/{{tjData.TLFC.sn}}">{{tjData.TLFC.showName}}</a>
+				</li>
+				<!-- <li ng-repeat="c in tjData"id="a_{{c.code.toLowerCase()}}" ng-click="about_click($event)">
+					<a href="#about_{{c.code.toLowerCase()}}/{{c.sn}}">{{c.name}}</a>
+				</li> -->
+			</ul>
+		</div>
+		<div ng-view style='min-height:100px;'></div>
+		<!-- 淘绿简介 -->
+		<script type="text/html" id="tljj_view">
+			<div id="tljj">
+				<div class="about_center" >
+					<p>
+						<span class="fl">{{tljj.title}}</span>
+					</p>
+					<div ng-bind-html="tljj.webBody">		
+					</div>	
+				</div>
+			</div>
+		</script>
+		<!-- 荣誉资质 -->
+		<script type="text/html" id="fyzz_view">
+			<div id="ryzz">
+				<p>
+					<span class="fl">{{tljj.title}}</span>
+				</p>
+				<!--<div  ng-bind-html="tljj.webBody">
+				</div> -->
+				<div>
+                    <div class="honor_head">
+						<div class="qualification">
+						     <p>淘绿打造中国特色回收体系，实现平台利益共同体，引领行业信心，造就环保生活，创造社会价值。公司在发展过程中不断优化各种资源，已经与环保组织、慈善机构、行业协会、国内外的多家知名环保企业建立了战略合作伙伴关系，并取得相关企业资质及获得多项荣誉。</p>
+						     <div class="qualification_center YLlightbox">
+						     	 <a href="<%= require('images/about/r/1.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/1.jpg')%>" />
+							       <p>全国互联网+流通典型企业</p>
+							    </a>
+							    <a href="<%= require('images/about/r/2.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/2.jpg')%>" />
+							       <p>副会长单位_中国物资再生协会</p>
+							    </a>
+							    <a href="<%= require('images/about/r/3.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/3.jpg')%>" />
+							       <p>副会长单位_贵屿再生资源协会</p>
+							    </a>
+							    <a href="<%= require('images/about/r/4.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/4.jpg')%>" />
+							       <p>手机生产者责任延伸试点单位</p>
+							    </a>
+							     <a href="<%= require('images/about/r/5.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/5.jpg')%>" />
+							       <p>电器电子产品生产者责任延伸首批试点单位</p>
+							    </a>
+							    <a href="<%= require('images/about/r/6.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/6.jpg')%>" />
+							       <p>电器电子产品生产者责任延伸首批试点单位</p>
+							    </a>
+							    <a href="<%= require('images/about/r/7.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/7.jpg')%>" />
+							       <p>废旧电器电子产品回收示范基地</p>
+							    </a>
+							    
+							     <a href="<%= require('images/about/r/8.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/8.jpg')%>" />
+							       <p>社会团体分支机构登记证书</p>
+							    </a>
+							    <a href="<%= require('images/about/r/9.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/9.jpg')%>" />
+							       <p>上海电子废弃物资源化协同创新基地</p>
+							    </a>
+							    <a href="<%= require('images/about/r/10.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/10.jpg')%>" />
+							       <p>上海第二工业大学_联合培养研究生实践基地</p>
+							    </a>
+							   
+							    <a href="<%= require('images/about/r/11.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/11.jpg')%>" />
+							       <p>再生资源循环利用产学研合作实践基地</p>
+							    </a>
+							    <a href="<%= require('images/about/r/12.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/12.jpg')%>" />
+							       <p>创业之星荣誉证书</p>
+							    </a>
+							    
+							     <a href="<%= require('images/about/r/13.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/13.jpg')%>" />
+							       <p>北京市国际科技合作基地</p>
+							    </a>
+							     <a href="<%= require('images/about/r/14.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/14.jpg')%>" />
+							       <p>深圳市高新技术企业</p>
+							    </a>
+							     <a href="<%= require('images/about/r/15.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/15.jpg')%>" />
+							       <p>国家高新企业证书</p>
+							    </a>
+							    <a href="<%= require('images/about/r/16.jpg')%>" rel="YLlightbox">
+							       <span></span>
+							       <img src="<%= require('images/about/r/16.jpg')%>" />
+							       <p>深圳市高新企业</p>
+							    </a>
+							   
+						     </div>
+						    </div>
+						   </div>
+						   <div class="honor_center">
+						    <div class="computer">
+						     <p>计算机注册著作权</p>
+						    </div>
+						    <div class="certificate YLlightbox">
+							    <a href="<%= require('images/about/r/z/1.jpg')%> " rel="YLlightbox">
+								    <img src="<%= require('images/about/r/z/1.jpg')%> " />
+								    <p>再生资源回收体系信息化系统</p>
+							    </a>
+							    <a href="<%= require('images/about/r/z/2.jpg')%> " rel="YLlightbox">
+								    <img src="<%= require('images/about/r/z/2.jpg')%> " />
+								    <p>委托交易系统</p>
+							    </a>
+							    <a href="<%= require('images/about/r/z/3.jpg')%> " rel="YLlightbox">
+								    <img src="<%= require('images/about/r/z/3.jpg')%> " />
+								    <p>委托采购管理</p>
+							    </a>
+							    <a href="<%= require('images/about/r/z/4.jpg')%> " rel="YLlightbox">
+								    <img src="<%= require('images/about/r/z/4.jpg')%> " />
+								    <p>手机估值系统</p>
+							    </a>
+							    <a href="<%= require('images/about/r/z/5.jpg')%> " rel="YLlightbox">
+								    <img src="<%= require('images/about/r/z/5.jpg')%> " />
+								    <p>手机回收换助学灯系统</p>
+							    </a>
+							    <a href="<%= require('images/about/r/z/6.jpg')%> " rel="YLlightbox">
+								    <img src="<%= require('images/about/r/z/6.jpg')%> " />
+								    <p>手机在线回收管理系统</p>
+							    </a>
+							    <a href="<%= require('images/about/r/z/7.jpg')%> " rel="YLlightbox">
+								    <img src="<%= require('images/about/r/z/7.jpg')%> " />
+								    <p>电子废料报价中心</p>
+							    </a>
+						    </div>
+						   </div>
+
+				</div>	
+			</div>
+		</script>
+		<!-- 淘绿风采 -->
+		<script type="text/html" id="tlfc_view">
+			<div id="tlfc">
+				<p>
+					<span class="fl">{{tjData.TLFC.showName}}</span>
+				</p>
+				<span style="line-height:26px;">
+					淘绿人，坚持绿色、环保的公益理念，以环境责任与企业社会责任为己任，从“心”做起，我们是一群激情、环保、热爱公益，拥有绿色梦想的追梦人。
+				</span>
+				<!-- <h3>公益环保，从淘绿开始！</h3>-->
+				<div class="public" ng-repeat="d in tjData.TLFC.newsList" >
+					<a href="{{d | bitUrl:tjData.TLFC.sn:tjData.TLFC.showName}}" target="_blank">
+						<img src="{{d.imageUrl}}" alt="" />
+					</a>
+					<p ng-bind="d.newsTitle"></p>
+				</div>
+				<a ng-show='{{tjData.TLFC.jumpUrl}}' href="{{tjData.TLFC.jumpUrl}}"  target="_blank">点击加载更多</a>
+			</div>	
+		</script>
+		<!-- 发展历程 ng-if="$index<2"-->
+		<script type="text/html" id="fzlc_view">
+			<div id="fzlc">
+				<div class="development">
+					<p>
+						<span class="fl">{{tjData.FZLC.showName}}</span>
+					</p>
+					<div class="course">
+						<ul ng-repeat="b in yearData">
+							<li class="years">{{b}}年</li>
+							<li class="figure dynamic" ng-class="{noImg:!c.imageUrl}" ng-repeat="c in arrData[$index]" ng-if="$index<2"> 
+								<i>{{c.findKey}}</i>
+								<div>
+									<b></b>
+									<p class="course_left" ng-if="c.imageUrl">
+										<a href="{{c | bitUrl:tjData.FZLC.sn:tjData.FZLC.showName}}" target="_blank">
+											<img src="{{c.imageUrl}}" alt=""/>
+										</a>
+									</p>
+									<p class="course_right" ng-bind-html="c.webText">
+									</p>
+								</div>
+							</li>
+							<li class="ziti dynamic" ng-if="arrData[$index].length>2">
+								<div><a href="" class="jump">>>查看更多</a></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div id="development_child" style="display:none;">
+					<p>
+						<span class="fl">发展历程</span>
+						<span class="fr"><a href="javascript:;" style="color: #0eb83b;" class="jrmp"><font style="font-family: '宋体';font-weight: bold;"><<</font> 返回</a></span>
+					</p>
+					<div class="course">
+						<ul ng-repeat="d in yearData" ng-init="index=$index" style="padding-left: 46px;">
+							<li class="years" >{{d}}年</li>
+							<li class="no_figure" ng-repeat="c in arrData[index]">
+								<i  ng-bind='c.findKey'></i><b></b>
+								<p ng-bind-html="c.webText"></p>
+								<span ng-if='arrData[index].length>1' class="fr open_show" >{{$index==0?'+ 展开':''}}
+								</span>
+							</li>
+							<li class="under_no"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</script>
+	</div>
+</div>

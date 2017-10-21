@@ -1,0 +1,68 @@
+<h3 class='box_head'>我的资料</h3>
+<div class='box_body' ng-show="datum">
+	<ul class='user_datum_ul' ng-show="infoShow">
+		<li><span>用户名：</span><p>{{user_datum.name}}</p></li>
+		<li><span>真实姓名：</span><p>{{user_datum.nickName}}<i ng-if="!user_datum.nickName">未设置</i></p></li>
+		<li><span>性别：</span><p>{{user_datum.sex==0?'男':'女'}}</p></li>
+		<li><span>生日：</span><p>{{user_datum.birthday}}<i ng-if="!user_datum.birthday">未设置</i></p></li>
+		<li><span>手机号码：</span><p>{{user_datum.phone}} <i ng-if="user_datum.ckPhone==1">（已验证）</i> <em ng-if="user_datum.ckPhone==0">（未验证）</em><a href="#account/safe?id=modifyPhone">修改</a></p></li>
+		<!-- <li><span>QQ号码：</span><p>{{user_datum.phone}}</p></li> -->
+		<li><span>固定电话：</span><p>{{user_datum.telephone}}<i ng-if="!user_datum.telephone">未设置</i></p></li>
+		<li><span>所在地址：</span><p>{{address}}<i ng-if="!address">未设置</i></p></li>
+		<li><span>邮政编码：</span><p>{{user_datum.postCode}}<i ng-if="!user_datum.postCode">未设置</i></p></li>
+		<!-- <li><span>邮箱：</span><p>{{user_datum.email}}<i ng-if="user_datum.ckEmail==1">（已验证）</i> <em ng-if="user_datum.ckEmail==0">（未验证）</em><a ng-if="user_datum.ckEmail==1" href="#account/safe?id=modifyMail">修改</a></p></li>
+		<li><span>注册时间：</span><p>{{user_datum.createDate | toDate}}</p></li> -->
+		<!-- <li><span>最近登录时间：</span><p>2016-10-10 10：13</p></li>
+		<li><span>访问总次数：</span><p>66次</p></li> -->
+		<li class='btn'><p><button ng-click="revise_info()">修改信息</button></p></li>
+		<li class='portrait'>
+			<form>
+				<span><img ng-src="{{user_datum.imageUrl?user_datum.imageUrl:'<%= require('images/user/user_image.png')%>'}}" height="130" width="130" src="/images/blank.gif"></span>
+				<!-- <i>
+					<input type="file" value="[更换头像]">		
+					[更换头像]						
+				</i> -->
+			</form>
+		</li>
+	</ul>
+	<!-- 修改 -->
+	<ul class='user_datum_ul modify_info_ul' ng-show="!infoShow">
+		<li class='user_name'><span>真实姓名：</span><p><input value="{{user_datum.nickName}}" placeholder="请输入真实姓名" class='text nickName' type="text" /></p></li>
+		<!-- <li><span>真实姓名：</span><p><input placeholder="您的姓名" class='text' type="text" /></p></li> -->
+		<li><span>性别：</span><p class='sex'><label><input ng-checked="!user_datum.sex" value="0" type="radio" name='sex'/> 男</label><label><input ng-checked="!!user_datum.sex" type="radio" value="1"  name='sex'/> 女</label></p></li>
+		<li>
+			<span>生日：</span>
+			<p>
+				<select rel="{{birthdayArr[0]}}" id="sel_year" class="form-control"></select>&nbsp;年&nbsp;
+				<select rel="{{birthdayArr[1]}}" id="sel_month" class="form-control"></select>&nbsp;月&nbsp;
+				<select rel="{{birthdayArr[2]}}" id="sel_day" class="form-control"></select>&nbsp;日&nbsp;
+			</p>
+		</li>
+		<li><span>固定电话：</span><p><input value="{{user_datum.telephone}}" placeholder="示例：0571-81683755" class='text telephone' type="text" /></p></li>
+		<li><span>邮政编码：</span><p><input value="{{user_datum.postCode}}" placeholder="邮政编码" class='text postCode' type="text" /></p></li>
+		<li><span>所在地区：</span>
+			<p class='citySelect'>
+				<select class="form-control prov" selectStyle>
+					<!-- <option value="广东">广东</option> -->
+				</select>
+				<select class="form-control city" selectStyle>
+					<option value="深圳">请选择</option>
+				</select>
+				<select class="form-control dist" selectStyle>
+				<option value="福田区">请选择</option>
+				</select>
+			</p>
+		</li>
+		<li><span>详细地址：</span><p><input value="{{user_datum.address}}" style="padding-right:10px;width:283px;" placeholder="您的所在地址" class='text detailed_address' type="text" /></p></li>
+		<li class='btn'><p><button class="but1" ng-click="preservation_user_info()">保存</button><button class="but2" style="margin-left: 20px;" ng-click="backP()">返回</button></p></li>
+		<li class='portrait'>
+			<form id="UserPortraitForm" enctype="multipart/form-data">
+				<span><img id="showImage" src="{{user_datum.imageUrl?user_datum.imageUrl:'<%= require('images/user/user_image.png')%>'}}" height="130" width="130"></span>
+				<i>
+					<input type="file" value="[更换头像]" name="upfile"  id="upUserPortrait">		
+					[更换头像]						
+				</i>
+			</form>
+		</li>
+	</ul>
+</div>

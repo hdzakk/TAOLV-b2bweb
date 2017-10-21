@@ -1,0 +1,143 @@
+<%= nav %>
+<div id="sell_order_content" class='tl_w hide' ng-class="{show:pageLoading}">
+	<p class='title'>确认订单信息</p>
+	<div class='order_content'>
+		<div class='wrap_info'>
+			<p class='info_title'>1.基本信息</p>
+			<p class='order_num'><span>订单号：{{sellOrder.saleOrder.orderSn}}</span>
+				<!-- <span style="margin-left:100px;">下单时间：{{sellOrder.createDateStr}}</span>  -->
+				<span style="margin-left:100px;">下单数量：{{sellOrder.saleOrderEntrustDetails | units}}</span>
+			</p>
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>货物名称</th>
+						<th>等级</th>
+						<th>供货数量</th>
+						<th>单位</th>
+						<th>参考价（元）</th>
+						<th>货物说明</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="d in sellOrder.saleOrderEntrustDetails">
+						<td>{{d.goodsName}}</td>
+						<td>{{d.gradeName}}</td>
+						<td>
+							<input ng-model="d.goodsNum" type="text" value="1">
+						</td>
+						<td>{{d.goodsUnit||'无'}}</td>
+						<td>{{d.referencePrice||'无'}}</td>
+						<td style="max-width:300px;"><input ng-model="d.detailRemark" style="width:90%;" type="text" value="备注啦"></td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- <div class='parts_info'>
+				配件信息：SIM卡<input type="text"> 张&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				主板<input type="text"> 公斤
+				<span>提示：若订单中不含手机，不需要输入配件，否则：SIM卡、主板不能为空，若没有请填写0</span>
+			</div> -->
+		</div>
+		<div class='wrap_region'>
+			<p class='info_title'>2.货物所在区域</p>
+			<div class='choice_region'>
+				<select ng-change="sendProvince($event)" class="form-control prov" ng-model="sellOrder.saleOrderLogis.sendProvince"></select>
+				<!-- <select class="form-control city" ng-model="sellOrder.saleOrderLogis.sendCity"></select>
+				<select class="form-control dist" ng-model="sellOrder.saleOrderLogis.sendArea"></select> -->
+				<select class="form-control city"></select>
+				<select class="form-control dist"></select>
+			</div>
+			<p class='tips'>如果已经发货，请填写发货信息：</p>
+			<div class='logistics'>
+				<span>物流公司：<input ng-model="sellOrder.saleOrderLogis.sendLogisticsCompany" type="text"></span>
+				<span>物流单号：<input ng-model="sellOrder.saleOrderLogis.sendLogisticsNo" type="text"></span>
+			</div>
+		</div>
+		<div class='wrap_make'>
+			<p class='info_title'>3.收款方式</p>
+			<div class='wrap_credit'>
+				<table cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>账号所属</th>
+							<th>账号</th>
+							<th>姓名</th>
+							<th>手机号码</th>
+							<th>分行支行</th>
+							<th>选择</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="d in accountList">
+							<td>{{$index+1}}</td>
+							<td>{{d.bankName}}</td>
+							<td>{{d.bankAccount}}</td>
+							<td>{{d.belongsName}}</td>
+							<td>{{d.belongsPhone}}</td>
+							<td>{{d.bewrite}}</td>
+							<td class='noBor'><input type="radio" ng-click="choiceAccount(d)" value="{{$index}}" name='credit' ng-checked="$index==0?true:false"> </td>
+						</tr>
+					</tbody>
+					<tfoot ng-if="!accountList||accountList.length=='0'">
+						<tr>
+							<td style="color:#999;padding: 10px 0;" colspan="7">您还未添加收款信息</td>
+						</tr>
+					</tfoot>
+				</table>
+				<p class='foot_txt'>
+					<!-- <a href="" class='fl'>显示全部账户信息</a> -->
+					<a target="_blank" href="/page/user/#/account/payment" class='fr administration' data-key="storage_account">管理账户信息</a>
+				</p>
+			</div>
+		</div>
+		<div class='wrap_sorting'>
+			<p class='info_title'>4.选择货物要发往的分拣中心</p>
+			<div class='sorting_core'>
+				<p class='t'>选择分拣中心</p>
+				<div class='fl div_select'>
+					<select class="form-control" ng-change="changeProvince()" ng-model='sortingProvince' ng-options="d.province as d.province  for d in province">
+						<option value="">请选择</option>
+					</select>
+					<select class="form-control" ng-change="changeCity()" ng-model='sortingCity' ng-options="d.city as d.city for d in city">
+						<option value="">请选择</option>
+					</select>
+					<select class="form-control" ng-change="changeArea()" ng-model='sortingArea' ng-options="d.area as d.area for d in area">
+						<option value="">请选择</option>
+					</select>
+					<select class="form-control" ng-change="changeName(nameData)" ng-model='fjCenter' ng-options="d.name as d.name for d in nameData">
+						<option value="">请选择</option>
+					</select>
+				</div>
+				<div class='fl take_info' ng-if="!!sortingName">
+					<p><span>收货人：</span>{{sortingName.principal}}</p>
+					<p><span>收货电话：</span>{{sortingName.telphone}}</p>
+					<p><span>邮编：</span>{{sortingName.postalcode}}</p>
+					<p><span>联系电话：</span>{{sortingName.phone}}</p>
+					<p><span>邮寄地址：</span>{{sortingName.province}}{{sortingName.city}}{{sortingName.area}}{{sortingName.address}} {{sortingName.name}}</p>
+				</div>
+			</div>
+		</div>
+		<!-- <div class='wrap_card'>
+			<p class='info_title'>5.使用卡卷</p>
+			<p>您现在没有任何可用卡券。</p>
+		</div> -->
+		<div class='wrap_remark'>
+			<p class='info_title'>5.订单备注</p>
+			<textarea ng-model="sellOrder.saleOrder.orderRemark"></textarea>
+		</div>
+		<div class="wrap_careful">
+			<em>注意事项： </em>请各位用户依法自行办理回收、拆解等经营相关的业务资质，并自行审核交易对方所需业务资质，合法规范经营。公司本网站仅向客户提供废旧电子产品的线上回收交易服务，用户需自行承担因未妥善办理相关经营业务资质而遭受的处罚及发生相关纠纷的风险，公司不承担任何责任。如有不便，敬请谅解。
+		</div>
+		<div class='submit_order'>
+			<label>
+				<input type="checkbox" checked id="orderChecked" />
+				我接受<a href="JavaScript:;">《淘绿网平台委托销售用户协议》</a>
+			</label>
+			<div class='btn'>
+				<a href="javascript:;" ng-click="sellSubmitOrser()">提交订单</a>
+				<a href="javascript:history.go(-1)">返回</a>
+			</div>
+		</div>
+	</div>
+</div>

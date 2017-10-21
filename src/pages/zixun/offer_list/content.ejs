@@ -1,0 +1,33 @@
+<%= nav %>
+<div class="message_center hide" ng-class="{show:pageLoading}">
+	<div class="message_left">
+		<p class='mulu'>每日报价</p>
+		<ul class="message_list">
+			<li ng-repeat="d in list">
+				<dl class="fl">
+					<dt><a href="/page/zixun/offer_details.html?time={{d.time}}&productCategory={{d.productCategory}}" target="blank">{{d.title}}</a></dt>
+					<!-- <dd>
+						{{d.bewrite}}
+					</dd>	 -->
+				</dl>
+				<p >
+					<span><i></i>发布时间：{{d.time}}</span>
+				</p>
+			</li>
+		</ul>
+		<a ng-if="isMore" href="" ng-click="loadMore($event)">点击加载更多</a>
+		<span ng-if="!isMore">没有更多数据了</span>
+	</div>
+	<div class="message_right">
+		<p>{{ph.RMPH.showName}}</p>
+		<ul>
+			<li ng-repeat="d in ph.RMPH.newsList" ng-init="i=$index" class="{{i>0?'ph_li':''}}">
+				<a href="{{d | bitUrl:ph.RMPH.sn:ph.RMPH.showName}}">
+					<i class="fl {{i<3?'single':''}}">{{i+1}}</i>
+					<img ng-if="i==0" class="fl" ng-src="{{d.imageUrl}}" alt="">
+					<span>{{d.newsTitle}}</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

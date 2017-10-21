@@ -1,0 +1,214 @@
+<!-- 销售订单详情 -->
+<div class="details">
+	<h3  class='box_head'>
+		订单详情
+		<a href="javascript:history.go(-1);" class="fr btn_default">返回列表</a>
+	</h3>
+	<div class='box_body'>
+		<div>
+			<p style="margin:20px 0;color:#333;">订单状态</p>
+			<p class="state_{{state_num||1}}"></p>
+			<ul class="state_time">
+				<li ng-repeat="d in logList" ng-class="{cur:$index==logList.length-1}">
+					<span>{{d.eventTime}}</span>
+				</li>
+				<!-- <li>
+					<span>2016/03/07</span><br>
+					<span>10:10:23</span>
+				</li>
+				<li>
+					<span>2016/03/07</span><br>
+					<span>10:10:23</span>
+				</li>
+				<li>
+					<span>2016/03/07</span><br>
+					<span>10:10:23</span>
+				</li>
+				<li>
+					<span>2016/03/07</span><br>
+					<span>10:10:23</span>
+				</li> -->
+			</ul>
+			<p class="details_head">
+				<span class="fl">基本信息</span>
+				<!-- <a href="javascript:history.go(-1)" class="fr">返回列表</a> -->
+			</p>
+			<table cellpadding="0" cellspacing="0" border="0" style="margin-top:0px;">
+				<thead>
+					<th>销售单号</th>
+					<th>下单时间</th>
+					<th>收款方式</th>
+					<th class="rigbor">订单状态</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="width:25%;">{{basic.saleOrderSn||'--'}}</td>
+						<td style="width:25%;">{{basic.orderDateCreate}}</td>
+						<td style="width:25%;">{{basic.paymentsAccountName||'--'}}</td>
+						<td style="width:25%;">{{basic.orderState||'--'}}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<p style="margin-top:20px;color:#333;">收入明细/元：(收款总额 = 交易货款总额-服务费-物流费-送货费-其他费用)</p>
+			<table cellpadding="0" cellspacing="0" border="0" style="margin-top: 10px;">
+				<thead>
+					<th>收款总额(元)</th>
+					<th>交易货款总额(元)</th>
+					<th>服务费(元)</th>
+					<th>物流费(元)</th>
+					<th>送货费(元)</th>
+					<!-- <th>返款金额(元)</th> -->
+					<th>其他费用(元)</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{(sale.orderPay*1||0).toFixed(2)}}</td>
+						<td>{{(sale.orderMoney*1||0).toFixed(2)}}</td>
+						<td>{{(sale.orderFeeService*1||0).toFixed(2)}}</td>
+						<td>{{(receiveList.receiveLogisFee*1||0).toFixed(2)}}</td>
+						<td>{{(receiveList.deliverGoodsFee*1||0).toFixed(2)}}</td>
+						<!-- <td>{{(sale.orderMoneyRefund*1).toFixed(2)}}</td> -->
+						<td>{{(sale.orderMoneyOther*1||0).toFixed(2)}}</td>
+					</tr>
+					<!-- <tr ng-if="!sale">
+						<td colspan="6">暂无数据</td>
+					</tr> -->
+				</tbody>
+			</table>
+			<p class="quick">
+				<span style="color:#333;">快捷方式：</span>
+				<a ng-click="baojia('jiben')">下单明细</a>
+				<a ng-click="baojia('jieshou')">签收信息</a>
+				<a ng-click="baojia('baojia')">分类检测报价记录</a>
+			</p>
+		</div>
+		<ul class="accordion">
+			<li id="jiben">
+				<p class="shrinkage"><i></i><span>下单明细</span></p>
+				<div>
+					<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+						<thead>
+							<th>序号</th>
+							<th>货物名称</th>
+							<th>等级</th>
+							<th>数量</th>
+							<th>单位</th>
+							<th>参考价(元)</th>
+							<th class="rigbor">货物说明</th>
+						</thead>
+						<tbody>
+							<tr ng-repeat="d in entrustList.entrustDetailList">
+								<td>{{$index+1}}</td>
+								<td>{{d.goodsName}}</td>
+								<td>{{d.gradeName}}</td>
+								<td>{{d.goodsNum | numFormat:d.goodsUnit}}</td>
+								<td>{{d.goodsUnit}}</td>
+								<td>{{d.referencePrice}}</td>
+								<td style="max-width:300px;text-align: left;">{{d.detailRemark}}</td>
+							</tr>
+						</tbody>
+					</table>
+					<span>下单备注：{{entrustList.orderRemark||'--'}}</span>
+				</div>
+
+			</li>
+			<li id="jieshou">
+				<p class="shrinkage"><i></i><span>签收信息</span></p>
+				<div>
+					<table cellpadding="0" cellspacing="0" border="0">
+					<thead>
+						<th>物流单号</th>
+						<th>物流公司</th>
+						<th>发货区域</th>
+						<th>收货件数(件)</th>
+						<th>物流费(元)</th>
+						<th>送货费(元)</th>
+						<th>重量</th>
+						<th>收货人</th>
+						<th>收货时间</th>
+						<th class="rigbor">备注</th>
+					</thead>
+					<tbody>
+						<tr ng-if="!receiveList">
+							<td colspan="9">
+							 	暂无签收信息
+							</td>
+						</tr>
+						<tr ng-if="receiveList">
+							<td>{{receiveList.sendLogisticsNo}}</td>
+							<td>{{receiveList.sendLogisticsCompany}}</td>
+							<td style="max-width:120px;">{{receiveList.sendProvince}}{{receiveList.sendCity}}{{receiveList.sendArea}}{{receiveList.sendAddress}}</td>
+							
+							<td>{{receiveList.realityParcel}}</td>
+							<td>{{(receiveList.receiveLogisFee||0).toFixed(2)}}</td>
+							<td>{{(receiveList.deliverGoodsFee*1||0).toFixed(2)}}</td>
+							<td>{{(receiveList.packageKg*1).toFixed(2)}}公斤</td>
+							<td>{{receiveList.recoverUser}}</td>
+							<td style="max-width:80px;">{{receiveList.realityTime}}</td>
+							<td style="max-width:150px;">{{receiveList.remark}}</td>
+						</tr>
+						<tr ng-if="picArr.length!=0">
+							<!-- <td style="border:none;border-top:1px solid #ccc;">
+								<img src="/images/user/leftlen.png" alt="" class="prev">
+							</td> -->
+							<td colspan="10" style="border:none;border-top:1px solid #ebebeb;">
+								<div id="slideBox" class="slideBox">
+									<div class="bd">
+										<ul >
+											<li ng-repeat="img in picArr"><img ng-src="{{img}}" alt=""></li>
+										</ul>
+									</div>
+									<a class="prev" href="javascript:void(0)">&lt;</a>
+									<a class="next" href="javascript:void(0)">&gt;</a>
+								</div>
+							</td>
+							<style type="text/css">
+								.slideBox img{
+									vertical-align: middle;
+								}
+								.slideBox .bd ul{
+									height: 300px;
+								}
+								.slideBox ul img{
+									height: 100%;
+								}
+								
+							</style>
+							<!-- <td style="border:none;border-top:1px solid #ccc;border-right:1px solid #ccc;">
+								<img src="/images/user/rightlen.png" alt="" class="next">
+							</td> -->
+						</tr>
+					</tbody>
+				</table>
+				</div>
+			</li>
+			<li id="baojia">
+				<p class="shrinkage"><i></i><span>报价记录</span></p>
+				<div>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<thead>
+							<th>序号</th>
+							<th style="width:50%;">货物名称</th>
+							<th>数量</th>
+							<th>单位</th>
+							<th class="rigbor">报价(元)</th>
+						</thead>
+						<tbody>
+							<tr ng-if="goodOfferResult.length==0">
+								<td colspan="5">暂无记录</td>
+							</tr>
+							<tr  ng-if="goodOfferResult.length>0" ng-repeat="d in goodOfferResult">
+								<td>{{$index+1}}</td>
+								<td>{{d.goodsName}}</td>
+								<td>{{d.goodsNum | numFormat:d.goodsUnit}}</td>
+								<td>{{d.goodsUnit}}</td>
+								<td>{{d.goodsPrice!=-1?(d.goodsPrice||0).toFixed(2):'未报价'}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

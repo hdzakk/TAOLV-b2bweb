@@ -1,0 +1,53 @@
+<%= nav %>
+<div class="message_center hide" ng-class="{show:pageLoading}">
+	<div class="message_left">
+		<p class='mulu' ng-bind-html="mlHtml"></p>
+		<div class="details">
+			<h3>{{detail.title}}</h3>
+			<p>
+				<span >发布时间：<span>{{detail.releaseDate | toDate}}</span></span>
+				<span>阅读量：<span>{{detail.clickCount}}</span></span>
+				<span>来源：<span>{{detail.source}}</span></span>
+			</p>
+			<div class="prize">
+				<div class='bewrite' ng-if="!!detail.bewrite">
+					 <b>导读：</b>{{detail.bewrite}}
+				</div>
+				<!-- <div ng-bind-html="detail.webBody">{{detail.webBody}}</div> -->
+				<div id="webBody"><!-- {{detail.webBody}} --></div>
+		        <div class="fr" style="text-align:center;line-height: 37px;">
+			        分享到：<div class="bdsharebuttonbox fr"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+			        </div>
+		       </div>
+			</div>
+			<div style="" class="xz_article">
+				<a ng-if="upNews" href="{{upNews | typeUrl}}" class="fl">上一篇：{{upNews!=''?upNews.title:'没有了！'}}</a>
+				<span ng-if="!upNews" class='fl'>上一篇：没有了</span>
+				
+				<a ng-if="nextNews" href="{{nextNews | typeUrl}}" class="fr tr">下一篇：{{nextNews!=''?nextNews.title:'没有了！'}}</a>
+				<span ng-if="!nextNews" class='fr'>下一篇：没有了</span>
+			</div>
+		</div>
+	</div>
+	<div class="message_right">
+		<p>{{ph.RMPH.showName}}</p>
+		<ul>
+			<li ng-repeat="d in ph.RMPH.newsList" ng-init="i=$index" class="{{i>0?'ph_li':''}}">
+				<a href="{{d | bitUrl:ph.RMPH.sn:ph.RMPH.showName}}">
+					<i class="fl {{i<3?'single':''}}">{{i+1}}</i>
+					<img ng-if="i==0" class="fl" ng-src="{{d.imageUrl}}" alt="">
+					<span>{{d.newsTitle}}</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="details_btm">
+		<p style="height:60px;color:#0eb83b;
+		font-size: 18px;">{{xg.XGZX.showName}}</p>
+		<p ng-repeat="d in xg.XGZX.newsList"> <a href="{{d | bitUrl:xg.XGZX.sn:xg.XGZX.showName}}">{{d.newsTitle}}</a></p>
+	</div>
+</div>
+<script type="text/javascript">
+	//分享代码
+	window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["qzone","tsina","tqq","weixin","renren"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","weixin","renren"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>

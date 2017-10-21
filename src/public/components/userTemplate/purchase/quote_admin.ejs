@@ -1,0 +1,98 @@
+<h3 class='box_head'>报价管理</h3>
+<div class='box_body pur_order'>
+	<ul class="sales_head">
+		<li class="sales_noe">
+			<span>状态：</span>
+			<a href="javascript:;" value="" class="cur">所有</a>
+			<a href="javascript:;" value="3">已完成</a>
+			<a href="javascript:;" value="2">未完成</a>
+		</li>
+		<li style="margin-top:10px;" ng-init="quoteOrderSn=''">
+			<span class="fl">品牌：</span>
+			<select class="form-control fl" ng-change="changeGood(phoneBrand.brand)" ng-model='phoneBrand' ng-options="d.brand for d in brandList" style="position: relative;top: 7px;">
+				<option value="">全部货物</option>
+			</select>
+			<span class="fl">关键字：</span>
+			<div class="fl">
+				<input type="text" class="key" placeholder="请输入关键字" ng-model="quoteOrderSn">
+				<a ng-click="check_polling()"><i></i></a>
+			</div>
+		</li>
+	</ul>
+	<div class="sales_list">
+		<p style="color:#999;">
+			共 <span style="color:#666;">{{quoteList.data.length}}</span> 个品类
+			<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span style="color:#666;">已报价</span> 70个&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#666;">未报价</span> 70个 -->
+		</p>
+		<table cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
+			<thead>
+				<tr><th>序号</th>
+				<th>货物名称</th>
+				<th>等级</th>
+				<th>扣款原因</th>
+				<th>数量</th>
+				<th>单位</th>
+				<!-- <th>近期均价（元）</th>
+				<th>最新报价（元）</th> -->
+				<th>状态</th>
+				<th>我的报价</th>
+			</tr></thead>
+			<tbody>
+				<tr ng-if="!quoteList.data.length>0">
+					<td colspan="9">暂无数据</td>
+				</tr>
+				<tr ng-repeat="d in quoteList.data">
+					<td style="width:30px;">{{serialNumber+$index+1}}</td>
+					<td>{{d.goodsName}}</td>
+					<td>{{d.gradeName}}</td>
+					<td style="max-width:250px;">{{d.reasonName}}</td>
+					<td>{{d.goodsNum | numFormat:d.goodsUnit}}</td>
+					<td>{{d.goodsUnit}}</td>
+					<!-- <td>20</td>
+					<td>30</td> -->
+					<!-- <td ng-if="d.state==0" ng-class="{c:d.state=='3',s:d.state=='2'}">{{d.state=='1' ? '待报价' : d.state=='2' ? '待确认' : '已报价'}}</td> -->
+					<td>{{d.state=='1' ? '待报价' : (d.state=='2'?'待确认':'已报价')}}</td>
+
+					<td style="width:120px;">
+						<input ng-class='{quote_input_cur:d.state==1}' data-val="{{d.buyRecentPrice}}" ng-disabled="d.state=='3'||d.state=='2'" ng-blur="reviseQuote(d)" ng-focus="oldbuyRecentPrice(d.buyRecentPrice)" ng-model="d.buyRecentPrice" class='quote_input' type="text" />
+
+						<span class='revise_quote' ng-if="d.state!='1'" ng-click="show_revise($event,d)">&nbsp;修改</span>
+					</td>
+					<!-- <td style="width:120px;">
+						<input ng-class='{quote_input_cur:d.state==1}' data-val="{{d.buyRecentPrice}}" ng-disabled="(d.state==1||d.state==0)" ng-blur="reviseQuote(d)" ng-focus="oldbuyRecentPrice(d.buyRecentPrice)" ng-model="d.buyRecentPrice" class='quote_input' type="text" />
+					</td> -->
+				</tr>
+			</tbody>
+		</table>
+		<style type="text/css">
+		  .sales_list .c{
+		  	color: #0eb83b;
+		  }
+		  .sales_list .s{
+		  	color: #F48512;
+		  }
+		  .sales_list .quote_input{
+		  	border: 1px solid #d9d9d9;
+		  	padding: 5px 3px;
+		  	text-align: center;
+		  	width: 60px;
+		  }
+		  .sales_list .quote_input:focus{
+		  	border-color: #0eb83a;
+		  }
+		  .sales_list .quote_input_cur{
+		  	width: 100px;
+		  }
+		  /* .sales_list .revise_quote{
+		  	cursor: pointer;
+		  	color: #0eb83a;
+		  } */
+		  .sales_list .revise_quote:hover{
+		  	cursor: pointer;
+		  	color: #0eb83a;
+		  }
+		</style>
+		<div id="Pagination" style="margin-top:30px;" class="page-pagination"></div>
+	</div>
+</div>

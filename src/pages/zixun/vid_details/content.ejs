@@ -1,0 +1,37 @@
+<%= nav %>
+<div class="message_center hide" ng-class="{show:pageLoading}">
+	<div class="video_list">
+		<h3 class='mulu' ng-bind-html="mlHtml"></h3>
+		<div class="finance">
+			<h3>{{detail.title}}</h3>
+			<p style="margin-bottom:18px;">
+				<span>浏览次数：<span>{{detail.clickCount}}</span></span> &nbsp; &nbsp; &nbsp; &nbsp;
+				<span> 发布时间：<span>{{detail.releaseDate | toDate}}</span></span>
+			</p>
+			<div class="video_box">
+			
+			<!-- <embed embed-src="{{detail.jumpUrl}}" allowFullScreen='true' quality='high' width='800' height='500' align='middle' allowScriptAccess='always' bgcolor="#000000"> -->
+			 <!-- type='application/x-shockwave-flash' 这个东西ie有问题先去掉-->
+			<!-- <embed embed-src="{{detail.jumpUrl}}"  wmode="opaque" quality="best">   -->
+
+				<!-- <img src="/images/zixun/finance.png" alt=""> -->
+			</div>
+			<div class="video_text" id="webBody"></div>
+			<p class="bom">
+				<span ng-if="upNews" class="fl">
+					<a ng-if="typeSn" href="{{upNews | typeUrl}}"><b>上一篇</b> <i ng-if="typeSn">{{upNews?upNews.title:'没有了！'}}</i></a>
+
+					<a ng-if="!typeSn" href="{{upNews | bitUrl:bitSn:lm}}"><b>上一篇</b><i ng-if="!typeSn">{{upNews?upNews.title:'没有了！'}}</i></a>
+					
+				</span>
+				<span ng-if="nextNews" class="fr">
+					<a ng-if="typeSn" href="{{nextNews | typeUrl}}"><b>下一篇</b><i ng-if="typeSn">{{nextNews?nextNews.title:'没有了！'}}</i></a>
+					
+					<a ng-if="!typeSn" href="{{nextNews | bitUrl:bitSn:lm}}"><b>下一篇</b><i ng-if="!typeSn">{{nextNews?nextNews.title:'没有了！'}}</i></a>
+					
+				</span>
+			</p>
+		</div>	
+	</div>
+</div>
+

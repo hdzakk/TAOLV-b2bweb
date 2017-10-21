@@ -1,0 +1,22 @@
+<h3 class='box_head'>新增退货申请<a href="javascript:history.go(-1);" class="fr btn_default">返回列表</a></h3>
+<div class='box_body adden_retreat'>
+	<ul class='adden_ul'>
+		<li>
+			<span><i>*</i>对应采购单号：</span>
+			<input type="text" ng-model="buyOrderSn"/>
+		</li>
+		<li>
+			<span>退货品类：</span>
+			<input type="text" ng-model="applyName"/>
+		</li>
+		<li>
+			<span>退货原因说明：</span>
+			<textarea ng-model="returnCause"></textarea>
+		</li>
+	</ul>
+	<p style="text-align: center;">温馨提示：请按照实际情况填写您的退货申请，以便我们的客服人员更好地协助您完成退货工作~</p>
+	<div class='btn'>
+		<a class='btn_default' href="" ng-click="added_retreat_apply_submit();">提交</a>
+		<a class='btn_default' href="javascript:history.go(-1);">取消</a>
+	</div>
+</div>

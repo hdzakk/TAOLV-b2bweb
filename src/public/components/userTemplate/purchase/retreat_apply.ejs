@@ -1,0 +1,116 @@
+<h3 class='box_head'>{{showLook?'退货申请':'退货详情'}}</h3>
+	<div class='box_body pur_order adden_retreat' ng-init="retreat=true;agree=true;showLook=true;">
+		<div ng-show="retreat">
+			<ul class="sales_head">
+				<li class="sales_noe">
+					<span>订单状态：</span>
+					<a href="" value="" class="on">所有</a>
+					<a href="" value="nofinish">未完成</a>
+					<a href="" value="no_dispose">未处理</a>
+					<a href="" value="dispose">处理中</a>
+					<a href="" value="off">已关闭</a>
+					<!-- <a href="" value="finish">已完成</a> -->
+				</li>
+				<li class="sales_two">
+					<span>生成日期：</span>
+					<input type="text" class="startDate" placeholder="请选择日期"> <i style="margin:0 5px;">-</i>
+					<input type="text" class="endDate" placeholder="请选择日期">
+					<span>最近：</span>
+					<a href="javascript:;" class="cur" data-day='-6'>一周</a>
+					<a href="javascript:;" data-day='-30'>1个月</a>
+					<a href="javascript:;" data-day='-90'>3个月</a>
+					<a href="javascript:;" data-day='-365'>1年</a>
+				</li>
+				<li>
+					<span class="fl">订单号：</span>
+					<div class="fl">
+						<input type="text" class="key" ng-model="keyWord" placeholder="请输入退货单号">
+						<a ng-click="check_polling()"><i></i></a>
+					</div>
+				</li>
+			</ul>
+			<div class="sales_list">
+				<p style="color:#999;" class='retr_title'>共 <span style="color:#666;">{{returnGoodsList.recordsFiltered||0}}</span> 个退货申请 <a href="#purchase/added_retreat_apply" class="fr btn_default">新增</a></p>
+				<table cellpadding="0" cellspacing="0" border="0" style="margin-top: 10px;">
+					<thead>
+						<tr><th>序号</th>
+						<th>申请编号</th>
+						<th>采购单号</th>
+						<th>生成时间</th>
+						<th>状态</th>
+						<th class="rigbor">操作</th>
+					</tr></thead>
+					<tbody>
+						<tr ng-if="!returnGoodsList.data.length">
+							<td colspan="6">无退货申请</td>
+						</tr>
+						<tr ng-repeat="d in returnGoodsList.data track by $index" ng-if="returnGoodsList.data.length">
+							<td style="width:50px;">{{serialNumber+($index+1)}}</td>
+							<td style="width:220px;">{{d.applySn}}</td>
+							<td style="width:260px;">{{d.buyOrderSn}}</td>
+							<td style="width:200px;">{{d.applyDate}}</td>
+							<td style="width:100px;">{{d.disposeState}}</td>
+							<td class='operation' style="width:100px;">
+								<!-- <a style="color: #0eb83a;" href="" ng-click="lookDetails();">查看详情</a> -->
+								<span>请选操作</span>
+								<div class='open_ul'>
+									<a ng-show="(d.stateName==1||d.stateName==2)" href="" ng-click="cancelReutrn(d)">取消退货</a>
+									<!-- <a ng-show="(d.stateName==2)" href="" ng-click="agreeHandle(d);">同意处理</a> -->
+									<a href="" ng-click="lookDetails(d);">查看详情</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div id="Pagination" style="margin-top:25px;" class="page-pagination"></div>
+			</div>
+		</div>
+		<!-- 查看详情 -->
+		<div ng-show="!showLook">
+			<ul class='check_details'>
+				<li>
+					<span><i>* </i>对应采购单号：</span>
+					<em>{{detailsContent.buyOrderSn}}</em>
+				</li>
+				<li>
+					<span>退货品类：</span>
+					<em>{{detailsContent.applyName}}</em>
+				</li>
+				<li>
+					<span>退货原因说明：</span>
+					<em>{{detailsContent.returnCause}}</em>
+				</li>
+				<li style="margin-left:-4px;">
+					<span style="width: 113px;">处理方法与结果：</span>
+					<em>{{detailsContent.disposeMethod}}</em>
+				</li>
+			</ul>
+			<a style="margin-left: 380px;margin-top:50px;" class='btn_default' href="" ng-click="retreat=true;showLook=true;">返回</a>
+		</div>
+		<!-- 同意处理 -->
+		<div ng-show="!agree">
+			<ul class='check_details'>
+				<li>
+					<span><i>* </i>对应采购单号：</span>
+					<em>{{detailsContent.buyOrderSn}}</em>
+				</li>
+				<li>
+					<span>退货品类：</span>
+					<em>{{detailsContent.applyName}}</em>
+				</li>
+				<li>
+					<span>退货原因说明：</span>
+					<em>{{detailsContent.returnCause}}</em>
+				</li>
+				<li style="margin-left:-4px;">
+					<span style="width: 113px;">处理方法与结果：</span>
+					<em>{{detailsContent.disposeMethod}}</em>
+				</li>
+			</ul>
+			<div style="text-align: center;">
+				<a style="margin-left: 30px;margin-top:50px;" class='btn_default' href="" ng-click="agreeHandleBtn()">同意处理</a>
+			    <a style="margin-left: 30px;margin-top:50px;" class='btn_default' href="" ng-click="retreat=true;agree=true;">返回</a>
+			</div>
+		</div>
+</div>
+

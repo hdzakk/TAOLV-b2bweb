@@ -1,0 +1,25 @@
+<%= nav %>
+<div>
+	<div class='hide' ng-class="{show:pageLoading}">
+		<div class="about_banner" style="background: url(<%= require('images/about/fuwu_banner.jpg')%>) no-repeat center;">
+			<!-- <p >全面化的环保回收服务，推进中国再生资源产业发展</p> -->
+		</div>
+		<div  class="about_heade">
+			<ul style='width:520px;'>
+				<li ng-repeat="d in listArr"  id="a_{{d.code.toLowerCase()}}" ng-click="about_click($event)"class='{{$index==listArr.length-1?"lyshi":""}}'>
+					<a href="#about_{{d.code.toLowerCase()}}/{{d.sn}}">{{d.name}}</a>
+				</li>
+			</ul>
+		</div>
+		<div ng-view></div>
+		<script type="text/html" id="hsfw_view">
+			<div id="hsfw" ng-bind-html='tljj.webBody'>
+			</div>
+		</script>
+		<script type="text/html" id="shfw_view">
+			<div id="shfw" ng-bind-html='tljj.webBody'>
+
+			</div>
+		</script>
+	</div>
+</div>

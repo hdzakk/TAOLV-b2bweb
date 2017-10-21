@@ -1,0 +1,97 @@
+<%= nav%>
+<div id="search_content" class='tl_w hide' ng-class="{show:pageLoading}">
+	<!-- 型号 -->
+	<div ng-show="step==1||step==2">
+		<div class='good_screen'>
+			<p class='screen_title'><em>{{keyWord}}</em> 共搜索到<em> {{goodsOfferList.length}} </em>个结果</p>
+			<ul class='screen_cen'>
+				<li>
+					<span>热搜内容：</span>
+					<div class='wrap_btn'>
+						<a ng-repeat="d in hotList" ng-click="go_offer_search(d.goodsName)">{{d.goodsName}}</a>
+					</div>
+				</li>
+				<li class="openLi" ng-click="visible($event)" ng-if="hotList.length>=9">
+					点击展开
+				</li>
+			</ul>
+		</div>
+		<div class='modelAll'>
+			<div class="wrap_mode" ng-show="step==1">
+				<a href="javscript:;" ng-repeat="d in goodsOfferList" ng-click="goResult(d)">
+					<span><img src="{{d.productPic}}"></span>
+					<p>{{d.goodsName}}11</p>
+				</a>
+				<p ng-if="goodsOfferList.length==0" style="width:100%;padding-top:30px;text-align: center;">搜索不到 <font style="color: #F44500;">“{{keyWord}}”</font>相关内容</p>
+			</div>
+			<div class="middle brand_models select_specifications" ng-show="step==2">
+				<div class="information">
+					<p class="fl" style="color: #0eb83b;">选择对应型号的规格信息</p>
+					<p class="fr"><button ng-click="step=1" class="again">返回</button></p>
+				</div>
+
+				<p ng-repeat="d in phoneStandard">
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{d.name}}：</span>
+					<em>
+						<button ng-repeat="c in d.list" ng-click="choiceMemory(c,d.name,$event)">{{c}}</button>
+					</em>
+				</p>
+			</div>
+		</div>
+		<div class='historys_screen' ng-if="goodsOfferList.length!=0&&historys.length!=0">
+			<ul class='screen_cen'>
+				<li>
+					<span>历史搜索：</span>
+					<div class='wrap_btn'>
+						<a ng-repeat="d in historys" ng-click="go_offer_search(d.goodsName)">{{d.goodsName}}</a>
+					</div>
+				</li>
+				<li class="openLi" ng-click="visible($event)" ng-if="historys.length>=9">
+					点击展开
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- 搜索结果 -->
+	<div ng-show="step==3" style="margin-top: 40px;">
+		<div class='good_screen' style="margin-top:15px;min-height: 700px;" id="searchResult">
+			<p class='screen_title'>
+				<font style="color: #F44500;">{{keyWords}}</font> 搜索结果
+				<a class='a1' href="javascript:;" ng-click="lookGrade()">等级说明</a>
+				<a class='a2' href="javascript:;" ng-click="returnFn();">返回搜索结果</a>
+			</p>
+			<div class='wrap_table'>
+				<table cellpadding="1" cellspacing="1">
+				 	<thead>
+				 		<tr>
+				 			<th>名称</th>
+				 			<th>等级</th>
+				 			<th>报价</th>
+				 		</tr>
+				 	</thead>
+				 	<tbody ng-repeat="d in goodsOfferResuitList">
+				 		<tr>
+				 			<td rowspan="{{d.grade.length+1}}">{{d.goodsName}}</td>
+				 			<td>{{d.first.name}}</td>
+				 			<td>{{d.first.value}}</td>
+				 		</tr>
+				 		<tr ng-repeat="b in d.grade">
+				 			<td>{{b.name}}</td>
+				 			<td>{{b.value}}</td>
+				 		</tr>
+				 	</tbody>
+				 	<tbody ng-if="goodsOfferResuitList.length==0">
+				 		<tr>
+				 			<td colspan="3">找不到 <font style="color: #F44500;">“{{keyWords}}”</font> 的相关报价！</td>
+				 		</tr>
+				 	</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/html" id="gradeExplain">
+	<div class="explain">
+		<p ng-repeat="d in gradeList">【{{d.gradeName}}】{{d.describeValue}}</p>
+	</div>
+</script>

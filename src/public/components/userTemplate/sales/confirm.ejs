@@ -1,0 +1,144 @@
+<!-- 确认销售订单 -->
+<div class="confirm_trading">
+	<p class='box_head'>
+		<span style="color:#0eb83a;">委托销售订单</span>  
+		<a href="#sales_order" class="fr btn_default">返回列表</a>
+	</p>
+	<div class='box_body'>
+		<div class='countDown'>
+			<h3 class='title'>
+				您订单的报价已提交，报价24小时内有效，请在24小时内确认交易。
+			</h3>
+			<p class='time'>注意：确认交易剩余时间 <em id="surplusTime">23时59分59秒</em>，如订单未能在指定时间内确认，订单所属货物将转为暂存，你可以在<font style="color:#0EB83A;">暂存记录</font>里面看到相应货物，谢谢~</p>
+		</div>
+		<table cellpadding="0" cellspacing="0" border="0">
+			<thead>
+				<th>销售单号</th>
+				<th>下单时间</th>
+				<th>收款方式</th>
+				<th class="rigbor">订单状态</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{salesJson.saleOrderSn}}</td>
+					<td>{{salesJson.orderDateCreate}}</td>
+					<td>{{salesJson.paymentsAccountName}}</td>
+					<td>{{salesJson.orderStateStr}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class='baojia' style="margin:30px 0 20px 0;">货物报价明细</p>
+		<table cellpadding="0" cellspacing="0" border="0">
+			<thead>
+				<th>
+					<label ng-init="allCheck=false">
+						<input ng-change="allGoodSelect()" ng-model="allCheck" name="Fruit" type="checkbox" value="" /> 全选
+					</label>
+				</th>
+				<th>货物名称</th>
+				<th>数量</th>
+				<th>单位</th>
+				<th>报价(元)</th>
+				<th class="rigbor">总价(元)</th>
+			</thead>
+			<tbody id="allcheck">
+				<tr ng-if="goodDetailList.length==0">
+					<td colspan="6">暂无数据</td>
+				</tr>
+				<tr ng-if="goodDetailList.length>0" ng-repeat="d in goodDetailList">
+					<td style="width:75px;"><input ng-change="goodSelect()" ng-model="d.check" name="Fruit" type="checkbox" value="" /></td>
+					<td>{{d.goodsName}}</td>
+					<td>{{d.goodsNum | numFormat:d.goodsUnit}}</td>
+					<td>{{d.goodsUnit}}</td>
+					<td>{{(d.goodsPrice*1).toFixed(2)}}</td>
+					<td>{{(d.total*1).toFixed(2)}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<style type="text/css">
+			.box_body label,.box_body input{cursor: pointer;}
+			.box_body input{vertical-align: middle;position: relative;top: -1px;}
+		</style>
+
+		<p style="margin:20px 0 30px 0;color:#333;">
+		货物总数：<span>{{orderTradeAllNum}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+		货款总额：<span>{{(basicInfo.saleOrderSummary.orderMoney*1).toFixed(2)}}</span>元  &nbsp;&nbsp;&nbsp;&nbsp;服务费：<span>{{(basicInfo.saleOrderSummary.orderFeeService*1).toFixed(2)}}</span> 元    &nbsp;&nbsp;&nbsp;&nbsp;物流费：<span>{{(basicInfo.saleOrderSummary.orderFeeLogis*1).toFixed(2)}}</span> 元 &nbsp;&nbsp;&nbsp;&nbsp;送货费：<span>{{(basicInfo.saleOrderSummary.orderFeeDeliver*1||0).toFixed(2)}}</span> 元&nbsp;&nbsp;&nbsp;&nbsp;其他费用：<span>{{(basicInfo.saleOrderSummary.orderMoneyOther*1||0).toFixed(2)}}</span> 元</p>
+		<div class='btn_list'>
+			<a href="" ng-click="add_address()">确认交易</a>
+			<a href="" ng-click="refund()">退货</a>
+			<a href="" ng-click="temporary()">暂存</a>
+			<a href="#sales_order">返回</a>
+		</div>
+	</div>
+</div>
+<!-- 确认交易 -->
+<script type="text/html" id="confirm">
+	<div class='confirm'>
+		<p style="margin-bottom:35px;">收入明细/元：(收款金额 = 货款总额-服务费-物流费-送货费-其他费用)</p>
+		<div>
+			<p style="margin-bottom:20px;">
+			<span style='margin:0px 10px;'>货物总数：{{orderTradeNum}}</span>
+			<span style='margin:0px 10px;'>货款总额：{{(orderMoneyTrade*1||0).toFixed(2)}}元</span> <span style='margin:0px 10px;'>服务费：{{(orderFeeService*1||0).toFixed(2)}}元</span><br/><span style='margin:0 10px;'>物流费：{{(lgsFee*1||0).toFixed(2)}}元</span><span style='margin:0 10px;'>送货费：{{(orderFeeDeliver*1||0).toFixed(2)}}元</span><span style='margin:0 10px;'>其他费用：{{orderMoneyOther}}元</span></p>
+		</div>
+		<p style="font-size:18px;">收款金额：<span style='font-size:21px;color:#f62d13;'>{{(orderMoneyTrade-orderFeeService-lgsFee-orderFeeDeliver-orderMoneyOther).toFixed(2)}}元</span></p>
+		<!--<p class="btn_con"> <a class='determineBtn' href="javascript:;">确认</a> <a href="javascript:layer.closeAll();">取消</a> </p>-->
+	</div>
+</script>
+<!-- 退货 -->
+<style type="text/css">
+	.form-select{
+		border: 1px solid #ddd;
+	    width: 262px;
+	    box-sizing: border-box;
+	    color: #666;
+	    font-size: 14px;
+	    height: 35px;
+    	padding: 5px 10px;
+	    outline: none;
+	    display:inline-block;
+	}
+</style>
+ 
+<script type="text/html" id="refund">
+	<div class='refund'>
+		<p>
+			<span><i>*</i>物流收费方式：</span>
+			<label><input type="radio" name="fs" value="0" ng-model="saleOrderLogisBack.type"/>运费到付</label>
+			<label><input type="radio" name="fs" value="1" ng-model="saleOrderLogisBack.type"/>自提</label>
+		</p>
+		<div>
+			<p><i>*</i>物流运输方式：</p>
+			<select style="background: {{saleOrderLogisBack.type==1?'#EBEBE4;':''}}" ng-disabled="saleOrderLogisBack.type==1" class="form-select" ng-model="saleOrderLogisBack.sendCompany">
+					<option value="{{d.name}}" ng-repeat="d in logisticList">{{d.name}}</option>
+			</select>
+		</div>
+		<div>
+			<p><i>*</i>选择收货地址：<a onclick="layer.closeAll();" target="_blank" href="/page/user/#/account/address" class='fr'>管理收货地址</a></p>
+			<ul class='address_ul'>
+				<li ng-class='{disabled:saleOrderLogisBack.type==1,cur:$index==0}' ng-repeat='d in addressAll' ng-click='choiceDddress(d,$event)'>
+				   <p class='name_p'>  
+				   		<span class='fl'>{{d.name}}</span>
+				   		<span class='fr'>{{d.phone}}</span>
+				   </p>
+				   <div class='ress'>
+				   		{{d.province}} {{d.city}} {{d.district}} {{d.address}}
+				   </div>
+				</li>
+				
+			</ul>
+		</div>
+		<div>
+			<p><i>*</i>退货原因</p>
+			<textarea ng-model="saleOrderLogisBack.remark" style="max-width:100%; max-height:100px;min-width:100%; min-height:60px;padding:10px 10px;box-sizing: border-box;"></textarea>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="temporary">
+	<div style='text-align:center;'>
+		<p style='margin:20px 0;'>确定要暂存吗？</p>
+		<p class='yshi'> 
+			<a>确认</a> 
+			<a href="javascript:layer.closeAll();">取消</a>
+		</p>
+	</div>
+</script>

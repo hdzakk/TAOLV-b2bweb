@@ -1,0 +1,159 @@
+<h3 class='box_head'>交易记录</h3>
+<div class='box_body'ng-hide="trading"> 
+	<div class="sales_order">
+		<ul class="sales_head">
+			<li class='sales_noe'>
+				<span>订单状态：</span>
+				<a href="" class="on" data-state=''>所有</a>
+				<a href="" data-state='1'>未完成</a>
+				<a href="" data-state='2'>已付款</a>
+			</li>
+			<li class="sales_two">
+				<span>生成日期：</span>
+				<input class='startDate' type="text" placeholder="请选择日期"> <i style="margin:0 5px;">-</i>
+				<input class='endDate' type="text" placeholder="请选择日期">
+				<span>最近：</span>
+				<a href="javascript:;" class="cur" data-time="1" data-day="-6">一周</a>
+				<a href="javascript:;" data-time="2" data-day="-30">1个月</a>
+				<a href="javascript:;" data-time="3" data-day="-90">3个月</a>
+				<a href="javascript:;" data-time="4" data-day="-365">1年</a>
+			</li>
+			<li>
+				<span class="fl">订单号：</span>
+				<div class="fl">
+					<input type="text" placeholder="请输入交易单号" ng-model='keyWord'>
+					<a ng-click="check_polling()" href=""><i></i></a>
+				</div>
+			</li>
+		</ul> 
+		<div class="sales_list">
+			<p style="color:#999;">共 <span style="color:#333;">{{dataList.recordsFiltered||0}}</span> 条交易记录</p>
+			<table cellpadding="0" cellspacing="0" border="0">
+				<thead>
+					<th>序号</th>
+					<th>交易单号</th>
+					<th>销售单号</th>
+					<th>生成时间</th>
+					<th>收款方式</th>
+					<th>状态</th>
+					<th class="rigbor">操作</th>
+				</thead>
+				<tbody>
+					<tr ng-if="!dataList.data">
+						<td colspan="7">
+							暂无记录
+						</td>
+					</tr>
+					<tr ng-repeat="d in dataList.data" ng-if="dataList.data">
+						<td style="width:40px;">{{index+$index+1}}</td>
+						<td>{{d.sn}}</td>
+						<td>{{d.saleOrderSn}}</td>
+						<td>{{d.createDate}}</td>
+						<td>{{d.paymentsAccountName}}</td>
+						<td>{{d.state | state}}</td>
+						<td class="operation">
+							<span>请选操作</span>
+							<div class='open_ul'>
+								<a href="javascript:;" ng-click="view_details(d.sn)">查看交易详情</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="Pagination" style="margin-top:25px;" class="page-pagination"><!-- 这里显示分页 --></div>
+		</div>
+	</div>
+</div>
+
+<div class='box_body trading'ng-show="trading">
+	<p class="trading_head">
+	 	<i  class="fl" style="color:#333;">交易详情</i>
+	 	<a ng-click='shhi()' href="" class="fr">返回列表</a>
+	 </p>
+
+	<p class="ztai{{state_num||1}}" style="margin-top:25px;"></p>
+	<ul class="time" style="margin-top:10px;">
+		<li ng-repeat="d in logList" ng-class="{cur:$index==logList.length-1}">
+			<span>{{d.eventTime}}</span>
+		</li>
+	</ul>
+
+	<p style="margin-top:15px;color:#333;">基本信息：</p>
+	<table cellpadding="0" cellspacing="0" border="0">
+		<thead>
+			<th>销售单号</th>
+			<th>交易单号</th>
+			<th>收款方式</th>
+			<th>状态</th>
+			<th ng-if="details.tradeMap.state=='2'">备注</th>
+		</thead>
+		<tbody>
+			<tr ng-if="!details.saleOrderSummary.orderMoney">
+				<td colspan="6">
+					暂无记录
+				</td>
+			</tr>
+			<tr ng-if="details.saleOrderSummary.orderMoney">
+				<td>{{details.tradeMap.saleOrderSn}}</td>
+				<td>{{details.tradeMap.sn}}</td>
+				<td>{{details.tradeMap.paymentsAccountName}}</td>
+				<td>{{details.tradeMap.state | state}}</td>
+				<td ng-if="details.tradeMap.state=='2'">{{details.tradeMap.remark}}</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<p style="margin-top:15px;color:#333;">收入明细/元：(收款金额 = 货款总额-服务费-物流费-送货费-其他费用)</p>
+	<table cellpadding="0" cellspacing="0" border="0">
+		<thead>
+			<th>收款金额(元)</th>
+			<th>货款总额(元)</th>
+			<th>服务费(元)</th>
+			<th>物流费(元)</th>
+			<th>送货费(元)</th>
+			<th>其他费用(元)</th>
+		</thead>
+		<tbody>
+			<tr ng-if="!details.saleOrderSummary.orderMoney">
+				<td colspan="6">
+					暂无记录
+				</td>
+			</tr>
+			<tr ng-if="details.saleOrderSummary.orderMoney">
+				<td>{{(details.saleOrderSummary.orderPay*1+details.saleOrderSummary.orderMoneyRefund*1).toFixed(2)}}</td>
+				<td>{{(details.saleOrderSummary.orderMoney*1).toFixed(2)}}</td>
+				<td>{{(details.saleOrderSummary.orderFeeService*1).toFixed(2)}}</td>
+				<td>{{(details.saleOrderSummary.orderFeeLogis*1).toFixed(2)}}</td>
+				<td>{{(details.saleOrderSummary.orderFeeDeliver*1||0).toFixed(2)}}</td>
+				<td>{{(details.saleOrderSummary.orderMoneyOther*1).toFixed(2)}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p style="margin-top:20px; color:#333;">货物明细：</p>
+	<table cellpadding="0" cellspacing="0" border="0">
+		<thead>
+			<th>序号</th>
+			<th>货物名称</th>
+			<th>数量</th>
+			<th>单位</th>
+			<th class="rigbor">报价(元)</th>
+			<th>总价(元)</th>
+		</thead>
+		<tbody>
+			<tr ng-if="!details.list.length">
+				<td colspan="5">暂无数据</td>
+			</tr>
+			<tr ng-repeat="d in details.list" ng-if="details.list.length">
+				<td>{{$index+1}}</td>
+				<td>{{d.goodsName}}</td>
+				<td>{{d.goodsNum}}</td>
+				<td>{{d.goodsUnit}}</td>
+				<td>{{(d.goodsPrice||0).toFixed(2)}}</td>
+				<td>{{(d.goodsPrice*d.goodsNum).toFixed(2)}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="fanhui"><a href="" ng-click='shhi()'>返回</a></p>
+</div>

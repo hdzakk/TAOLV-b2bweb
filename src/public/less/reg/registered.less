@@ -1,0 +1,164 @@
+@charset "utf-8";
+@mainColor:#0eb83a;//主颜色
+@subColor1:#f68413;//辅助颜色
+@subColor2:#f62d13;//辅助颜色
+@borderColor:#f2f2f2;//边框颜色
+@hoverColor:#F48512;//hover颜色
+body{background: #f5f5f5;}
+.active{background:#0eb83b;color:#fff;}
+#buy_content{
+	margin-bottom:45px;
+	margin-top:45px;
+	padding:0 20px 0 30px;
+	background:#fff;
+	&>p{
+		font-size:20px;
+		color:#0eb83a;
+		line-height: 60px;
+	}
+	.reg_list{
+		border-top:1px solid #f2f2f2;
+		padding-top:40px;
+		padding-bottom:40px;
+		overflow: hidden;
+		.user_list{
+			border-right: 1px solid #E0E0E0;
+			width:49%;
+			padding-bottom: 10px;
+			.stered{
+				width: 400px;
+			    margin: auto;
+			    p{
+			    	line-height: 42px;
+			    	margin-top:15px;
+			    	position:relative;
+			    	&>span{
+				    	width: 80px;
+					    text-align: right;
+					    display: inline-block;
+					    margin-right:5px;
+					    vertical-align: bottom;
+
+			    	}
+			    	input{
+			    		border: 1px solid #ddd;
+					    height: 20px;
+					    padding: 10px 0;
+					    width: 262px;
+					    padding-left:10px;
+					    padding-right:40px;
+					    border-radius: 4px;
+					    &:focus{
+					    	border-color: @mainColor;
+					    }
+			    	}
+			    	i{
+			    		display: inline-block;
+			    		width:19px;
+			    		height: 20px;
+			    		position: absolute;
+			    		bottom:12px;
+			    		right:12px;
+			    		background: url(../../images/reg/user.png) no-repeat center;
+			    	}
+			    	.pwo{
+			    		background: url(../../images/reg/password.png) no-repeat center;
+			    		cursor: pointer;
+			    	}
+		    	 	.verification_code{
+				    	width: 93px;
+					    display: inline-block;
+					    height: 42px;
+					    background: #0eb83a;
+					    text-align: center;
+					    border-radius: 4px;
+					    margin-left:5px;
+					    color: #fff;
+					     &:hover{
+					    	background: #11c33f;
+					    }
+					    // &.disabled{
+					    // 	&:hover{
+						   //  	background: #ccc;
+						   //  }
+						   //  cursor: wait;
+					    // }
+				    }
+				    .agreed{
+						    height: 15px;
+						    width: 15px;
+						    float: left;
+						    margin-top: 14px;
+						    margin-right: 5px;
+						    padding: 0;
+				    }
+				    .method{
+				    	color:#0eb83a;
+				    }
+				    .registered_btn{
+				    	display: inline-block;
+					    height: 42px;
+					    width: 315px;
+					    border-radius: 4px;
+					    background: #0eb83b;
+					    color: #fff;
+					    text-align: center;
+					    margin-left: 80px;
+					    font-size: 16px;
+					    &:hover{
+					    	background: #f68413;
+					    }
+				    }
+			    }  
+			}
+		}
+		.login{
+			width:49%;
+			text-align: center;
+			margin-top: 12%;
+			.reg_login{
+				margin-bottom: 110px;
+				a{
+					display:inline-block;
+					line-height:36px;
+					width: 105px;
+					background: #0eb83a;
+					border-radius: 4px;
+					color:#fff;
+					text-align: center;
+					&:hover{
+					    background: #f68413;
+					}
+				}
+			}
+			.three_parties{
+				line-height: 38px;
+				height: 38px;
+				padding-left:150px;
+				i{
+					float:left;
+					margin-right: 5px;
+					display: inline-block;
+					height:35px;
+					width: 35px;
+					background: url(../../images/reg/log_ico.png) no-repeat 0 0;
+					&:hover{
+						background: url(../../images/reg/log_ico.png) no-repeat -43px 0px;
+					}
+				}
+				.wechat{
+					background: url(../../images/reg/log_ico.png) no-repeat 0 -46px;
+					&:hover{
+						background: url(../../images/reg/log_ico.png) no-repeat -43px -46px;
+					}
+				}
+				.weibo{
+					background: url(../../images/reg/log_ico.png) no-repeat 0 -90px;
+					&:hover{
+						background: url(../../images/reg/log_ico.png) no-repeat -43px -90px;
+					}
+				}
+			}
+		}
+	}
+}

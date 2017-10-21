@@ -1,0 +1,73 @@
+<%= nav %>
+<div style="min-height:300px;" class='wrap_content'>
+	<div class='hide' ng-class="{show:pageLoading}">
+		<div class="about_banner" style="background: url(<%= require('images/about/ys_banner.jpg')%>) no-repeat center;">
+			<!-- <p >全面化的环保回收服务，推进中国再生资源产业发展</p> -->
+		</div>
+		<div  class="about_heade">
+			<ul style="width:680px;">
+				<li ng-repeat="d in about_data" id="a_{{d.code | idtxt}}" ng-click="about_click($event)"
+				class='{{$index==about_data.length-1?"lyshi":""}}'>
+					<a href="#about_{{d.code.toLowerCase()}}/{{d.sn}}">{{d.name}}</a>
+				</li>
+			</ul>
+		</div>
+		<div ng-view style="min-height:100px;" class="view_content"> </div>
+		<!-- 法律声明 -->
+		<script type="text/html" id="flsm_view">
+			<div id="flsm">
+				<p>
+					<span class="fl" ng-bind='about_data[0].name'></span>
+					</span>
+				</p>
+				<div ng-bind-html="tljj.webBody">
+					
+				</div>
+			</div>
+		</script>
+		<!-- 隐私声明 -->
+		<script  type="text/html" id='yssm_view'>
+			<div id="yssm">
+				<p>
+					<span class="fl" ng-bind='about_data[1].name'></span>
+					</span>
+				</p>
+				<div ng-bind-html="tljj.webBody">
+					
+				</div>
+			</div>
+		</script>
+		<style>
+			.content_div:after{
+				content: '';
+				display: block;
+				clear: both;
+			}
+			.tk_content{
+				margin-top: 20px;
+				 padding: 30px 20px;
+			    line-height: 30px;
+			    font-size: 14px;
+			    display: none;
+			}
+			
+			.tk_content p {
+			    padding: 10px 0px;
+			    color: #666;
+			}
+		</style>
+		<!-- 服务条款 -->
+		
+		<script  type="text/html" id='ysfwtk_view'>
+			<div id="ysfwtk" >
+				<p>
+					<span class="fl" ng-bind='about_data[2].name'></span>
+					<span class="fr" ng-bind-html="mlHtml">
+					</span>
+				</p>
+				<div ng-bind-html="tljj.webBody" class="content_div">
+				</div>
+			</div>
+		</script>
+	</div>
+</div>

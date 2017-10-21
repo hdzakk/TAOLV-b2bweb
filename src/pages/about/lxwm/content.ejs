@@ -1,0 +1,66 @@
+<%= nav %>
+<div class='hide' ng-class="{show:pageLoading}">
+	<div class="contact_banner">
+		<!-- <p>承载希望，放飞梦想</p> -->
+	</div>
+	<div class="contact">
+		<p>
+			<span class="fl" ng-bind="tjtl.title"></span>
+		</p>
+		<span>深圳淘绿信息科技股份有限公司</span>
+		<div class="contact_head">
+			<!-- <span>
+				<i style="background: url(<%= require('images/about/xiao.png')%>) no-repeat 1px 2px;"></i>淘绿网：http://www.taolv365.com 
+			</span>
+			<span>
+				<i style="background: url(<%= require('images/about/xiao.png')%>) no-repeat -15px 2px;"></i>淘绿手机在线回收平台：http://tf.taolv365.com 
+			</span> -->
+			<!-- <span>
+				<i style="background: url(<%= require('images/about/xiao.png')%>) no-repeat -30px 2px;"></i>客服热线：400-188-5167
+			</span> -->
+			<span>
+				<i style="background: url(<%= require('images/about/xiao.png')%>) no-repeat 0px -14px;"></i>前台总机：0755-21005065
+			</span>
+			<span >
+				<i style="background: url(<%= require('images/about/xiao.png')%>) no-repeat -33px -14px;"></i>传真号码：0755-21004296
+			</span>
+			<span style="width: 200px;">
+				<i style="background: url(<%= require('images/about/xiao.png')%>) no-repeat -0px -14px;"></i>客服热线：400-188-5167
+			</span>
+			<span>
+				<i style="background: url(<%= require('images/about/xiao.png')%>) no-repeat 0px -30px;"></i>电子邮箱：service@taolv365.com
+			</span>
+			<span>
+				<i style="background: url(<%= require('images/about/xiao.png')%>) no-repeat -16px -29px;"></i>详细地址：深圳市龙华新区和平路24号A栋淘绿网
+				</span>
+			<span style="width: 200px;">
+				<i style="background: url(<%= require('images/about/xiao.png')%>) no-repeat -31px -30px;"></i>邮政编码：518031
+			</span>
+		</div>
+		<div style='margin-bottom:25px;margin-top:10px;'>
+			<div id="map3" style="height:370px;width:1144px;border:1px solid #bcbcbc;"></div>
+		</div>
+		<div class="route" ng-bind-html="tjtl.webBody">
+
+		<!--  ng-bind-html="tljj.webBody" -->
+		<!-- 	<p style='border-bottom:1px solid #f2f2f2;'>到达淘绿网的路线指南</p>
+			<div>
+				<span class="route_head">地铁</span><br>
+				<span>4号线（龙华线）清湖站 B出口 直行900米</span>
+			</div>
+			<div  class="che">
+				<span class="route_head">开车自驾</span><br>
+				<span>导航联网搜“淘绿网”（支持百度地图、高德地图）</span>
+			</div>
+			<div class="gonj">
+				<span class="route_head">公交车</span><br>
+				<span style="line-height:25px;">公交站：深圳清湖社区工作站的公交，向前直行500米<br>
+				途径公交车：b654路 b731路 m212路 m264路 m287路 m302路 m338路 m450路 m464路 高峰专线51路 高峰专线54路 高峰专线80路 深莞1线</span>
+			</div> -->
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="<%= config.DIRS.BUILD_FILE.js.bdMap %>"></script>
+<script type="text/javascript">
+	ShowMap("map3",{title:'深圳市淘绿信息科技股份有限公司',mapx:'114.045943,22.678204'});
+</script>

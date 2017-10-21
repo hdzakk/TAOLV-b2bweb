@@ -1,0 +1,34 @@
+<div id="header">
+    <div class="header_bg">
+        <div class="tl_w wrap_head">
+            <a class="tl_logo" href="/"><img src="<%= require('images/tl_logo.png') %>"></a>
+            <ul class="fl tl_nav_ul" id="tl_nav_ul">
+                <li><a href="/">首页</a></li>
+                <li id="buy"><a href="/page/buy/">我要买货</a></li>
+                <li id="sell"><a href="/page/sell/">我要卖货</a></li>
+                <li><a href="/page/zixun/">行业资讯</a></li>
+                <!--<li><a href="/page/help">帮助中心</a></li>
+                <li><a href="/page/zixun">关于我们</a></li>-->
+            </ul>
+            <div class="fl tl_search">
+                <div class="fl search_tab">
+                    <ul class="txt_ul">
+                        <li class="cur">报价</li>
+                        <li>资讯</li>
+                    </ul>
+                </div>
+                <input id="headSearchKeyWord" class="fl" type="text" placeholder="请输入搜索内容">
+                <a></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    !function(){
+        var c,e,f,a=window.location.href.match(/[^\/]\/page\/([a-zA-Z]+)\//),
+        b=document.getElementById('tl_nav_ul'),d=b.children;
+        if (a) {if (a[1]=='a') return;};
+        for(e=0,f=d.length;f>e;e++)null!==a&&d[e].id===a[1]&&(c=e);c||(c=0),d[c].className="cur";
+    }();
+</script>
+<div class="page-loading" ng-hide="pageLoading">页面加载中...</div>

@@ -1,0 +1,201 @@
+<h3 class='box_head'>暂存记录<a href="javascript:;"  ng-show="inventory" ng-click="inventory=false;" class="fr btn_default">返回列表</a></h3>
+<div class='box_body' ng-hide="inventory">
+	<div class="sales_order">
+		<ul class="sales_head">
+			<li class='sales_noe'>
+				<span>订单状态：</span>
+				<a href="" class="on" data-state='0'>所有</a>
+				<a href="" data-state='1'>未处理</a>
+				<a href="" data-state='2'>已处理</a>
+				<a href="" data-state='3'>处理中</a>
+			</li>
+			<li class="sales_two">
+				<span>生成日期：</span>
+				<input class='startDate' type="text" placeholder="请选择日期"> <i style="margin:0 5px;">-</i>
+				<input class='endDate' type="text" placeholder="请选择日期">
+				<span>最近：</span>
+				<a href="javascript:;" class="cur" data-time="1" data-day="-6">一周</a>
+				<a href="javascript:;" data-time="2" data-day="-30">1个月</a>
+				<a href="javascript:;" data-time="3" data-day="-90">3个月</a>
+				<a href="javascript:;" data-time="4" data-day="-365">1年</a>
+			</li>
+			<li>
+				<span class="fl">订单号：</span>
+				<div class="fl">
+					<input type="text" placeholder="请输入暂存单号/销售单号" ng-model='keyWord'>
+					<a ng-click="check_polling()" href=""><i></i></a>
+				</div>
+			</li>
+		</ul> 
+		<div class="sales_list">
+			<p style="color:#999;">共 <span style="color:#333;">{{dataList.recordsFiltered||0}}</span> 条暂存记录</p>
+			<table cellpadding="0" cellspacing="0" border="0">
+				<thead>
+					<th>序号</th>
+					<th>暂存单号</th>
+					<th>销售单号</th>
+					<th>生成时间</th>
+					<!-- <th>收款方式</th> -->
+					<th>已暂存天数</th>
+					<th>暂存总额（元）</th>
+					<th>状态</th>
+					<th class="rigbor">操作</th>
+				</thead>
+				<tbody>
+					<tr ng-if="!dataList.data">
+						<td colspan="7">
+							暂无记录
+						</td>
+					</tr>
+					<tr ng-repeat="d in dataList.data" ng-if="dataList.data">
+						<td>{{index+$index+1}}</td>
+						<td>{{d.sn}}</td>
+						<td>{{d.saleOrderSn}}</td>
+						<td>{{d.createDate}}</td>
+						<td>{{d.day}}</td>
+						<td>{{(d.orderMoney*1).toFixed(2)}}</td>
+						<td>{{d.state=='1'?'未处理':d.state=='2'?'已处理':d.state=='3'?'处理中':'--'}}</td>
+						<td class='operation'>
+							<!-- <span style="cursor:pointer;color:#0eb83a" ng-click="(d.type==3?turnTemporary(d):view_details(d.sn,$index))">{{d.type==3?'转暂存':'处理暂存货物'}}</span> -->
+							<span>请选操作</span>
+							<div class='open_ul'>
+								<a ng-show="d.state=='1'||d.state=='3'" ng-click="view_details(d.sn,$index,1)" href="JavaScript:;">处理暂存</a>
+								<a ng-click="view_details(d.sn,$index,2)" href="JavaScript:;">暂存单详情</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="Pagination" style="margin-top:25px;" class="page-pagination"><!-- 这里显示分页 --></div>
+		</div>
+	</div>
+</div>
+<!-- 处理暂存 -->
+<div class='box_body inventory' ng-show="inventory">
+		<table cellpadding="0" cellspacing="0" border="0">
+			<thead>
+				<th>暂存单号</th>
+				<th>销售单号</th>
+				<th>生成时间</th>
+				<th>已暂存天数</th>
+				<th>暂存总额（元）</th>
+				<th>状态</th>
+				<th>操作人</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{details.tradeMap.sn}}</td>
+					<td>{{details.tradeMap.saleOrderSn}}</td>
+					<td>{{details.tradeMap.createDate}}</td>
+					<td>{{details.tradeMap.day}}</td>
+					<td>{{(details.tradeMap.orderMoney*1).toFixed(2)}}</td>
+					<td>{{details.tradeMap.state=='1'?'未处理':details.tradeMap.state=='2'?'已处理':details.tradeMap.state=='3'?'处理中':'--'}}</td>
+					<td>{{details.tradeMap.auditBy}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<p style="margin-top:20px;color:#333;">货物总数量：<i style="color: #f62d13;">{{details.totalNum}}</i>； 现货总数量：<i style="color: #f62d13;"> {{details.goodsNum}} </i> ； 总处理：<i style="color: #f62d13;">{{details.groundingNum}}</i>； 货款总额：<i style="color: #f62d13;">{{(details.tradeMap.orderMoney*1||0).toFixed(2)}}元</i></p>
+		<table cellpadding="0" cellspacing="0" border="0" style="margin-top: 10px;">
+			<thead>
+				<th ng-show="btnShow">
+					<label style="cursor: pointer;" ng-init="allCheck=false">
+						<input ng-disabled="disabled" ng-change="allGoodSelect()" name="checkAll" ng-model="allCheck" type="checkbox" style="position:relative;top:2px;"/>全选
+					</label>
+				</th>
+				<th>序号</th>
+				<th>现货编号</th>
+				<th>货物名称</th>
+				<th>等级</th>
+				<th>总数量</th>
+				<th>现货数量</th>
+				<th>已处理</th>
+				<th>单位</th>
+				<th>参考价（元）</th>
+				<th>总价（元）</th>
+				<th class="rigbor">状态</th>
+			</thead>
+			<tbody>
+				<tr ng-if="!details.list.length">
+					<td colspan="{{btnShow?12:11}}">暂无数据</td>
+				</tr>
+				<tr ng-repeat="d in details.list" ng-if="details.list.length">
+					<td style="width:30px;" ng-show="btnShow">
+						<input ng-disabled="d.goodsNum<=0" ng-change="goodSelect()" type="checkbox" name="checkAll" ng-model="d.check" style="position:relative;top:2px;"/>
+					</td>
+					<td style="width:30px;">{{$index+1}}</td>
+					<td>{{d.sn}}</td>
+					<td>{{d.goodsName}}</td>
+					<td>{{d.gradeName}}</td>
+					<td>{{d.surplusNum | numFormat:d.goodsUnit}}</td>
+					<td>{{d.goodsNum | numFormat:d.goodsUnit}}</td>
+					<td>{{d.groundingNum | numFormat:d.goodsUnit}}</td>
+					<td>{{d.goodsUnit}}</td>
+					<td>{{(d.goodsPrice*1).toFixed(2)}}</td>
+					<td>{{(d.goodsPrice*d.surplusNum||0).toFixed(2)}}</td>
+					<td>{{d.statusValue=='1'?'已下线':'已上线'}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class='btn_list' ng-show="btnShow">
+			<a href="" ng-click="add_address()" class="shenc">重新报价</a>
+			<a href="" ng-click="refund()">生成退货单</a>
+			<!-- <a href="" ng-click="inventory=false;">返回</a> -->
+		</div>
+</div>
+<!-- 生成委托销售单 -->
+<script type="text/html" id="confirm">
+	<div class='inventory_btn'>
+		<p style="font-size:18px;">确认要生成委托销售单吗？</p>
+		<p>温馨提示：生成委托销售单后，会重新报价！</p>
+		<p class="btn_top"><a>确认</a><a href="javascript:layer.closeAll();">取消</a></p>
+	</div>
+</script>
+<style type="text/css">
+	.form-select{
+		border: 1px solid #ddd;
+	    width: 262px;
+	    box-sizing: border-box;
+	    color: #666;
+	    font-size: 14px;
+	    height: 35px;
+    	padding: 5px 10px;
+	    outline: none;
+	    display:inline-block;
+	}
+</style>
+<!-- 退货 -->
+<script type="text/html" id="refund">
+	<div class='refund'>
+		<p>
+			<span><i>*</i>物流收费方式：</span>
+			<label><input type="radio" name="fs" value="0" ng-model="backGoods.logisType"/>运费到付</label>
+			<label><input type="radio" name="fs" value="1" ng-model="backGoods.logisType"/>自提</label>
+		</p>
+		<div>
+			<p><i>*</i>物流运输方式：</p>
+			<select style="background: {{backGoods.logisType==1?'#EBEBE4;':''}}" ng-disabled="backGoods.logisType==1" class="form-select" ng-model="backGoods.sendCompany">
+					<option value="{{d.name}}" ng-repeat="d in logisticList">{{d.name}}</option>
+			</select>
+		</div>
+		<div>
+			<p><i>*</i>选择收货地址：<a onclick="layer.closeAll();" target="_blank" href="/page/user/#/account/address" class='fr'>管理收货地址</a></p>
+			<ul class='address_ul'>
+				<li ng-class='{disabled:backGoods.logisType==1,cur:$index==0}' ng-repeat='d in addressAll' ng-click='choiceDddress(d,$event)'>
+				   <p class='name_p'>  
+				   		<span class='fl'>{{d.name}}</span>
+				   		<span class='fr'>{{d.phone}}</span>
+				   </p>
+				   <div class='ress'>
+				   		{{d.province}} {{d.city}} {{d.district}} {{d.address}}
+				   </div>
+				</li>
+				
+			</ul>
+		</div>
+		<div>
+			<p><i>*</i>退货原因</p>
+			<textarea ng-model="backGoods.remark" style="max-width:100%; max-height:190px;min-width:100%; min-height:60px;padding:10px 10px;"></textarea>
+		</div>
+
+	</div>
+</script>

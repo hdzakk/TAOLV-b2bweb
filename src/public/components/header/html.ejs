@@ -1,0 +1,40 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="ie ie6"><![endif]-->
+<!--[if IE 7]><html class="ie ie7"><![endif]-->
+<!--[if IE 8]><html class="ie ie8"><![endif]-->
+<!--[if IE 9]><html class="ie ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" /> 
+  <meta name="renderer" content="webkit" />
+  <link rel="shortcut icon" href="<%= require('images/favicon.ico') %>">
+  <title><% if (pageTitle) { %> <%= pageTitle %> <% } %></title>
+  <script type="text/javascript" src="<%= DIRS.BUILD_FILE.js.config %>"></script>
+</head>
+<body class='bg'>
+	<div id="ieBrowser" style="display:none;">
+		<div class='iePrompt'>
+			<p class='left_img'><img src="<%= require('images/ie.png') %>"></p>
+			<div class='right_txt'>
+				<h3><span>您的浏览器版本过低</span>，无法正常使用，请升级您的浏览器！</h3>
+				<p class='t1'>为了得到我们网站最好的体验效果，我们建议您升级到最新版本的Internet Explorer或选择另一个web浏览器，以下是最流行的web浏览器。</p>
+				<p class='t2'>点击图标将跳到下载页</p>
+				<div class='browser'>
+					<a title="点击下载" target="_blank" class='a1' href="http://www.google.cn/chrome/browser/desktop/">Chrome<span>( 强烈推荐 )</span></a>
+					<a title="点击下载" target="_blank" class='a2' href="http://www.opera.com/zh-cn">Opera</a>
+					<a title="点击下载" target="_blank" class='a4' href="http://www.firefox.com.cn/">Firefox</a>
+					<a title="点击下载" target="_blank" class='a3' href="https://www.microsoft.com/zh-cn/download/default.aspx">Ie 9+</a>
+					<!-- <a target="_blank" class='a5' href=""></a> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		if (!-[1,]) {
+			document.getElementById('ieBrowser').style.display = 'block';
+		 }
+	</script>
+ 	

@@ -1,0 +1,186 @@
+<h3 class='box_head'>
+	退货记录
+</h3>
+<div class='box_body'ng-hide="refund">
+	<div class="sales_order">
+		<ul class="sales_head">
+			<li class='sales_noe'>
+				<span>订单状态：</span>
+				<a href="" class="on" data-state=''>所有</a>
+				<a href="" data-state='1'>未完成</a>
+				<a href="" data-state='2'>已退货</a>
+			</li>
+			<li class="sales_two">
+				<span>生成日期：</span>
+				<input class='startDate' type="text" placeholder="请选择日期"> <i style="margin:0 5px;">-</i>
+				<input class='endDate' type="text" placeholder="请选择日期">
+				<span>最近：</span>
+				<a href="javascript:;" class="cur" data-time="1" data-day="-6">一周</a>
+				<a href="javascript:;" data-time="2" data-day="-30">1个月</a>
+				<a href="javascript:;" data-time="3" data-day="-90">3个月</a>
+				<a href="javascript:;" data-time="4" data-day="-365">1年</a>
+			</li>
+			<li>
+				<span class="fl">订单号：</span>
+				<div class="fl">
+					<input type="text" placeholder="请输入退货单号" ng-model='keyWord'>
+					<a ng-click="check_polling()" href=""><i></i></a>
+				</div>
+			</li>
+		</ul> 
+		<div class="sales_list">
+			<p style="color:#999;">共 <span style="color:#333;">{{dataList.recordsFiltered||0}}</span> 条退货记录</p>
+			<table cellpadding="0" cellspacing="0" border="0">
+				<thead>
+					<th>序号</th>
+					<th>退货单号</th>
+					<th>销售单号</th>
+					<th>生成时间</th>
+					<th>收件人</th>
+					<th>联系电话</th>
+					<th>状态</th>
+					<th class="rigbor">操作</th>
+				</thead>
+				<tbody>
+					<tr ng-if="!dataList.data.length">
+						<td colspan="8">暂无记录</td>
+					</tr>
+					<tr ng-repeat="d in dataList.data" ng-if="dataList.data.length">
+						<td style="width:40px;">{{index+$index+1}}</td>
+						<td style="max-width:180px;word-wrap:break-word;">{{d.sn}}</td>
+						<td style="max-width:180px;word-wrap:break-word;">{{d.saleOrderSn}}</td>
+						<td style="max-width:120px;word-wrap:break-word;">{{d.createDate}}</td>
+						<td>{{d.recoverUser}}</td>
+						<td>{{d.recoverPhone}}</td>
+						<td>{{d.state | state : 'TH'}}</td>
+						<td class="operation">
+							<span>请选操作</span>
+							<div class='open_ul' ng-if="d.orderState!='2'">
+								<a href="javascript:;" ng-click="view_details(d.sn)">查看退货详情</a>  
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="Pagination" style="margin-top:25px;" class="page-pagination"><!-- 这里显示分页 --></div>
+		</div>
+	</div>
+</div>
+<div class='box_body trading refund'ng-show="refund">
+
+	<p class="trading_head">
+	 	<span  class="fl" style='color:#333;'>退货详情</span>
+	 	<a href="" ng-click='refund=false;' class="fr">返回列表</a>
+	 </p>
+
+	<p class="ztai{{state_num||1}}" style="margin-top:25px;"></p>
+	<ul class="time">
+		<li ng-repeat="d in logList" ng-class="{cur:$index==logList.length-1}">
+			<span>{{d.eventTime}}</span>
+		</li>
+		<!-- <li>
+			<span>2016/03/07 10:10:23</span>
+		</li>
+		<li>
+			<span>2016/03/07 10:10:23</span>
+		</li> -->
+	</ul>
+	
+	<div class='refund_details'>
+		<p>
+			<span>退货单号：<i>{{details.tradeMap.sn}}</i></span>
+			<span>销售单号：<i>{{details.tradeMap.saleOrderSn}}</i></span>
+			<span>状态：<i>{{details.tradeMap.state | state : 'TH'}}</i></span>
+			<!-- <span>退货时间：<i>{{details.saleOrderLogisBack.createDate}}</i></span> -->
+			
+		</p>
+		<p>
+			
+			<!-- <span>物流公司：<i>{{details.saleOrderLogisBack.sendCompany}}</i></span>
+			<span>物流单号：<i>{{details.saleOrderLogisBack.sendNo}}</i></span> -->
+		</p>
+		<p>
+			<span>收件人：<i>{{details.saleOrderLogisBack.recoverUser}}</i></span>
+			<span>联系电话：<i>{{details.saleOrderLogisBack.recoverPhone}}</i></span>
+			<span>物流收费方式：<i>{{(details.saleOrderLogisBack.type==0?'运费到付':'自提')}}</i></span>
+		</p>
+		<p>
+			<span style="width: 100%;">收货地址：<i>{{details.saleOrderLogisBack.recoverAddress}}</i></span>
+		</p>
+		<p ng-if="details.tradeMap.state=='2'">
+			<span style="width: 100%;">审核备注：<i style="display: inline-block;max-width: 840px;vertical-align: top;">{{details.tradeMap.remark}}</i></span>
+		</p>
+	</div>
+
+	<p style="color:#333;">退货明细：&nbsp;&nbsp; <span style="color: #999;">总数：{{refundTotal}}</span></p>
+	<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+		<thead>
+			<th>序号</th>
+			<th>货物名称</th>
+			<th>数量</th>
+			<th>单位</th>
+			<th>报价(元)</th>
+			<th>总价(元)</th>
+		</thead>
+		<tbody>
+			<tr ng-if="!details.list.length">
+				<td colspan="5">暂无数据</td>
+			</tr>
+			<tr ng-repeat="d in details.list" ng-if="details.list.length">
+				<td>{{$index+1}}</td>
+				<td>{{d.goodsName}}</td>
+				<td>{{d.goodsNum}}</td>
+				<td>{{d.goodsUnit}}</td>
+				<td>{{(d.goodsPrice*1).toFixed(2)}}</td>
+				<td>{{(d.goodsPrice*d.goodsNum).toFixed(2)}}</td>
+			</tr>
+		</tbody>
+	</table>
+    <p style="color:#888;">退货原因：{{details.saleOrderLogisBack.remark||'--'}}</p>
+	<p style="color:#333;">物流单信息</p>
+	<table cellpadding="0" cellspacing="0" border="0">
+		<thead>
+			<tr><th>物流单号</th>
+			<th>物流公司</th>
+			<th>生成时间</th>
+			<th>操作人</th>
+		</tr></thead>
+		<tbody>
+			<tr>
+				<td class="ng-binding">{{details.saleOrderLogisBack.sendNo||'--'}}</td>
+				<td class="ng-binding">{{details.saleOrderLogisBack.sendCompany||'--'}}</td>
+				<td class="ng-binding">{{details.saleOrderLogisBack.operateDate||'--'}}</td>
+				<td class="ng-binding">{{details.saleOrderLogisBack.operateBy||'--'}}</td>
+			</tr>
+			<tr ng-if="picArr.length!=0">
+				<td colspan="9" style="border:none;border-top:1px solid #ebebeb;border-right:1px solid #ebebeb;">
+					<div id="slideBox" class="slideBox">
+						<div class="bd">
+							<ul >
+								<li ng-repeat="img in picArr"><img ng-src="{{img}}" alt=""></li>
+							</ul>
+						</div>
+						<a class="prev" href="javascript:void(0)">&lt;</a>
+						<a class="next" href="javascript:void(0)">&gt;</a>
+					</div>
+				</td>
+				<style type="text/css">
+					.slideBox img{
+						vertical-align: middle;
+					}
+					.slideBox .bd ul{
+						height: 300px;
+					}
+					.slideBox ul img{
+						height: 100%;
+					}
+				</style>
+				<!-- <td style="border:none;border-top:1px solid #ccc;border-right:1px solid #ccc;">
+					<img src="/images/user/rightlen.png" alt="" class="next">
+				</td> -->
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="fanhui"><a ng-click='refund=false;' href="">返回</a></p>
+</div>

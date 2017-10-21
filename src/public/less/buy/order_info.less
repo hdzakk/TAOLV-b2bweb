@@ -1,0 +1,453 @@
+@charset "utf-8";
+@mainColor:#0eb83a;//主颜色
+@subColor1:#f68413;//辅助颜色
+@subColor2:#f62d13;//辅助颜色
+@borderColor:#f2f2f2;//边框颜色
+@hoverColor:#F48512;//hover颜色
+body{
+	background: #F5F5F5;
+}
+.layui-layer-content{
+	&>*{
+		font-family: "Microsoft YaHei"!important;
+	}
+}
+#buy_order_content{
+	margin: 40px auto;
+	background: #fff;
+	border-top: 2px solid @mainColor;
+	.title{
+		height: 50px;
+		line-height: 50px;
+		color: #333;
+		font-size: 16px;
+		border-bottom: 1px solid @borderColor;
+		text-indent: 28px;
+	}
+	.order_content{
+		border-right:1px solid @borderColor;
+		border-left:1px solid @borderColor;
+		box-sizing: border-box;
+		*width: 1144px;
+		padding: 0 28px;
+		overflow: hidden;
+	}
+	.info_title{
+		width: 100%;
+		height: 35px;
+		line-height: 35px;
+		font-size: 16px;
+		margin-top: 15px;
+		margin-bottom: 10px;
+		color: #333333;
+	}
+	.wrap_info{
+		width: 100%;
+		.order_num{
+			text-indent: 20px;
+			padding-bottom: 10px;
+		}
+		table{
+			width: 100%;
+			border-left:  1px solid @borderColor;
+			border-right:  1px solid @borderColor;
+		}
+		th{
+			background: #F2F2F2;
+			padding: 14px 0;
+		}
+		td{
+			text-align: center;
+		    padding: 11px 0;
+		    *width: 250px;
+		    border-bottom: 1px solid @borderColor;
+		    input{
+		    	height: 25px;
+		    	border:1px solid @borderColor;
+		    	padding: 10px 0;
+		    	text-align: center;
+		    	width: 105px;
+		    	color: #666;
+		    	transition: all 0.35s;
+		    	&:focus{
+					border-color: @mainColor;
+				}
+		    }
+		    .modify,.reason_modify{
+		    	color: @mainColor;
+		    	text-decoration: underline;
+		    	padding-left: 5px;
+		    }
+		}
+	}
+	.wrap_make{
+		overflow: hidden;
+		.wrap_credit{
+			width: 97%;
+			margin: 0 auto;
+			table{
+				width: 100%;
+				border:1px solid #DDDDDD;
+				th{
+					background: #F2F2F2;
+					padding: 10px 0;
+				}
+				td{
+					padding: 10px 0;
+					text-align: center;
+					border-top: 1px solid #E3E3E3;
+					border-right: 1px solid #E3E3E3;
+					max-width: 200px;
+					padding: 5px;
+					&.noBor{
+						border-right: none;
+					}
+				}
+			}
+			.foot_txt{
+				margin-top: 12px;
+				a{
+					color: #0eb83b;
+					&:hover{
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+	
+	.wrap_remark{
+		textarea{
+			width: 98%;
+			max-width: 98%;
+			border:1px solid #DEDEDE;
+			min-height: 48px;
+			outline: none;
+			padding: 2px 5px;
+			color: #666;
+		}
+	}
+	.wrap_careful{
+		color: #999;
+		font-size: 12px;
+		line-height: 20px;
+		margin-top: 15px;
+		em{
+			color: #f62d13;
+			font-weight: bold;
+		}
+	}
+	.submit_order{
+		width: 100%;
+		text-align: center;
+		padding-top: 50px;
+		padding-bottom: 50px;
+		label{
+			cursor: pointer;
+			input{
+				vertical-align: middle;
+				position: relative;
+				top: -1px;
+			}
+			a{
+				color: @mainColor;
+				&:hover{
+					text-decoration: underline;
+				}
+			}
+		}
+		.btn{
+			margin-top: 40px;
+			a{
+				width: 105px;
+				height: 35px;
+				color: #fff;
+				font-size: 16px;
+				text-align: center;
+				line-height: 35px;
+				background: @mainColor;
+				display: inline-block;
+				border-radius: 3px;
+				margin: 0 10px;
+				&:hover{
+					background: #F68412;
+				}
+			}
+		}
+	}
+
+	.wrap_take{
+		width: 100%;
+		overflow: hidden;
+		.take_address{
+			width: 98%;
+			margin: 0 auto;
+			.add_title{
+				color: #333;
+				font-weight: bold;
+			}
+		}
+		.wrap_address{
+			width: 100%;
+			margin-bottom: 15px;
+			&:after{
+				content: "";
+				clear: both;
+				display: block;
+				*zoom:1;
+			}
+			li{
+				width: 235px;
+				height: 140px;
+				padding: 10px 15px;
+				float: left;
+				border:1px solid #E6E6E6;
+				cursor: pointer;
+				margin-right: 16px;
+				margin-top: 16px;
+				.name{
+					padding-bottom: 12px;
+					font-weight: bold;
+					border-bottom: 1px dashed #EAEAEA;
+				}
+				.phone{
+					padding: 10px 0;
+					background: url(../../images/buy/phone.png) no-repeat left center;
+					padding-left: 20px;
+					border-bottom: 1px dashed #EAEAEA;
+				}
+				.address{
+					padding: 10px 0;
+					padding-left: 20px;
+					background: url(../../images/buy/address.png) no-repeat left 13px;
+				}
+				&:hover,&.cur{
+					border-color: @mainColor;
+					position: relative;
+					&:after{
+						position: absolute;
+						content: "";
+						width: 13px;
+						height: 13px;
+						right: 1px;
+						bottom: 1px;
+						background: url(../../images/buy/address_cur.png) no-repeat;
+					}
+				}
+			}
+		}
+		.hidden{
+			height: 180px;
+    		overflow: hidden;
+		}
+		.address_btn{
+			height: 30px;
+			margin-top: -5px;
+			a{
+				color: @mainColor;
+				&:hover{
+					color: @hoverColor;
+				}
+			}
+		}
+		.deliver_mode{
+			width: 100%;
+			p{
+				padding-top: 10px;
+				label{
+					cursor: pointer;
+					input{
+						vertical-align: middle;
+						position: relative;
+						top: -2px;
+					}
+				}
+				&>input{
+					border:1px solid #CFCFCF;
+					padding: 3px 2px;
+					width: 200px;
+				}
+			}
+			.tips{
+				color: #f62d13;
+			}
+		}
+	}
+}
+
+//分拣中心修改弹窗内容
+.sorting_core{
+	width: 100%;
+	
+	background: #F2F2F2;
+	padding:20px 28px;
+	box-sizing: border-box;
+	position: relative;
+	.sorting_centent{
+		&:after{
+			content: "";
+			clear: both;
+			display: block;
+			*zoom: 1;
+		}
+	}
+	&>a{
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		font-size: 10px;
+		right: 10px;
+		top: 10px;
+		color: #999999;
+		font-size: 20px !important;
+		font-weight: bold;
+		&:hover{
+			color: #f62d13;
+		}
+	}
+	p.t{
+		font-size: 16px;
+		padding-bottom: 15px;
+		color: #333;
+	}
+	.div_select{
+		width: 45%;
+	}
+	.form-control{
+		border: 1px solid #DDDDDD;
+	    outline: none;
+	    height: 28px;
+	    padding: 2px 12px;
+	    min-width: 100px;
+	    margin-right: 10px;
+	    color: #666;
+	}
+	.take_info{
+		 
+		 p{
+		 	padding-bottom: 15px;
+		 }
+		 span{
+		 	display: inline-block;
+		 	width: 80px;
+		 	text-align: right;
+		 	color: #333;
+		 }
+	}
+	.sorting_btn{
+		width: 100%;
+		text-align: center;
+		padding-top: 20px;
+		a{
+			display: inline-block;
+			width: 105px;
+			height: 36px;
+			line-height: 36px;
+			border-radius: 3px;
+			margin: 0 8px;
+			background: @mainColor;
+			color: #fff;
+			font-size: 16px;
+			&:hover{
+				background: @hoverColor;
+			}
+		}
+	}
+}
+//接受扣款原因修改弹窗内容
+.larey_bg{
+	display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#44999999', endColorstr='#44999999');
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#44999999', endColorstr='#44999999');
+    background: rgba(0,0,0,0.2);
+}
+.debit_reason{
+	width: 600px;
+	margin: 50px auto;
+	background: #fff;
+	padding:20px 22px;
+	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	max-height: 250px;
+	.close{
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		font-size: 10px;
+		right: 10px;
+		top: 10px;
+		color: #999999;
+		font-size: 20px !important;
+		font-weight: bold;
+		&:hover{
+			color: #f62d13;
+		}
+	}
+	p.t{
+		font-size: 16px;
+		padding-bottom: 15px;
+		color: #333;
+	}
+	.reason_centent{
+		width: 96%;
+		margin: 0 auto;
+		.wrap_label{
+			&:after{
+				content: "";
+				clear: both;
+				display: block;
+				*zoom: 1;
+			}
+		}
+		label{
+			cursor: pointer;
+			display: inline-block;
+			float: left;
+			width: 25%;
+			padding-top: 10px;
+			input{
+				vertical-align: middle;
+				position: relative;
+				top: -2px;
+			}
+		}
+	}
+	.reason_btn{
+		width: 100%;
+		text-align: center;
+		padding-top: 20px;
+		position: absolute;
+		bottom: 20px;
+		a{
+			display: inline-block;
+			width: 105px;
+			height: 36px;
+			line-height: 36px;
+			border-radius: 3px;
+			margin: 0 8px;
+			background: @mainColor;
+			color: #fff;
+			font-size: 16px;
+			&:hover{
+				background: @hoverColor;
+			}
+		}
+	}
+}
+
+

@@ -1,0 +1,254 @@
+<%= nav %>
+<div id="buy_content" class='tl_w hide' ng-class="{show:pageLoading}">
+	<p class="prompt">提示操作：请在需要进行委托采购的货物后面输入对应的报价和采购数量，选择完了之后点击委托采购进行下单。</p>
+	<div class="navigation">
+		<a ng-click="getSellClassifyInfo(d.typeName,$event,$index)" ng-repeat="d in categoryList" href="javascript:;" class="{{$index==0?'active':''}}" ng-class="{noBor:categoryList.length-1==$index&&categoryList.length>11}">{{d.typeName}}</a>
+	</div>
+	<div id="gradeless" class='gradeless' data-toggle="content">
+		<table class="cargo_box" >
+			<thead>
+				<th>货物名称</th>
+				<th>货物说明</th>
+				<th>报价（元）</th>
+				<th>单位</th>
+				<th>采购数量</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="d in typeList track by $index">
+					<td style="width:210px;">{{d.classifyName}}</td>
+					<td style="width:530px;" class='txt'><input class="instructions" type="text" ng-model="d.goodsExplain" value=""></td>
+					<td style="width:180px;"><input type="text" class='buyInput' style="color:#f62d13;" ng-model="d.maxPrice" value=""></td>
+					<td style="width:60px;">{{d.unitValue}}</td>
+					<td style="width:220px;"><input type="text" class='buyInput' ng-model="d.number" value=""></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="5" class=" view tc">
+						<a class='entrust' href="JavaScript:;" ng-click="go_order_info(1)">委托采购</a>
+						<a class='view' href="/page/buy/index.html">查看采购信息</a>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<!-- 二手 -->
+	<div id="second_hand" class="second_hand switch" data-toggle="content">
+		<!-- 第一步 -->
+		<div class="middle brand_models select_brand" ng-show="flow==1">
+			<div class="iPhone_model" style="line-height: 33px;">
+				<p class='model_title'>
+					<span class='fl' style="color: #333;font-size: 16px;">第一步：选择品牌型号</span>
+					<span class='fr' ng-style="{'padding-right':phoneModelArr.length>0?'100px':'0'}">已选型号：<font ng-repeat="d in modelEllipsis track by $index">{{d.brand+''+d.promodelName}}<i ng-if="$index<phoneModelArr.length-1">，</i></font><font ng-if="phoneModelArr.length==0">无</font></span>
+					<button ng-show="phoneModelArr.length>0" class="look" ng-click="lookMoreGoods()">查看更多</button>
+				</p>
+				<p class='tips'>请选择要采购的品牌</p>
+			</div>
+			<div class="choose_brand ">
+				<button title="{{d.brand}}" class='no' ng-repeat="d in secondList track by $index" ng-click="choiceBrand(d)">
+					<img ng-src="{{d.brandLogo}}">
+				</button>
+			</div>
+		</div>
+
+		<!-- 第二步 -->
+		<div class="middle brand_models select_models" ng-show="flow==2">
+			<div class="iPhone_model">
+				<p class='model_title'>
+					<span class='fl' style="color: #333;font-size: 16px;">第一步：选择品牌型号</span>
+					<span class='fr' ng-style="{'padding-right':modelEllipsis.length>0?'100px':'0'}">已选型号：<font ng-repeat="d in modelEllipsis track by $index">{{d.brand+''+d.promodelName}}<i ng-if="$index<modelEllipsis.length-1">，</i></font><font ng-if="modelEllipsis.length==0">无</font></span>
+					<button ng-show="modelEllipsis.length>0" class="look" ng-click="lookMoreGoods()">查看更多</button>
+				</p>
+				<div>
+					<p class="fl" style="color: #0eb83b;">请选择要采购的型号（单击选择）</p>
+					<input id="searchVal" class="fl" type="text" ng-model="searchVal" placeholder="请输入关键词">
+					<i class="fl" ng-click="modelSearch()"><img src="<%= require('images/buy/2.png')%>" alt=""></i>
+				</div>
+				<!-- <p class="fr"><button ng-click="flow=1" class="again">重新选择品牌</button></p> -->
+			</div>
+			<div class="mobilePhone_model scrollBar">
+				<a ng-click="choicePhoneModel(d,$event)" ng-repeat="d in modelList track by $index" ng-class="{on:d.checked}">
+					<img ng-src="{{d.productPic}}">
+					<!-- <b style="background-image:url({{d.productPic}})"></b> -->
+					<p title="{{d.brand}} {{d.promodelName}}">{{d.brand}} {{d.promodelName}}</p>
+				</a> 
+	
+				<!-- <a ng-click="choicePhoneModel(d,$event)" v-for="d of modelList" :class="{on:d.checked}">
+					<img :src="((d.productPic))">
+					<p>((d.brand)) ((d.promodelName))</p>
+				</a> -->
+
+				<p ng-if="modelList.length==0" style="text-align: center;margin-top: 40px;font-size: 16px;margin-bottom: 30px;">找不到与<em style="color:#f62d13;">“{{searchVal}}”</em>相关的型号</p>
+			</div>
+			<div class="future_generations" ng-init="modelChecked=false;">
+				<button class="been_chosen" ng-click="flow=1;searchVal='';">添加其他品牌</button>
+				<button class="all_cancelled" ng-click="all_cancelled()" ng-show="modelList.length>0">全选/取消</button>
+				<button class="been_chosen" ng-click="selectedModel()">下一步</button>
+			</div>
+		</div>
+		<!-- 第三步 -->
+		<div class="middle brand_models select_specifications select_models" ng-show="flow==3">
+			<!-- <div class="information">
+				<p class="fl" style="color: #0eb83b;">第二步：选择对应型号要采购的规格信息</p>
+				<p class="fr"><button ng-click="flow=1" class="again">重新选择品牌</button></p>
+			</div> -->
+			<div class="iPhone_model">
+				<p class='model_title'>
+					<span class='fl' style="color: #333;font-size: 16px;">第二步：选择规格信息</span>
+					<span class='fr' ng-style="{'padding-right':modelEllipsis.length>0?'100px':'0'}">已选型号：<font ng-repeat="d in modelEllipsis track by $index">{{d.brand+''+d.promodelName}}<i ng-if="$index<modelEllipsis.length-1">，</i></font><font ng-if="modelEllipsis.length==0">无</font></span>
+					<button ng-show="modelEllipsis.length>0" class="look" ng-click="lookMoreGoods()">查看更多</button>
+				</p>
+				<!-- <div>
+					<p class="fl" style="color: #0eb83b;">请选择要采购的型号（单击选择）</p>
+					<input id="searchVal" class="fl" type="text" ng-model="searchVal" placeholder="请输入关键词">
+					<i class="fl" ng-click="modelSearch()"><img src="<%= require('images/buy/2.png')%>" alt=""></i>
+				</div> -->
+			</div>
+
+			<p ng-repeat="d in phoneStandard track by $index" style="{{$index==0?'margin-top:25px;':''}}">
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{d.name}}：</span>
+				<em>
+					<button ng-repeat="c in d.list track by $index" ng-click="choiceMemory(c,d.name,$event)" ng-class="{selected:c.checked}">{{c.spec}}</button>
+				</em>
+			</p>
+			
+			<p style="text-align:center;margin-top:30px;" ng-init="specChecked=false;">
+				<a class="confirm" ng-click="flow=1">选择更多型号</a>
+				<a class="confirm all_spec" ng-click="all_spec()">全选/取消</a>
+				<a class="confirm" ng-click="confirmSpecification()">下一步</a>
+			</p>
+		</div>
+		<!-- 第四步 -->
+		<div class="middle brand_models select_level" ng-show="flow==4">
+			<div class="level_purchasing">
+				<div style="height:40px;lien-height:40px;">
+					<p class="fl" style="color: #333;font-size: 16px;">第三步：选择采购等级</p>
+					<!-- <p class="fr"><button ng-click="flow=1" class="again">重新选择品牌</button></p> -->
+				</div>
+				<div>
+					<span class='fl'>等级说明：</span>
+					<p class='fr' style="width: 93%;">
+						<i ng-repeat="d in gradeList track by $index">【{{d.gradeName}}】{{d.describeValue}}。</i>
+					</p>
+				</div>
+				
+			</div>
+			<table cellpadding="0" cellspacing="1" border="0" class="purchasing_form" bgcolor="#ddd">
+				<thead style="background:#ddd;">
+					<th style="min-width:250px;max-width:250px;">货物名称</th>
+					<th style="min-width:730px;max-width:730px;">请选择要采购的等级</th>
+					<th style="width:85px;">操作</th>
+				</thead>
+				<tbody class="delete_line">
+					<tr ng-repeat="d in phoneSpecification track by $index">
+						<td>{{d.phoneName}}</td>
+						<!-- <td>
+							<em ng-repeat="c in d.offerList track by $index">
+								&nbsp;{{c.grade}} <input ng-model="c.price" type="text" placeholder="报价">&nbsp;<input ng-model="c.number" type="text"placeholder="数量">
+							</em>
+						</td> -->
+						<td>
+							<button ng-repeat="c in d.offerList track by $index" ng-class='{selected:c.checked}' ng-click="gradeSelect(c,$index)"> 
+								{{c.grade}}等级
+							</button>
+						</td>
+						<td><a href="javascript:;" ng-click="deleteGood(d)">删除</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class='choiceGrade'>
+				<ul class='g_center'>
+					<li ng-repeat="d in checkboxChoiceList track by $index">
+						<label>
+							<input ng-click="setBtnOff()" ng-model="d.checked" value="checkbox" type="checkbox"><i>✓</i>{{d.grade}}全选
+						</label>
+					</li>
+				</ul>
+				<p class='whole' ng-init="allSelect = false;">
+					<label>
+						<input ng-model="allSelect" value="checkbox" type="checkbox" ng-click="allGradeSelect(allSelect)"><i>✓</i>全选选择
+					</label>
+				</p>
+			</div>
+			<div class="confirm_rating">
+				<button ng-click="flow=(isStandardValue?3:1)">{{isStandardValue?'重选规格信息':'重新选择品牌'}}</button>
+				<button ng-click="confirmPurchase()">确定采购等级</button>
+			</div>
+		</div>
+		<!-- 已采购型号 -->
+		<div class="middle choose_model" ng-show="flow==5">
+			<!-- <p>已选采购型号</p> -->
+			<div class="iPhone_model" style="height:40px;lien-height:40px;margin-top:6px;">
+				<p style="color: #333;font-size: 16px;">
+					<span class='fl'>第四步：确认已选采购型号</span>
+					<span class='fr'>
+						<button class="goodsImport" ng-init="goodsImportVal='';">
+							导入
+							<form id="goodsImportForm" enctype="multipart/form-data">
+								<input type="file" value="[更换头像]" name="upfile"  id="goodsImportFile" ng-change="goodsImport()" ng-model="goodsImportVal">
+							</form>
+						</button>
+						<button ng-click="goodsExport()">导出</button>
+						<button ng-click="addMoreGoods()">添加更多机型</button>
+						<button ng-click="againChoicePrompt()">重新选择型号</button>
+					</span>
+				</p>
+			</div>
+			<table class="add_table" cellpadding="0" cellspacing="0" border="0">
+				<thead>
+					<th>货物名称</th>
+					<th>等级</th>
+					<th>报价(元)</th>
+					<th>采购数量</th>
+					<th>单位</th>
+					<th><span style="color: #f62d13;">请选择您可以接受的扣款原因</span>
+					<!-- ，默认选择<span ng-repeat="val in defaultSelecteds">{{$index!=0?',':''}}{{val}}</span> --></th>
+					<th>操作</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="d in phonePurchase track by $index">
+						<td>{{d.classifyName}}</td>
+						<td class="level_good">{{d.grade}}</td>
+						<td class="offer"><input class="price{{$index}}" ng-model="d.maxPrice" type="text"></td>
+						<td class="purchase_quantity"><input class="number{{$index}}" ng-model="d.number" type="text"></td>
+						<td class="unit">{{d.unitValue}}</td>
+						<td class="goods_that">
+							<!-- <label ng-repeat="n in d.goodsExplainJson"><input ng-model="n.checked" ng-checked="n.checked" type="checkbox">{{n.name}}</label> -->
+							<a ng-click="reason_modify(d.goodsExplainJson,$index)" class="reason_modify" href="javascript:;">查看扣款项</a>
+						</td>
+						<td class="operation" style="width:50px;">
+							<a href="javascript:;" ng-click="deleteModel(d)">删除</a>
+						</td>
+					</tr>
+					<tr ng-if="phonePurchase.length==0">
+						<td colspan="7">请选择货物</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="jump">
+				<a href="javascript:;" ng-click="go_order_info(2)">委托采购</a>
+				<a href="/page/buy/index.html" class="gray">查看现货资源</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 接受扣款原因修改弹窗 -->
+<div class='larey_bg'  style="display: {{reason?'block':'none'}};">
+	<div class='debit_reason'>
+		<p class='t'>选择您可以接受的扣款原因</p>
+		<div class='reason_centent'>
+			<!-- <p style="color:#F6331A;">说明：默认选择1,2,3,4,5,8</p> -->
+			<div class='wrap_label'>
+				<label ng-repeat="d in reason track by $index">
+					<input value="checkbox" ng-checked="d.checked" ng-model="d.checked" type="checkbox"/>
+					<span ng-bind="d.name"></span>
+				</label>
+			</div>
+		</div>
+		<div class='reason_btn'>
+			<a href="javascript:;" ng-click="determineReason()">确定</a>
+			<a href="javascript:;" ng-click="reason=false">取消</a>
+		</div>
+		<a href="javascript:;" ng-click="reason=false" class='close iconfont'>&#xe652;</a>
+	</div>
+</div>

@@ -1,0 +1,165 @@
+<div id='help_header' style='background:#fff;'>
+	<div class='tl_w warp_help_header'>
+		<a class='help_logo' href='/page/help'><img src='<%= require('images/helpcenter/help_logo.png')%>'></a>
+		<span class='search'>
+			<input type='text' class="find" placeholder='请简单描述您的问题，如‘如何查找订单’'>
+			<a  ng-click="help_find()"></a>
+		</span>
+	</div>	
+</div>
+<div class="page-loading" ng-hide="pageLoading">页面加载中...</div>
+<div id="wrapHelp" class='hide ' ng-class="{show:pageLoading}" style="min-height:580px;">
+	<!-- 上列表 -->
+	<ul class="help_heart">
+	<li ng-repeat='d in headData' class=' {{d.code}}'><!--  -->
+		<a ng-click="problem(d.code)" href="page/help?code=d.code">{{d.name}}</a>
+	</li>
+		<!-- <li  class="choose CJWD"><a ng-click="problem('CJWD')">常见问题</a></li>
+		<li class='WSMJ'><a ng-click="problem('WSMJ')">我是卖家</a></li>
+		<li class='WOMJ'><a ng-click="problem('WOMJ')">我是买家</a></li> -->
+	</ul>
+	<!-- 下-->
+	<div class="min_height">
+		<div id="user_content" class='tl_w' style="margin-top:20px;">
+			<!-- 左侧 -->
+			<div class="guide">
+				<p ng-bind="data.name"></p>
+				<ul>
+					<li ng-repeat="d in noun" class='switch'>
+						<p> 
+							<!-- <i class="" style="background: url(/images/helpcenter/{{d.code | lowercase}}.png) no-repeat;">1</i> -->
+							<a href="" ng-bind="d.name"></a>
+							<b class='{{$index==0?"cur":""}}'></b>
+						</p>
+						<ul class='{{$index==0?"sah":""}}'>
+							<li ng-repeat="b in d.childrenNewsType" class="{{$index==0?'cut':''}}">
+								<a href="javascript:;" ng-bind="b.name" ng-click="jump(b.sn,b.name,d.name)"></a>
+							</li>
+						</ul>
+					</li>		
+				</ul> 
+			</div>
+			<!-- 右侧 -->
+			<div ng-view>
+				<div id='help_right'>
+					<div class='box_head'>
+						<p class='box_title'>
+							<span class="fl">{{zn_name}} &nbsp;<font style="font-family: '宋体';font-weight: bold;">&gt;</font> &nbsp;
+								<a class='fr' ng-bind="name" ng-show="isShow"></a>
+								<a class='fr' ng-bind="title" ng-show="!isShow"></a>
+							</span>
+							<a ng-show="!isShow" class='fr return_back' href="javascript:;" ng-click="isShow=true"><font style="font-family: '宋体';font-weight: bold;">&lt;</font> 返回</a>
+						</p>
+						<p class='box_btn' ng-show="term">
+							<a href="javascript:;" class='cur' ng-click="termTab(0,$event)">屏幕</a>
+							<a href="javascript:;" ng-click="termTab(1,$event)">功能</a>
+							<a href="javascript:;" ng-click="termTab(2,$event)">硬件</a>
+						</p>
+					</div>	
+					<div class="noun" ng-show="isShow&&!term">
+						<div class='box_body'>
+							<p ng-repeat="d in dataAll">
+								<a class="su" ng-click="obtain(d.webBody,d.title,d.sn)">{{d.title}}</a>
+							</p>
+						</div>
+						<div id="Pagination" style="margin-top:25px;" class="page-pagination"><!-- 这里显示分页 --></div>
+					</div>
+
+					<div class="supply" ng-show="!isShow&&!term">
+						<div class='box_body box_content'>
+							<h3>{{title}}</h3>
+							<!-- <span ng-bind-html="dataList.webBody">
+
+							</span><br> -->
+							<div id="webBody">
+								
+							</div>
+							<a ng-click="isShow=true" href="" class="return_back">返回</a>
+						</div>
+					</div>
+					<!-- 手机质检术语 -->
+					<div ng-show="term" class="phoneTerm">
+						<div class="term_box">
+							<div>
+								<h2>屏幕</h2>
+								<h3>1、智能手机屏幕的组成</h3>
+								<img src="<%= require('images/help/01.jpg')%>">
+							</div>
+							<div>
+								<h3>2、外屏破、内屏好</h3>
+								<p>是指保护手机屏幕的盖板玻璃破裂，但是内屏的显示正常（也称爆盖板）。</p>
+								<img src="<%= require('images/help/02.jpg')%>">
+							</div>
+							<div>
+								<h3>3、背光</h3>
+								<p>是指屏幕背光层受到损伤造成屏幕显示局部发亮等。</p>
+								<img src="<%= require('images/help/03.jpg')%>">
+							</div>
+							<div>
+								<h3>4、压伤</h3>
+								<p>由于屏幕正面受到压伤后导致屏幕局部发蓝，压伤严重的会导致漏液屏幕局部发黄。</p>
+								<img src="<%= require('images/help/04.jpg')%>">
+							</div>
+							<div>
+								<h3>5、屏幕分层</h3>
+								<p>针对不开机而屏幕没有明显破裂损坏的OLED屏幕手机，在阳光照射下倾斜至10-15度（接近平视角度），肉眼观看若呈现出泛蓝色则该屏幕不分层。若呈现出黄色，该屏幕则分层，即屏幕漏液。</p>
+								<img src="<%= require('images/help/05.jpg')%>">
+							</div>
+							<div>
+								<h3>6、屏幕老化（色差）</h3>
+								<p>屏幕会因为物理性能衰减而老化,比如塑料老化就会变脆,LED屏幕老化会有色差。</p>
+								<img src="<%= require('images/help/06.jpg')%>">
+							</div>
+						</div>
+						<div class="term_box">
+							<div>
+								<h2>功能</h2>
+								<h3>1、屏显</h3>
+								<p>指开机后屏幕定在开机画面而不能进入操作界面，也称定屏。</p>
+								<img src="<%= require('images/help/10.jpg')%>">
+							</div>
+							<div>
+								<h3>2、屏锁</h3>
+								<p>指开机后需要通过密码解锁才能进入手机操作界面，因缺少密码不能进行操作。</p>
+								<img src="<%= require('images/help/11.jpg')%>">
+							</div>
+						</div>
+						<div class="term_box">
+							<div>
+								<h2>硬件</h2>
+								<h3>1、进水</h3>
+								<p>在未出现氧化情况下，手机严重受潮或者进水导致主板或机身的试水纸变红色。</p>
+								<img src="<%= require('images/help/07.jpg')%>">
+							</div>
+							<div>
+								<h3>2、主板氧化</h3>
+								<p>由于手机主板进水，受潮或电池漏液后，长期和空气接触，在主板形成绿色的氧化物。</p>
+								<img src="<%= require('images/help/08.jpg')%>">
+							</div>
+							<div>
+								<h3>3、触点氧化</h3>
+								<p>触点氧化，也是主板受潮后氧化形成的。</p>
+								<img src="<%= require('images/help/09.jpg')%>">
+							</div>
+							<div>
+								<h3>4、搬板机</h3>
+								<p>一个新的非原装的空主板，上面无CPU、电源、字库等芯片，在别的坏主板、断裂主板上拆取下芯片，通过人工焊接把芯片搬到新的空板子上，与原主板修机更换新的芯片的概念基本一样，属于大修过。</p>
+								<img src="<%= require('images/help/12.jpg')%>">
+							</div>
+							<div>
+								<h3>5、主板变形</h3>
+								<p>主板微变形指主板能开机情况下，有少许弯曲（弯曲角度不能超过10度，因为液晶屏幕弯曲角度在10~15度时候就会炸屏，若遇到机身弯曲，并且内屏破了，则主板弯曲角度将会达到10度）。</p>
+								<img src="<%= require('images/help/13.jpg')%>">
+							</div>
+							<div>
+								<h3>6、大修</h3>
+								<p>指主板上的CPU、字库、电源IC模块等重要组件维修过。芯片边缘封装胶水（长方形框），维修过芯片的表面字体会模糊（圆圈框），这些都是大修的体现。~15度时候就会炸屏，若遇到机身弯曲，并且内屏破了，则主板弯曲角度将会达到10度）。</p>
+								<img src="<%= require('images/help/14.jpg')%>">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

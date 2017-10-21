@@ -1,0 +1,31 @@
+<%= nav %>
+<div class="message_center hide" ng-class="{show:pageLoading}">
+	<div class="video_list">
+		<h3 class='mulu' ng-bind-html="mlHtml"></h3>
+		<div class="screening">
+			<ul>
+				<li style="color:#999;">{{code=='TLBK'?'视频':'热点'}}分类：</li>
+				<li ng-click="getVideoChildrenList('all',$event)" class='cur btnLi'><a href="javascript:;">所有</a></li>					
+				<li class='btnLi' ng-repeat="d in childrenType" ng-click="getVideoChildrenList(d.sn,$event)"><a href="">{{d.name}}</a></li>
+			</ul>
+			<!-- <p>
+				<span style="color:#999;">发布时间：</span>
+				<input type="text" placeholder="请选择日期">
+				<a href=""></a>
+			</p> -->
+		</div>
+		<div class="video_box">
+			<p ng-if="list.length==0">没有相关内容</p>
+			<div ng-repeat="d in list" ng-if="list.length!=0">
+				<a class='{{d.templateCode=="SP"?"video":""}}' href="{{d | typeUrl}}" target="_blank">
+					<span ng-style="{'backgroundImage': 'url({{d.imageUrl}})'}">
+						<!-- <img src="{{d.imageUrl}}"> -->
+					</span>
+				</a>
+				<p><a href="{{d | typeUrl}}">{{d.title}}</a></p>
+			</div>
+		</div>
+		<!-- 分页 -->
+		<div id="Pagination" class="page-pagination"><!-- 这里显示分页 --></div>
+	</div>
+</div>

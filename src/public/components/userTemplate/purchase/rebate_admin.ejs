@@ -1,0 +1,90 @@
+<h3 class='box_head'>返点管理</h3>
+<div class='box_body pur_order'>
+	<div>
+		<ul class="sales_head">
+			<li class="sales_noe">
+				<span>订单状态：</span>
+				<a href="" value="" class="cur">所有</a>
+				<a href="" value="1">未返点</a>
+				<a href="" value="2">待确认</a>
+				<a href="" value="3">已返点</a>
+				<a href="" value="4">已撤销</a>
+			</li>
+			<li class="sales_two" data-time="1">
+				<span>下单日期：</span>
+				<input type="text" class="startDate" placeholder="请选择日期"> <i style="margin:0 5px;">-</i>
+				<input type="text" class="endDate" placeholder="请选择日期">
+				<span>最近：</span>
+				<a href="javascript:;" class="cur" data-day='-6' value="1">一周</a>
+				<a href="javascript:;" data-day='-30' value="2">1个月</a>
+				<a href="javascript:;" data-day='-90' value="3">3个月</a>
+				<a href="javascript:;" data-day='-365' value="4">1年</a>
+			</li>
+			<li class="sales_two" data-time="2">
+				<span>返点日期：</span>
+				<input type="text" class="startDate" placeholder="请选择日期"> <i style="margin:0 5px;">-</i>
+				<input type="text" class="endDate" placeholder="请选择日期">
+				<span>最近：</span>
+				<a href="javascript:;" class="cur" data-day='-6' value="1">一周</a>
+				<a href="javascript:;" data-day='-30' value="2">1个月</a>
+				<a href="javascript:;" data-day='-90' value="3">3个月</a>
+				<a href="javascript:;" data-day='-365' value="4">1年</a>
+			</li>
+			<li>
+				<span class="fl">订单号：</span>
+				<div class="fl">
+					<input type="text" class="key" placeholder="请输入业务单号" ng-model="keyWord">
+					<a ng-click="check_polling()"><i></i></a>
+				</div>
+			</li>
+		</ul>
+		<div class="sales_list">
+			<p style="color:#999;">共 <span style="color:#666;">{{recordsFiltered}}</span> 个返点</p>
+			<table cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
+				<thead>
+					<tr><th>序号</th>
+					<th>业务单号</th>
+					<th>订单金额</th>
+					<th>服务费</th>
+					<th>返点比例</th>
+					<th>返款金额</th>
+					<th>返点状态</th>
+					<th>返点日期</th>
+				</tr></thead>
+				<tbody>
+					<tr ng-if="!orderList.length>0">
+						<td colspan="7">{{errorMsg?errorMsg:'暂无数据'}}</td>
+					</tr>
+					<tr ng-repeat="d in orderList">
+						<td style="width:50px;">{{orderData.pageNum+($index+1)}}</td>
+						<td>{{d.businessSn}}</td>
+						<td>{{(d.receivableFee*1).toFixed(2)}}</td>
+						<td>{{(d.serviceFee*1).toFixed(2)}}</td>
+						<td>{{d.returnedPercent}}%</td>
+						<td>{{(d.returnedFee*1).toFixed(2)}}</td>
+						<td>{{d.returnedState=='0'?'未返点':d.returnedState=='1'?'已返点':d.returnedState=='2'?'待确认':d.returnedState<=-1?'已撤销':d.returnedState}}</td>
+						<td style="width:180px;">{{d.paidInDate||'--'}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="Pagination" style="margin-top:30px;" class="page-pagination"></div>
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	/* .pur_order .sales_head li > input{
+		width: 148px;
+		background-position: 157px 7px;
+	} */
+</style>
+
+<script type="text/html" id="cancel">	
+	<div>
+		<p style='text-align:center;'>确定停止该品类的采购吗？</p>
+		<p class='info'> 
+			<a>确认</a> <a href="javascript:layer.closeAll();">取消</a>
+		</p>
+	</div>
+</script>
+

@@ -1,0 +1,53 @@
+//行页资讯头部
+@charset "utf-8";
+#about_header{
+	width:100%;
+	border-bottom:1px solid #e5e5e5;
+	background: #fff;
+	position: relative;
+	z-index: 10;
+	.about{
+		width:1200px;
+		margin:0 auto;
+		height: 120px;
+		p{
+			float: left;
+			padding: 29px 0;
+		}
+		ul{
+			float:right;
+		    box-sizing: border-box;
+		    padding:42px 0;
+		    li{
+		    	float:left;
+		    	width: 104px;
+		    	margin:0;
+		    	padding:0;
+		    	margin-right: 10px;
+		    	a{
+		    		display:inline-block;
+		    		width: 92px;
+		    		height:36px;
+		    		line-height:36px;
+		    		text-align: center;
+		    		font-size: 16px;
+		    		color:#333;
+		    		margin-right: 20px;
+		    		&:hover{
+		    			color:#0eb83b;
+		    		}
+		    		&:last-child{
+		    			margin-right: 0px;
+		    		}
+		    	}
+		    	&.cur{
+		    		a{
+		    			background: #0eb83b;
+		    			color:#fff;
+		    			border-radius: 4px;
+		    		}
+		    	}
+		    }
+		}
+	}
+}

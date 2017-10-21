@@ -1,0 +1,77 @@
+<style type="text/css">.page-loading{display: none;}</style>
+<%= nav %>
+<div id="buy_content" class='tl_w'>
+	<p>找回密码</p>
+	<!--填写账号 -->
+	<div id="fill_user">
+		<div class="pwd_figure fill_user">
+		</div>
+		<ul>
+			<li >
+				<span>账号：</span><p><input id="name" type="text"placeholder="请输入要找回密码的账号"></p>
+			</li>
+			<li class="validation_pwd">
+				<span>验证码：</span>
+				<p class='verification_input'>
+					<input type="text" placeholder="请输入正确的验证码">
+						<!-- <img id="code" src="/images/code.jpg" alt=""> -->
+					<em class='code'><i title='点击刷新' class='showCode'>F2HV</i></em>
+				</p>
+			</li>
+			<li><a class="btn_next" id="verify_account">下一步</a></li>
+		</ul>
+	</div>
+	<!-- 验证身份 -->
+	<div id="validation_identity" style="display:none;">
+		<div class="pwd_figure fill_user2"></div>
+		<!-- 手机验证 -->
+			<ul class="iphone_validation according_iphone" >
+				<!-- <li ><a class="email">选择邮箱验证</a></li> -->
+				<!-- <li style="overflow:hidden;height:46.36px;">
+					<span>验证码：</span><p><b>152****641</b><a href="" class="validation_code">获取验证码</a></p>
+				</li> -->
+				<li>
+					<span>手机号：</span><p><input id="phone" type="text" style="width:180px;" placeholder="请输入绑定的手机号"><a href="javascript:;" class="validation_code" id="validation_code_phone">获取验证码</a></p>
+				</li>
+				<li >
+					<span>手机验证码：</span><p><input id="phone_code" type="text"  placeholder="请输入正确的手机验证码"></p>
+				</li>
+				<li ><a href="javascript:;" class="btn_next" id="verify_code">下一步</a></li>
+			</ul>
+		<!--邮箱验证 -->
+			<ul class="iphone_validation according_email" style="display:none;">
+				<li ><a class="iphone">选择手机验证</a></li>
+				<li>
+					<span>电子邮箱：</span><p><input type="text" style="width:180px;" placeholder="xxx@xxxxx.com"><a href="" class="validation_code"  >验证邮箱</a></p>
+				</li>
+				<li >
+					<span>邮箱验证码：</span><p><input type="text"placeholder="请输入正确的邮箱验证码"></p>
+				</li>
+				<li ><a href="javascript:;" class="btn_next" >下一步</a></li>
+			</ul>
+	</div>
+	<!-- 重置密码 -->
+	<div id="panel_digital" style="display:none;">
+		<div class="pwd_figure fill_user3">
+		</div>
+		<ul class="iphone_validation" >
+			<li >
+				<span>新密码：</span><p><input id="newPass" type="password"  placeholder="大小写英文字母+数字，6-20个字符"></p>
+			</li>
+			<li >
+				<span>确认密码：</span><p><input id="conPass" type="password"  placeholder="大小写英文字母+数字，6-20个字符"></p>
+			</li>
+			<li ><a href="javascript:;" class="btn_next" id="revise_pass">下一步</a></li>
+		</ul>
+	</div>
+	<!-- 成功 -->
+	<div id="all_electrical" style="display:none;">
+		<div class="pwd_figure fill_user4">
+		</div>
+		<div class="success">
+				<p style="font-size:16px;font-weight:bold;margin-bottom: 15px;">恭喜您，您的密码已重新设置，欢迎访问淘绿网。</p>
+				<p><span id="time">5</span> 秒后，进入淘绿网，或 <a href="/page/reg/login.html"> 直接进入</a></p>
+				<img style="margin-top:20px;" src="<%= require('images/reg/ren.png')%>" alt="">
+		</div>
+	</div>
+</div>

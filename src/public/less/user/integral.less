@@ -1,0 +1,425 @@
+@charset "utf-8";
+@mainColor:#0eb83a;//主颜色
+@subColor1:#f68413;//辅助颜色
+@subColor2:#f62d13;//辅助颜色
+@borderColor:#f2f2f2;//边框颜色
+@hoverColor:#F48512;//hover颜色
+body{
+	background: #f5f5f5;
+}
+//我的积分
+.integral_head{
+	overflow: hidden;
+	margin-top:40px;
+    border: 1px dashed #ddd;
+    line-height: 49px;
+    padding:0 15px;
+	&>.fl{
+		&>span{
+			font-size:24px;
+			color:#f62d13;
+		}
+	}
+	.total{
+		margin-right: 15px;
+		&>span{
+			color:#f62d13;
+		}
+	}
+}
+.points_list{
+	margin-top:30px;
+	&>p{
+		font-size: 16px;
+		color:#333;
+	}
+	table{
+		width: 100%;
+		line-height: 41px;
+		text-align: center;
+		margin-top:20px;
+		border:1px solid #ddd;
+		border-bottom: 0;
+		thead{
+			background: #f2f2f2;
+		}
+		tbody{
+			td{
+				border-bottom: 1px solid #ddd;
+				border-right:1px solid #ddd;
+			}
+		}
+	}
+	.points_foot{
+		margin-top:20px;
+		margin-bottom: 15px;
+		text-align: right;
+		a{
+			text-align: center;
+			display: inline-block;
+			width:20px;
+			height: 20px;
+			border:1px solid #dfdfdf;
+			margin-left:5px;
+			&:hover{
+				background: #f2f2f2;
+			}
+		}
+	}
+}
+//卡券管理
+.voucher_head{
+	line-height: 31px;
+    height: 34px;
+	padding-right: 20px;
+	margin-top:20px;
+	background: #f2f2f2;
+	border-radius: 2px;
+	p{
+		float:left;
+		position:relative;
+		a{
+			color:#0eb83b;
+		}
+		i{
+			display: inline-block;
+			height:10px;
+			width: 10px;
+			cursor:pointer;
+			background: url(../../images/user/duwp.png) no-repeat center;
+			position: absolute;
+			top:10px;
+			left:60px;
+		}
+	}
+	.rules_right{
+		float:right;
+	}
+	.state{
+		margin-left:70px;
+		&>a{
+			margin-let:100px;
+		}
+	}
+	.notuse,.card_type{
+		box-sizing: border-box;
+		width:114px;
+		text-align: center;
+	    position: relative;
+	    margin-left:20px;
+	    border:1px solid #f2f2f2;
+	    border-bottom: none;
+	    &:hover{
+	    	background:#fff;
+	    	border:1px solid #ddd;
+	    	border-bottom: none;
+	    	.unde_la{
+	    		display: block;
+	    		border:1px solid #ddd;
+	    		border-top: none;
+	    	}
+	    }
+	    .duwp{
+	    	display: inline-block;
+	    	height: 10px;
+	    	width: 10px;
+	    	position:absolute;
+	    	top:11px;
+	    	left:95px;
+	    	background: url(../../images/user/duwp.png) no-repeat center;
+	    }
+	    .unde_la{
+	    	loat: left;
+		    position: absolute;
+		    background: #fff;
+		    z-index: 10000;
+		    width: 86px;
+		    padding-left: 27px;
+		    left: -1px;
+		    top:31px;
+		    text-align: left;
+		    display: none;
+	    }
+	}
+}
+.expired_box{
+	width:462px;
+	height: 145px;
+	background: #fafafa;
+	border-radius: 5px;
+	margin-top:20px;
+	//快过期
+	.expired_card{
+		width:462px;
+		height: 100px;
+		background: #0fb83b;
+		border-radius: 5px;
+		position:relative;
+		.expired{
+			display:inline-block;
+			height:60px;
+			width:60px;
+			background: url(../../images/user/expired_card.png) no-repeat;
+			position:absolute;
+			top:0px;
+			left:0px;
+			z-index: 1000;
+		}
+		.round_ticket{
+			display:inline-block;
+			height:31px;
+			width:31px;
+			background: url(../../images/user/round_ticket.png) no-repeat;
+			position:absolute;
+			top:20px;
+			left:20px;
+		}
+		.round{
+			display:inline-block;
+			height:20px;
+			width:462px;
+			background: url(../../images/user/round.png) no-repeat  0 -11px;
+			position:absolute;
+			top:88px;
+			left:0px;
+		}
+		.use{
+			&>a{
+				display: inline-block;
+			    width: 100px;
+			    line-height: 38px;
+			    background: #fff;
+			    color: #0fb83b;
+			    border-radius: 3px;
+			    text-align: center;
+			    margin-right: 10px;
+			    margin-top: 34px;
+			    margin-left:20px;
+			}
+		}
+		.fl{
+			&>.amount{
+			    margin-left: 50px;
+			    margin-top: 13px;
+			    font-size: 36px;
+			    color: #fff;
+			}
+			.amount_explain{
+				margin-left: 50px;
+   				color: #fff;
+   				font-size:12px;
+			}		
+		}
+		.amount_center{
+			line-height: 22px;
+		    color: #fff;
+		    margin-top: 20px;
+		    font-size: 12px;
+		    margin-left: 20px;
+		    &>p{
+		    	font-family:"宋体";
+		    	font-size: 12px;
+		    }
+		}
+	}
+	//已使用
+	&.been_used{
+		.expired{
+			background: url(../../images/user/been_used.png) no-repeat;
+		}
+		.round_ticket{
+			background: url(../../images/user/with_ticket.png) no-repeat;
+		}
+		.expired_card {
+			background:#f68413;
+		}
+		.round{
+			background: url(../../images/user/been_round.png) no-repeat  0 -11px;
+		}
+		.use{
+			p{
+				margin-left:30px;
+				color: #fff;
+				margin-top:20px;
+				font-size: 12px;
+				font-family: "宋体";
+			}
+		}
+	}
+	//过期
+	&.overdue{
+		.expired{
+			background: url(../../images/user/overdue.png) no-repeat;
+		}
+		.round_ticket{
+			background: url(../../images/user/overdue_vouchers.png) no-repeat;
+		}
+		.expired_card {
+			background:#999;
+		}
+		.round{
+			background: url(../../images/user/overdue_round.png) no-repeat  0 -11px;
+		}
+		.use{
+			p{
+				margin-left:30px;
+				color: #fff;
+				margin-top:20px;
+				font-size: 12px;
+				font-family: "宋体";
+			}
+		}
+	}
+}
+//账号信息
+.payment_head{
+	margin-top: 25px;
+	line-height: 30px;
+	font-size: 12px;
+	color:#999;
+	padding-left: 33px;
+	background:#f2f2f2 url(../../images/user/prompt.png) no-repeat 10px;
+}
+.payment_body{
+	.add_information{
+		display:block;
+		width:100px;
+		line-height: 36px;
+		margin-top: 20px;
+		color:#fff;
+		background: #0eb83b;
+		border-radius:4px;
+		text-align: center;
+		margin-bottom: 20px;
+		cursor: pointer;
+		&:hover{
+			background: @subColor1;
+		}
+	}
+	table{
+		width:100%;
+		text-align: center;
+		border:1px solid #ebebeb;
+		thead{
+			background: #f2f2f2;
+			height: 40px;
+			line-height: 40px;
+			th{
+				padding:0 13px;
+				font-size: 14px;
+				color:#333;
+			}
+		}
+		tbody{
+			tr{
+				td{
+					// font-family: "宋体";
+					font-size: 13px;
+					// line-height: 20px;
+					// border-right: 1px solid #ddd;
+					// border-top: 1px solid #ddd;
+					// max-width: 200px;
+					// padding: 5px 5px;
+					&:last-of-type{
+				    	border-right: none;
+				    }
+					a{
+						font-size: 12px;
+						color:#0eb83b;
+						&:first-child{
+							padding-right:5px;
+						}
+						&:last-child{
+							margin-left: 5px;
+						}
+					}
+					span{
+						font-size: 12px;
+						color: #0eb83b;
+					}
+				}
+			}
+		}
+	}
+}
+//账号信息2
+.datum_ul{
+	width: 100%;
+	position: relative;
+	li{
+		padding: 10px 0;
+		line-height: 25px;
+		span{
+			float: left;
+			width: 100px;
+			text-align: right;
+			color: #333;
+			height:40px;
+			line-height:40px;
+			i{
+				display: inline-block;
+				height:10px;
+				width: 10px;
+				color:#f8685c;
+				margin-right: 5px;
+			}
+		}
+		p{
+			margin-left: 105px;
+			min-width: 300px;
+			line-height: 40px;
+			height: 40px;
+			input{
+				width: 300px;
+				line-height: 40px;
+				height: 40px;
+				border:1px solid #ddd;
+				border-radius:4px;
+				box-sizing: border-box;
+				padding:0 10px;
+				&:focus{
+					border:1px solid #0eb83a;
+				}
+			}
+			textarea{
+				min-height:100px;
+				max-height:100px;
+				min-width:300px;
+				max-width:300px;
+				border-radius:4px;
+				border:1px solid #ddd;
+				outline: none;
+				padding:0 10px;
+				box-sizing: border-box;
+				&:focus{
+					border:1px solid #0eb83a;
+				}
+			}
+			a{
+				display: inline-block;
+				line-height: 38px;
+				background: #0eb83a;
+				text-align: center;
+				color:#fff;
+				border-radius: 4px;
+				padding: 0 10px;
+				width: 102px;
+				&:hover{
+					background: #11c33f;
+				}
+			}
+			.btn{
+				display: inline-block;
+				width:103px;
+				line-height: 36px;
+				background: #0eb83a;
+				cursor: pointer;
+				&:hover{
+					background: #f68413;
+				}
+			}
+		}
+	}
+}
+
+

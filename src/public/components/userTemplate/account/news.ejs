@@ -1,0 +1,37 @@
+<h3 class='box_head'>我的消息</h3>
+<div class='box_body user_news'>
+	<div class='news_head'>
+		<button class='cur'>系统通知</button>
+		<button>站内信息</button>
+		<!-- <button ng-click="newShow=false" ng-class="{true: 'cur'}[!newShow]">优惠券</button> -->
+		<a ng-if="systemMsg.length!=0" href="javascript:;" class='fr emptyNew' ng-click="clearInstation()">清空</a>
+		<a style="display: none;" ng-if="instationMsg.length!=0" href="javascript:;" class='fr emptyNew' ng-click="clearInstation()">清空}}</a>
+	</div>
+	<ul class='news_list_ul' style="display:block;">
+		<li ng-repeat="d in systemMsg">
+			<b>系统消息</b>
+			<span class='con'>{{d.msgBody}}<!-- <a href=""> 查看详情</a> --></span>
+			<em class='time'>{{d.msgTime | toDate}}</em>
+			<span class='fr btn'>
+				<a href="javascript:;" ng-click="shieldSystemMsg(d.sn,$index)">删除</a> <!-- | -->
+				<!-- <a href="">刪除</a> -->
+			</span>
+		</li>
+		
+		<li ng-if="systemMsg.length==0" class='more_news'><span>暂无记录</span></li>
+	</ul>
+	<ul class='news_list_ul'>
+		<li ng-repeat="d in instationMsg">
+			<b >{{d.msgTitle}}</b>
+			<span class='con'>{{d.msgBody}}<!-- <a href="">我的优惠券</a> --></span>
+			<em class='time'>{{d.msgTime | toDate}}</em>
+			<span class='fr btn'>
+				<a href="javascript:;" ng-click="shieldInstationMsg(d.sn,$index)">删除</a> <!-- | -->
+				<!-- <a href="">刪除</a> -->
+			</span>
+		</li>
+		
+		<li ng-if="instationMsg.length==0" class='more_news'><span>暂无记录</span></li>
+	</ul>
+</div>
+

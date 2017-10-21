@@ -1,0 +1,43 @@
+<div id="zixun_header">
+    <div class="zixun">
+        <p>
+            <a href="/page/zixun"><img src="<%= require('images/zixun/zixun_logo.png')%>" alt=""></a>
+        </p>
+        <ul id="zx_nav">
+        </ul>
+    </div>
+</div>
+<script id="zixunScript" type="text/javascript"></script>
+<script type="text/javascript">
+    document.getElementById('zixunScript').setAttribute('src',base_url + "/newsType/getDetailsNewsType.do?callback=getDetailsNewsType&code=HYZX")
+    function getDetailsNewsType(d){
+        var zixun = document.getElementById('zx_nav');
+        var li = '';
+        for (var i = 0,d = d.data.childrenNewsType, len = d.length>7?7:d.length; i < len; i++) {
+            
+            var url = d[i].url?d[i].url:'news_list.html'
+            // if (d[i].code == "RDZT") {//热点专题
+            //  url = 'redian_list.html'
+            // }else if(d[i].code == "TLBK"){//淘绿播客
+            //  url = 'video_list.html'
+            // }
+            if (d[i].code == "RDZT" || d[i].code == "TLBK") {//热点专题
+                url = 'video_list.html'
+            }
+            li += "<li id=tl_"+d[i].code+"><a href='"+url+"?typeSn="+d[i].sn+"&code="+d[i].code+"&lm="+encodeURIComponent(d[i].name)+"'>"+d[i].name+"</a></li>"
+        };
+        zixun.innerHTML = li;
+
+        !function(){
+            var c,e,f,a=window.location.href.match(/[^\/]\/page.+code=([a-zA-Z]+)&/),
+            b=document.querySelector('#zx_nav'),d=b.children;
+            if (!a) return;
+            for (var i = 0; i < d.length; i++) {
+                if (d[i].id == 'tl_'+a[1]) {
+                    d[i].className = 'cur';
+                };
+            };
+        }();
+    }
+</script>
+<div class="page-loading" ng-hide="pageLoading">页面加载中...</div>

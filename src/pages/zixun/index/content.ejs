@@ -1,0 +1,270 @@
+<%= nav %>
+<div class="tl_center hide" ng-class="{show:pageLoading}">
+	<!--轮播 -->
+	<div class="headlines">
+		<p ng-if="zx.TT.status==0">
+			<a target="_blank" href="{{zx.TT.newsList[0] | bitUrl:zx.TT.sn:zx.TT.showName}}">
+				<span style="color:#f62d13;">头条</span>
+				<span style="color:#222;">{{zx.TT.newsList[0].newsTitle}}</span>
+			</a>
+		</p>
+		<div class="head_bottom">
+			<!-- 左边轮播 -->
+			<div class="shuffling fl" ng-if="zx.LBGG.status==0">
+					<div id="slideBox" class="slideBox">
+						<div class="bd">
+							<ul>
+								<li ng-repeat="d in zx.LBGG.newsList">
+									<a target="_blank" href="{{d | bitUrl:zx.LBGG.sn:zx.LBGG.showName}}">  <!-- target="_blank" -->
+										<img ng-src="{{d.imageUrl}}" alt="{{d.newsTitle}}">
+										<span>{{d.newsTitle}}</span>
+									</a>
+								</li>
+							
+							</ul>
+						</div>
+						<a class="prev" href="javascript:void(0)">&lt;</a>
+						<a class="next" href="javascript:void(0)">&gt;</a>
+					</div>
+			</div>
+			<!-- 右边广告 -->
+			<div class="head_advertising fr" ng-if="zx.ZYZX.status==0">
+				<dl class='{{i%3==0?"dt":""}}' ng-repeat="d in zx.ZYZX.newsList" ng-init="i=$index">
+					<dd><a target="_blank" href="{{d | bitUrl:zx.ZYZX.sn:zx.ZYZX.showName}}" style='{{i==0?"color:#f62d13;":""}}'><i></i>{{d.newsTitle}}</a></dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+
+	<div class="tl_dynamic">
+		<!-- 淘绿动态 -->
+		<div class="dynamic" ng-if="zx.TLDT.status==0">
+			<p>
+				<span>{{zx.TLDT.showName}}</span>
+				<!-- <a href="/page/zixun/recommended_list.html?bitSn={{zx.TLDT.sn}}&lm={{zx.TLDT.showName}}" class="fr">更多</a> -->
+				<a target="_blank" href="{{zx.TLDT | moreUrl}}" class="fr" ng-if="!!zx.TLDT.jumpUrl">更多</a>
+			</p>
+			<ul>
+				<li class='{{i==0?"one":""}}' ng-repeat="d in zx.TLDT.newsList" ng-init="i=$index">
+					<a target="_blank" href="{{d | bitUrl:zx.TLDT.sn:zx.TLDT.showName}}"><i></i>{{d.newsTitle}}</a>
+				</li>
+			</ul>
+		</div>
+		<!-- 淘绿公告 -->
+		<div class="dynamic" ng-if="zx.TLGG.status==0">
+			<p>
+				<i></i>
+				<span>{{zx.TLGG.showName}}</span>
+				<em class="fr tab_nav">
+					<a href="javascript:;" data-text="废旧手机" class="cur">废旧手机</a>
+					<a href="javascript:;" data-text="废旧电脑" class="">废旧电脑</a>
+					<a href="javascript:;" data-text="内存卡">内存卡</a>
+					<a class="dailyQuoteMore" target="_blank" href="/page/zixun/offer_list.html">更多</a>
+				</em>
+				<!-- <a target="_blank" href="{{zx.TLGG | moreUrl}}" class="fr" ng-if="!!zx.TLGG.jumpUrl">更多</a> -->
+			</p>
+			<ul>
+				<li class='{{i==0?"one":""}}' ng-repeat="d in dateList" ng-init="i=$index">
+					<a target="_blank" href="/page/zixun/offer_details.html?time={{d.time}}&productCategory={{d.productCategory}}"><i></i>{{d.title}}</a>
+				</li>
+			</ul>
+		</div>
+		<!-- 行情分析 -->
+		<div class="dynamic" ng-if="zx.HQFX.status==0">
+			<p>
+				<i></i>
+				<span>{{zx.HQFX.showName}}</span>
+				<a target="_blank" href="{{zx.HQFX | moreUrl}}" class="fr" ng-if="!!zx.HQFX.jumpUrl">更多</a>
+			</p>
+			<ul>
+				<li class='{{i==0?"one":""}}' ng-repeat="d in zx.HQFX.newsList" ng-init="i=$index">
+					<a target="_blank" href="{{d | bitUrl:zx.HQFX.sn:zx.HQFX.showName}}"><i></i>{{d.newsTitle}}</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- 热点专题 -->
+	<div class="hot_topic" ng-if="zx.RMZT.status==0">
+		<p>
+			<span>{{zx.RMZT.showName}}</span>
+			<a target="_blank" href="{{zx.RMZT | moreUrl}}" class="fr" ng-if="!!zx.RMZT.jumpUrl">更多</a>
+		</p>
+		<div class="outside_box">
+			<div class="slideTxtBox">
+			    <div class="bd">
+			        <ul>
+						<li ng-repeat="d in zx.RMZT.newsList" ng-init="i=$index">
+							<dl>
+								<dt>
+								<a ng-style="{'background-image': 'url({{d.imageUrl}})' }" target="_blank" href="{{d | bitUrl:zx.RMZT.sn:zx.RMZT.showName}}">
+								 <!--  <img src="{{d.imageUrl}}" alt=""> -->
+								</a></dt>
+								<dd><a class='mainA' target="_blank" href="{{d | bitUrl:zx.RMZT.sn:zx.RMZT.showName}}">{{d.newsTitle}}</a></dd>
+								<dd><a target="_blank" href="{{d | bitUrl:zx.RMZT.sn:zx.RMZT.showName}}">{{d.webText}}</a></dd>
+							</dl>
+						</li>
+					</ul>
+			    </div>
+			    <a class="prev" href="javascript:void(0)">&lt;</a>
+				<a class="next" href="javascript:void(0)">&gt;</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="recycling_school">
+		<!-- 回收学堂 -->
+		<div class="school" ng-if="zx.HSXT.status==0">
+			<p>
+				<span>{{zx.HSXT.showName}}</span>
+				<a target="_blank" href="{{zx.HSXT | moreUrl}}" class="fr" ng-if="!!zx.HSXT.jumpUrl">更多</a>
+			</p>
+			<ul>
+				<li ng-class="{one:i==0}" ng-repeat="d in zx.HSXT.newsList" ng-init="i=$index">
+					<a target="_blank" href="{{d | bitUrl:zx.HSXT.sn:zx.HSXT.showName}}"><i></i>{{d.newsTitle}}</a>
+
+					<!-- <a target="_blank" href="recommended_details.html?bitSn={{zx.HSXT.sn}}&sn={{d.newsSn}}&lm={{zx.HSXT.showName}}"><i></i>{{d.newsTitle}}</a> -->
+					<div style="overflow:hidden" ng-if="i==0">
+						<a href="{{d | bitUrl:zx.HSXT.sn:zx.HSXT.showName}}" target="_blank">
+							<span class="fl lf_word"  style="width:166px;"><img ng-src="{{d.imageUrl}}" alt=""></span>
+						</a>
+						<p class="fl rg_word">
+							<span>
+								{{d.webText | text}} <a target="_blank" href="{{d | bitUrl:zx.HSXT.sn:zx.HSXT.showName}}">[详情]</a>
+							</span>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- 媒体报道 -->
+		<div class="media" ng-if="zx.MTBD.status==0">
+			<p>
+				<span>{{zx.MTBD.showName}}</span>
+				<a target="_blank" href="{{zx.MTBD | moreUrl}}" class="fr" ng-if="!!zx.MTBD.jumpUrl">更多</a>
+			</p>
+			<ul>
+				<li ng-class="{one:i==0}" ng-repeat="d in zx.MTBD.newsList" ng-init="i=$index">
+					<a target="_blank" href="{{d | bitUrl:zx.MTBD.sn:zx.MTBD.showName}}"><i></i>{{d.newsTitle}}</a>
+					<div style="overflow:hidden" ng-if="i==0">
+						<a target="_blank" href="{{d | bitUrl:zx.MTBD.sn:zx.MTBD.showName}}">
+							<span class="fl lf_word"  style="width:166px;"><img ng-src="{{d.imageUrl}}" alt=""></span>
+						</a>
+						
+						<p class="fl rg_word">
+							<span>
+								{{d.webText | text}} <a target="_blank" href="{{d | bitUrl:zx.MTBD.sn:zx.MTBD.showName}}">[详情]</a>
+							</span>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- 淘绿播客 -->
+		<div class="tl_podcast" style='margin-right:0px;' ng-if="zx.TLBK.status==0">
+			<p>
+				<span>{{zx.TLBK.showName}}</span>
+				<a target="_blank" href="{{zx.TLBK | moreUrl}}" class="fr" ng-if="!!zx.TLBK.jumpUrl">更多</a>
+			</p>
+			<ul>	
+				<li class="{{i==0?'one':''}}" ng-repeat="d in zx.TLBK.newsList" ng-init="i=$index">
+					<a href="{{d | bitUrl:zx.TLBK.sn:zx.TLBK.showName}}" ng-if="i==0" target="_blank">
+						<span class='{{d.templateCode=="SP"?"video":""}}'><img ng-src="{{d.imageUrl}}" alt=""></span>
+						<b>{{d.newsTitle}}</b>
+					</a>
+					<a ng-if="i!=0" href="{{d | bitUrl:zx.TLBK.sn:zx.TLBK.showName}}" target="_blank">
+						<i></i>{{d.newsTitle}}
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!-- 先锋亮见 -->
+		<div class="pioneer" ng-if="zx.XFLJ.status==0">
+			<p>
+				<span>{{zx.XFLJ.showName}}</span>
+				<a target="_blank" href="{{zx.XFLJ | moreUrl}}" class="fr" ng-if="!!zx.XFLJ.jumpUrl">更多</a>
+			</p>
+			<ul>
+				<li ng-class="{one:i==0}" ng-repeat="d in zx.XFLJ.newsList" ng-init="i=$index">
+					<a target="_blank" href="{{d | bitUrl:zx.XFLJ.sn:zx.XFLJ.showName}}"><i></i>{{d.newsTitle}}</a>
+					<div style="overflow:hidden" ng-if="i==0">
+						<a target="_blank" href="{{d | bitUrl:zx.XFLJ.sn:zx.XFLJ.showName}}">
+							<span class="fl lf_word"  style="width:166px;"><img ng-src="{{d.imageUrl}}" alt=""></span>
+						</a>
+						<p class="fl rg_word">
+							<span>
+								{{d.webText | text}} <a target="_blank" href="{{d | bitUrl:zx.XFLJ.sn:zx.XFLJ.showName}}">[详情]</a>
+							</span>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- 八卦杂谈 -->
+		<div class="gossip" ng-if="zx.BGZT.status==0">
+			<p>
+				<span>{{zx.BGZT.showName}}</span>
+				<a target="_blank" href="{{zx.BGZT | moreUrl}}" class="fr" ng-if="!!zx.XFLJ.jumpUrl">更多</a>
+			</p>
+			<ul>
+				<li ng-class="{one:i==0}" ng-repeat="d in zx.BGZT.newsList" ng-init="i=$index">
+					<a target="_blank" href="{{d | bitUrl:zx.BGZT.sn:zx.BGZT.showName}}"><i></i>{{d.newsTitle}}</a>
+					<div style="overflow:hidden" ng-if="i==0">
+						<a target="_blank" href="{{d | bitUrl:zx.BGZT.sn:zx.BGZT.showName}}">
+							<span class="fl lf_word"  style="width:166px;"><img ng-src="{{d.imageUrl}}" alt=""></span>
+						</a>
+						<p class="fl rg_word">
+							<span>
+								{{d.webText | text}} <a target="_blank" href="{{d | bitUrl:zx.BGZT.sn:zx.BGZT.showName}}">[详情]</a>
+							</span>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- 淘绿月刊 -->
+		<div class="monthly" style="margin-right:0px;" ng-if="zx.LTYK.status==0">
+			<p>
+				<span>{{zx.LTYK.showName}}</span>
+				<a target="_blank" href="{{zx.LTYK | moreUrl}}" class="fr" ng-if="!!zx.LTYK.jumpUrl">更多</a>
+			</p>
+			<ul>
+				<li ng-class="{one:i==0}" ng-repeat="d in zx.LTYK.newsList" ng-init="i=$index">
+					<a target="_blank" href="{{d | bitUrl:zx.LTYK.sn:zx.LTYK.showName}}"><i></i>{{d.newsTitle}}</a>
+					<div style="overflow:hidden" ng-if="i==0">
+						<a target="_blank" href="{{d | bitUrl:zx.LTYK.sn:zx.LTYK.showName}}">
+							<span class="fl lf_word"  style="width:166px;"><img ng-src="{{d.imageUrl}}" alt=""></span>
+						</a>
+						<p class="fl rg_word">
+							<span>
+								{{d.webText | text}} <a target="_blank" href="{{d | bitUrl:zx.LTYK.sn:zx.LTYK.showName}}">[详情]</a>
+							</span>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- 典型案例 -->
+	<div class="typical_cases" ng-if="zx.DXAL.status==0">
+		<p>
+			<span>{{zx.DXAL.showName}}</span>
+			<a target="_blank" href="{{zx.DXAL | moreUrl}}" class="fr" ng-if="!!zx.DXAL.jumpUrl">更多</a>
+		</p>
+		<div class="typical_box">
+			<div class="slideTxtBox anli_slideTxtBox">
+			    <div class="bd">
+			        <ul>
+						<li ng-repeat="d in zx.DXAL.newsList" ng-init="i=$index">
+							<dl>
+								<dt><a target="_blank" href="{{d | bitUrl:zx.DXAL.sn:zx.DXAL.showName}}"><img ng-src="{{d.imageUrl}}" alt=""></a></dt>
+								<dd ><a target="_blank" href="{{d | bitUrl:zx.DXAL.sn:zx.DXAL.showName}}">{{d.newsTitle}}</a></dd>
+							</dl>
+						</li>
+					</ul>
+			    </div>
+			    <a class="prev" href="javascript:void(0)">&lt;</a>
+				<a class="next" href="javascript:void(0)">&gt;</a>
+			</div>
+		</div>
+	</div>
+</div>

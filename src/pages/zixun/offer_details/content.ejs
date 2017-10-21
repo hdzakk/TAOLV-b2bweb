@@ -1,0 +1,88 @@
+<%= nav %>
+<div class="message_center hide" ng-class="{show:pageLoading}">
+	<div class="message_left">
+		<p ng-if="detail.lm!='undefined'">{{detail.lm}}</p>
+		<div class="details">
+			<h3>{{detail.title}}</h3>
+			<p>
+				<span >发布时间：<span>{{detail.time}}</span></span>
+				<!-- <span>阅读量：<span>{{detail.clickCount}}</span></span> -->
+				<span>来源：<span>淘绿网</span></span>
+			</p>
+			<div class="prize">
+				<div id="webBody">
+					<div class="wrap_table">
+						<table cellpadding="1" cellspacing="1">
+						 	<thead>
+						 		<tr>
+						 			<th>品名/规格/产地牌号</th>
+						 			<th>报价</th>
+						 			<th>日期</th>
+						 		</tr>
+						 	</thead>
+						 	<tbody>
+						 		<tr ng-repeat="d in goodsOfferList">
+						 			<td>{{d.classifyName}}</td>
+						 			<td>{{d.referencePrice||'--'}}元/{{d.unitValue}}<em ng-if="d.wavePrice!=0" ng-class="{r:d.wavePrice>0,g:d.wavePrice<0}" > <span ng-bind-html="d.wavePrice<0?'↓ ':'↑ '"></span> {{d.wavePercent}}</em></td>
+						 			<td>{{detail.time}}</td>
+						 		</tr>
+						 	</tbody>
+						 	<tbody ng-if="goodsOfferList.length==0">
+						 		<tr>
+						 			<td colspan="3">暂无报价</td>
+						 		</tr>
+						 	</tbody>
+						 	<tfoot>
+						 		<tr>
+						 			<td colspan="3">
+						 				<i>备注：</i>
+						 				<i>报价供参考，具体以市场实时交易价为准。</i><br/>
+						 			</td>
+						 		</tr>
+						 		<tr>
+						 			<td colspan="3">
+						 				<i>建议：</i>
+						 				<i>如果对价格涨跌把控不好，建议联系你们自己专属的服务人员或淘绿官方客
+				         服电话 400-188-5167。</i>
+						 			</td>
+						 		</tr>
+						 	</tfoot>
+						</table>
+					</div>
+				</div>
+		        <div class="fr" style="text-align:center;line-height: 37px;">
+			        分享到：<div class="bdsharebuttonbox fr"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+			        </div>
+		       </div>
+			</div>
+			<!-- <div style="" class="xz_article">
+				<a ng-if="upNews" href="{{upNews | bitUrl:bitSn:lm}}" class="fl">上一篇：{{upNews!=''?upNews.title:'没有了！'}}</a>
+				<span ng-if="!upNews" class='fl'>上一篇：没有了</span>
+				
+				<a ng-if="nextNews" href="{{nextNews | bitUrl:bitSn:lm}}" class="fr tr">下一篇：{{nextNews!=''?nextNews.title:'没有了！'}}</a>
+				<span ng-if="!nextNews" class='fr'>下一篇：没有了</span>
+			</div> -->
+		</div>
+	</div>
+	<div class="message_right">
+		<p>{{ph.RMPH.showName}}</p>
+		<ul>
+			<li ng-repeat="d in ph.RMPH.newsList" ng-init="i=$index" class="{{i>0?'ph_li':''}}">
+				<a href="{{d | bitUrl:ph.RMPH.sn:ph.RMPH.showName}}">
+					<i class="fl {{i<3?'single':''}}">{{i+1}}</i>
+					<img ng-if="i==0" class="fl" ng-src="{{d.imageUrl}}" alt="">
+					<span>{{d.newsTitle}}</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="details_btm">
+		<p style="height:60px;color:#0eb83b;
+		font-size: 18px;">{{xg.XGZX.showName}}</p>
+		<p ng-repeat="d in xg.XGZX.newsList"> <a href="{{d | bitUrl:xg.XGZX.sn:xg.XGZX.showName}}">{{d.newsTitle}}</a></p>
+	</div>
+</div>
+<script type="text/javascript">
+	//分享代码
+	window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["qzone","tsina","tqq","weixin","renren"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","weixin","renren"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>

@@ -1,0 +1,52 @@
+<h3 class='box_head'>账户信息</h3>
+<div class='box_body'>
+	<div class="payment_head">
+		为避免造成不必要的损失，您在填写账号信息时，请仔细检测内容。
+	</div>
+	<div ng-show="!show" class="payment_body">
+		<a ng-click="addAccountInfoBtn()" class="add_information">添加</a>
+		<table cellpadding="0" cellspacing="0" border="0">
+			<thead>
+				<th>序号</th>
+				<th>账号所属</th>
+				<th>账号</th>
+				<th>姓名</th>
+				<th>手机号码</th>
+				<th>分行支行</th>
+				<th>操作</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="d in accountList">
+					<td>{{$index+1}}</td>
+					<td>{{d.bankName}}</td>
+					<td>{{d.bankAccount}}</td>
+					<td>{{d.belongsName}}</td>
+					<td>{{d.belongsPhone}}</td>
+					<td>{{d.bewrite}}</td>
+					<td><a href="javascript:;" ng-click="revise_account($index,d.sn)">修改</a><span>|</span><a href="javascript:;" ng-click="renove_account(d.sn)">删除</a></td>
+				</tr>
+			</tbody>
+			<tfoot ng-if="!accountList||accountList.length=='0'">
+				<tr>
+					<td style="color:#999;padding: 10px 0;font-family: '宋体';font-size: 12px;" colspan="7">您还未添加账户信息</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<div ng-show="show">
+		<ul class="datum_ul accountInfo" style="margin-top:10px;">
+			<li ng-if="status=='1'"><span><i>*</i>真实姓名：</span><p>{{cardData.name}}</p></li>
+			<li ng-if="status=='1'"><span><i>*</i>身份证账号：</span><p>{{idCard}}</p></li>
+			
+			<li><span><i>*</i>账号所属：</span><p><input id="bankName" placeholder="中国银行" type="text" ng-model="reviseData.bankName"></p></li>
+			<li><span><i>*</i>账号：</span><p><input id="bankAccount" class="text" type="text" ng-model="reviseData.bankAccount"></p></li>
+			<li><span>分行支行：</span><p><input id="bewrite" class="text" type="text" ng-model="reviseData.bewrite"></p></li>
+			<li><span><i>*</i>姓名：</span><p><input id="belongsName" class="text" type="text" ng-model="reviseData.belongsName"></p></li>
+			<li><span><i>*</i>手机号码：</span><p><input id="belongsPhone" class="text" type="text" ng-model="reviseData.belongsPhone"></p></li>
+			<!-- <li style="height:100px;"><span>分行支行：</span><p><textarea id="bewrite" ng-model="reviseData.bewrite"></textarea></p></li> -->
+			<li><span>手机验证：</span><p>{{phone}}</p></li>
+			<li><span>验证码：</span><p><input id="phoneCode" type="text" style="width:165px;margin-right:10px;"><a href="javascript:;" ng-click="get_phone_code($event)">获取验证码</a></p></li>
+			<li style="margin-top:15px;"><p><a ng-click="addCustomerAccount(1)" class="btn">确定</a><a ng-click="backP()" style="margin-left:50px;" class="btn">返回</a></p></li>
+		</ul>
+	</div>
+</div>

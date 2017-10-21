@@ -1,0 +1,70 @@
+<%= nav %>
+<style type="text/css">
+	.page-loading{display: none}
+	#login_content{
+		width: 100%;
+		min-width: 1200px;
+		height: 470px;
+		background: #CFFFDE url(<%= require('images/reg/login_banner.png')%>) no-repeat center center;
+		position: relative;
+	}
+	#login_content .sign_body{
+			margin-top: 30px;
+		}
+	#login_content .login_page{
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 50%;
+			margin: auto;
+			margin-right: -600px;
+			width: 400px;
+			height: 430px;
+			background: #fff;
+		}
+	#login_content .login_title{
+			padding: 0 50px;
+			box-sizing: border-box;
+			border-bottom: 2px solid #0eb83a;
+		}
+</style>
+<div id="login_content">
+	<div class='login_page'>
+		<p class='login_title'>
+ 	 		<b class='fl'>登录</b>
+ 	 		<span class='fr'>还没有账号？<a href='/page/reg/registered.html'>立即注册</a></span>
+ 	 	</p>
+		<div class='sign_body'>
+	 	 	
+	 	 	<div class='account_input'>
+	 	 		<input id="tl_user" class='text' type='text' placeholder='用户名/手机号'>
+	 	 	</div>
+	 	 	<div class='password_input'>
+	 	 		<input id="tl_password" class='text' type='password' placeholder='密码'>
+	 	 	</div>
+	 	 	<div class='verification_input'>
+	 	 		<input class='text' type='text' placeholder='验证码'>
+	 	 		<span class='code'>
+	 	 			<!-- <img src='/images/blank.gif' height="1" width="1"> -->
+	 	 			<i title='点击刷新' class='showCode'></i>
+	 	 		</span>
+	 	 	</div>
+	 	 	<div class='remember_account'>
+	 	 		<label class='fl'>
+	 	 			<input type='checkbox'>
+	 	 			记住账号
+	 	 		</label>
+	 	 		<a name="pass" class='fr' href='/page/reg/back_password.html'>忘记密码</a>
+	 	 	</div>
+	 	 	<div class='submit_btn'>
+	 	 		 登 录
+	 	 	</div>
+	 	 	<!-- <div class='third_login'>
+	 	 		<span>使用第三方账号登录：</span>
+	 	 		<a href='javascript:;' class='iconfont xl'></a>
+	 	 		<a href='javascript:;' class='iconfont qq'></a>
+	 	 		<a href='javascript:;' class='iconfont wx'></a>
+	 	 	</div> -->
+	 	 </div>
+	</div>
+</div>

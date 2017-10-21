@@ -1,0 +1,294 @@
+@charset "utf-8";
+@mainColor:#0eb83a;//主颜色
+@subColor1:#f68413;//辅助颜色
+@subColor2:#f62d13;//辅助颜色
+@borderColor:#f2f2f2;//边框颜色
+@hoverColor:#F48512;//hover颜色
+//帮助中心导航条
+#help_header{
+	width: 100%;
+	height: 120px;
+	background:#fff;
+    border-bottom: 1px solid #e5e5e5;
+	.warp_help_header{
+		height: 120px;
+		line-height: 120px;
+		position: relative;
+		.help_logo{
+			padding: 27px 0;
+			position: absolute;
+			bottom: 0;
+			top:2px;
+			margin: auto;
+		}
+		.search{
+			float: right;
+			padding-top: 41px;
+			position:relative;
+			input{
+				border:1px solid #0eb83b;
+				width:537px;
+				height: 40px;
+				line-height: 40px;
+				float:left;
+				box-sizing: border-box;
+				padding:0 10px;
+				padding-right: 80px;
+			}
+			a{
+				display: inline-block;
+				float:left;
+				width:73px;
+				height: 40px;
+				position:absolute;
+				right: 0px;
+				buttom:0px;	
+				background:#0fb83b url(../../images/helpcenter/search.png) no-repeat center;
+				cursor:pointer; 
+			}
+		}
+	}
+}
+//帮助中心内容切换
+.help_heart{
+	width:1200px;
+	margin: auto;
+	height: 58px;
+	line-height: 58px;
+    margin-top: 45px;
+    background: #fff;
+    border-top:1px solid #f2f2f2;
+    border-bottom:2px solid #0eb83b;
+    li{
+    	float:left;
+    	width: 186px;
+	    height: 58px;
+	    line-height: 58px;
+	    text-align: center;
+	    border-right:1px solid #f2f2f2;
+	    cursor:pointer;
+	    &>a{
+	    	display: inline-block;
+	    	width:186px;
+	    	height:58px;
+	    	line-height: 58px;
+	    	text-align: center;
+	    	font-size: 18px;
+	    }
+    }
+ 	.choose{
+	   background:#0eb83b;
+	    a{
+	   		color:#fff;
+		}
+	}
+}
+//左侧
+.min_height{
+	min-height: 300px;
+}
+#user_content{display: none;}
+#user_content,#sell,#buy{
+	margin-top:20px;
+	margin-bottom:40px;
+	min-height: 450px;
+	&>.guide{
+		float: left;
+		width: 186px;
+		border:1px solid #f2f2f2;
+		background: #fff;
+		&>p{
+			border-bottom: 1px solid #f2f2f2;
+		    height: 60px;
+		    text-align: center;
+		    line-height: 60px;
+		    color: #0eb83b;
+		    font-size: 16px;
+		}
+		&>ul{
+			&>li{
+				line-height: 40px;
+			    border-bottom: 1px solid #f2f2f2;
+			    text-align: center;
+			    color: #333;
+			    box-sizing: border-box;
+			    &>p{
+			    	cursor:pointer;
+				    &>i{
+				    	display: inline-block;
+					    height: 25px;
+					    width: 25px;
+					   
+					    margin-top: 10px;
+					    float: left;
+					    margin-left: 20px;
+				    }
+				    &>b{
+						display: inline-block;
+					    background:url(../../images/helpcenter/up_dwnp.png) no-repeat -13px 0;
+					    height: 25px;
+					    width: 12px;
+					    float: right;
+					    margin-top: 15px;
+					    margin-right: 10px;
+					    &.cur{
+					    	background:url(../../images/helpcenter/up_dwnp.png) no-repeat 0 0;
+					    }
+				    }
+				    &>a{
+				    	margin-right: 42px;
+				    }
+				}
+				&>.sah{
+					display:block;
+				}
+			    &>ul{
+			    	background: #fff;
+			    	display:none;
+			    	&>li{
+			    		a{
+			    			display: inline-block;
+			    			height:40px;
+			    			width:186px;
+			    		}
+			    		&:hover{
+			    			background: #eafff0;
+			    		}
+			    	}
+			    	&>.cut{
+			    		background: #eafff0;
+			    	}
+			    }
+			}
+		}
+	}
+}
+#wrapHelp.fixed #user_content{
+	&>.guide{
+		position: fixed;
+		top: 0px;
+	}
+}
+//右侧
+#help_right{
+	margin-left: 208px;
+	background: #fff;
+	padding-bottom: 40px;
+	border:1px solid #f2f2f2;
+	box-sizing: border-box;
+	.box_head{
+		font-size: 14px;
+		overflow: hidden;
+
+		.fr{
+			color: @mainColor;
+		}
+		p{
+			padding: 0 29px;
+			box-sizing: border-box;
+		}
+		.box_title{
+			height: 60px;
+			line-height: 60px;
+			border-bottom: 1px solid @borderColor;
+		}
+		.box_btn{
+			&:after{
+				content: '';
+				clear: both;
+				display: block;
+			}
+			padding: 15px 29px;
+			a{
+				display: block;
+				float: left;
+				width: 100px;
+				height: 35px;
+				line-height: 35px;
+				text-align: center;
+				border: 1px solid #ddd;
+				color: #999;
+				margin-right: 20px;
+				&.cur{
+					color: @mainColor;
+					border: 1px solid @mainColor;
+				}
+			}
+		}
+	}
+	.box_body{
+		width: 100%;
+		padding: 25px 29px;
+		padding-top: 0;
+		box-sizing: border-box;
+		&>p{
+			line-height: 60px;
+			height:60px;
+			border-bottom:1px solid #f2f2f2;
+			a{
+				cursor: pointer;
+				&:hover{
+					color:#0eb83a;
+				}
+			}
+		}
+		h3{
+			font-size: 18px;
+			color:#333;
+			font-weight:500;
+			line-height: 75px;
+		}
+		span{
+			line-height:30px;
+			height:30px;
+		}
+		.return_back{
+			margin-top:20px;
+			display:inline-block;
+			width:104px;
+			height:36px;
+			line-height:36px;
+			background: #0eb83a;
+			color:#fff;
+			text-align: center;
+			border-radius: 4px;
+		}
+	}
+	//手机质检术语
+	.phoneTerm{
+		padding: 25px 29px 0 29px;
+		.term_box{
+			h2{
+				font-size: 20px;
+				font-weight: bold;
+				color: @mainColor;
+			}
+			h3{
+				font-size: 18px;
+				font-weight: bold;
+				color: #333;
+				padding: 20px 0 25px 0;
+			}
+			p{
+				margin-top: -15px;
+				padding-bottom: 20px;
+			}
+			&>div{
+				padding-bottom: 20px;
+			}
+		}
+	}
+}
+#wrapHelp.fixed{
+	.box_head{
+		position: fixed;
+		top: 0px;
+		// padding-top: 21px;
+		width: 990px;
+		z-index: 100;
+		background: #fff;
+	}
+	.phoneTerm{
+		padding-top: 152px;
+	}
+}

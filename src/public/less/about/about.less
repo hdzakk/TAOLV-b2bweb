@@ -1,0 +1,1147 @@
+//关于我们头部
+@charset "utf-8";
+body{
+	background: #fff!important;
+}
+.about_banner,.talent_banner,.contact_banner{
+	width:100%;
+	height: 230px;
+	background: url(../../images/about/about_banner.jpg) no-repeat center;
+	&>p{
+		width:1200px;
+		margin: auto;
+		line-height: 230px;
+		font-size: 24px;
+		color:#666;
+		padding: 0 28px;
+   		box-sizing: border-box;
+	}
+}
+.BMap_cpyCtrl{
+	display: none;
+}
+// .
+.BMapLib_sendToPhone{
+	display: none;
+}
+.BMapLabel{
+	background: #0eb83b !important;
+	border:1px solid #0eb83b !important;
+	padding:3px 6px !important;
+}
+.BMap_Marker>div>img{
+	background: #ddd !important;
+}
+//关于我们-人才招聘头部
+.talent_banner{
+	margin-top: -1px;
+	background: url(../../images/about/talent_banner.jpg) no-repeat center;
+	&>p{
+		color:#333;
+		font-size: 30px;
+	}
+}
+//关于我们-联系我们
+.contact_banner{
+	background: url(../../images/about/contact.jpg) no-repeat center;
+	&>p{
+		color:#333;
+		font-size: 34px;
+	}
+}
+//关于淘绿头部
+.about_heade{
+	height:61px;
+	background: #fafafa;
+	overflow: hidden;
+	ul{
+		width:1144px;
+		margin: auto;
+		line-height: 61px;
+		height: 61px;
+		li{
+			float:left;
+			width:208px;
+			height: 65px;
+			&:after{
+				content: "|";
+				clear: both;
+				display: inline-block;
+				color:#ddd;
+				float:right;
+			}
+			a{
+				font-size: 16px;
+			    display: inline-block;
+			    text-align: center;
+			    height: 65px;
+			    width: 203px;
+				
+			}
+			&.on{
+				a{
+					color:#0eb83b;
+				}
+			}
+		}
+		&>.lyshi{
+			&:after{
+				content: "";
+				clear: both;
+				display: inline-block;
+				color:#ddd;
+			}
+		}
+	}
+}
+//关于淘绿-淘绿简介
+#tljj{
+	min-height: 500px;
+	.about_center{
+		width:1144px;;
+		margin:auto;
+		background:#fff;
+		overflow: hidden; 
+		&>p{
+			padding-top: 28px;
+			padding-bottom: 18px;
+			height: 24px;
+			overflow: hidden;
+			border-bottom: 1px solid #f2f2f2;	
+			.fl{
+				font-size: 24px;
+				color:#333;
+			}
+			.fr{
+				padding-top:12px;
+				color:#999;
+			}
+		}
+		.enterprise{
+			margin-top:75px;
+			margin-bottom: 35px;
+			overflow: hidden;
+			.concept{
+				float:left;
+				border-right:1px solid #ddd;
+				padding: 0 70px;
+			    box-sizing: border-box;
+			    width: 381px;
+				text-align: center;
+				&>p{
+					font-size: 24px;
+					color:#0eb83b;
+				}
+				&>span{
+					display: inline-block;
+					margin-bottom: 32px;
+					margin-top:10px;
+				}
+			}
+		}
+
+	}
+	.tl_word{
+		overflow:hidden;
+		&>.fl{
+			width:850px; 
+			margin-top:18px;
+			// margin-right:36px;
+			font-size:15px; 
+			line-height:25px;
+		}
+		&>.fr{
+			margin-top: 27px;
+			img{
+				float: right;
+			}
+		}
+	}
+	.organization{
+		height:388px;
+		width:100%;
+		background: url(../../images/about/organization.png) no-repeat -265px;
+	}
+}
+//关于淘绿-发展历程
+#fzlc,#development_child{
+	.course{
+		margin-top: 40px;
+		ul{
+			width:882px;
+			margin-left: 262px;
+			border-left:2px solid #0eb83b;
+			padding-left: 47px;
+			position:relative;
+			// &:after{
+			// 	content: '';
+			// 	position: absolute;
+			// 	width: 2px;
+			// 	background-color: #0eb83b;
+			// 	height: 100%;
+			// 	left: -2px;
+			// 	top: 30px;
+			// }
+			li{
+				padding-bottom: 30px;
+				i{
+					display: inline-block;
+				    position: absolute;
+				    width: 83px;
+				    background: url(../../images/about/dian.png) no-repeat 105px;
+				    top: 18px;
+				    left: -163px;
+				    padding-right: 41px;
+				    color: #0eb83b;
+				    font-size: 24px;
+				}				
+			}
+			.figure{
+				div{
+					overflow: hidden;
+					background: #fafafa;
+					padding:22px 40px 25px 14px;
+					width: 830px;
+					box-sizing: border-box;
+					height: 170px;
+					border: 1px solid #f2f2f2;
+				}
+			}
+			.dynamic{
+				position:relative;
+				&.noImg{
+					div{
+						overflow: hidden;
+					    background: #fafafa;
+					    padding: 0px 40px 0px 14px;
+					    width: 830px;
+					    box-sizing: border-box;
+					    height: 60px;
+					    border: 1px solid #f2f2f2;
+					    line-height: 60px;
+					    .course_right{
+					    	margin-top: 0;
+					    }
+					}
+				}
+				div{				
+				    transform:translate(250px,0px);
+					-webkit-transition:all 0.35s;
+					opacity:0;
+					.course_left{
+						margin-right: 35px;
+	   					float: left;
+	   					&>a{
+	   						&>img{
+	   							width: 200px;
+	   							height: 123px;
+	   						}
+	   					}
+					}
+					.course_right{
+						float: left;
+					    width: 528px;
+					    font-size: 18px;
+					    color: #333;
+					    margin-top: 35px;
+					}
+					b{
+						display: inline-block;
+					    position: absolute;
+					    height: 35px;
+					    width: 19px;
+					    background: url(../../images/about/jiao.png) no-repeat;
+					    top: 15px;
+	   					left: -17px;
+					}
+				}
+			}
+			.effect{
+				&>div{
+					transform:translate(0px,0px);
+					-webkit-transition:all 0.35s;
+					opacity:1;
+				}
+			}
+			.no_figure{
+				box-sizing: border-box;
+				padding:18px 35px 18px 15px;
+				background: #fafafa;
+				width: 830px;
+				margin-bottom: 30px;
+				position:relative;
+				background: #fafafa;
+				border: 1px solid #f2f2f2;
+				&>p{
+				    font-size: 18px;
+				    color: #333;
+				    width:523px;
+				    float: left;
+				}
+				&:after{
+					display:block;
+					clear:both;
+					content:"";
+					visibility:hidden;
+					height:0;
+				}
+				.open_show{
+					color:#0eb83b;
+					font-size:16px;
+					cursor: pointer;
+				} 
+			}
+			.under_no{
+				display: block !important;
+				height:25px;
+				background: #fff;
+			}
+			.years{
+				font-size: 24px;
+				color:#666;
+				position: absolute;
+			    top: 18px;
+			    left: -263px;
+			}
+			.ziti{
+				padding-bottom: 42px;
+				div{
+
+					a{
+						font-size: 15px;
+						color:#666;
+						&:hover{
+							color: #0eb83b;
+						}
+					}
+				}				
+			}
+			.ziti_after{
+				padding-bottom:0px;
+			}
+		}
+	}
+}
+//关于淘绿-荣誉资质
+#ryzz{
+	&>p{
+		width:1144px;
+		margin:auto;
+		overflow: hidden;
+		padding-top:28px;
+		padding-bottom: 18px;
+		height: 24px;
+		margin-bottom: 18px;
+		border-bottom: 1px solid #f2f2f2;
+		.fl{
+			display: block;
+			width: 200px;
+			color:#333;
+			font-size:24px;
+		}
+		.fr{
+			color:#999;
+			padding-top:12px;
+		}
+	}
+	&>div{
+		width:1144px;;
+		margin:auto;
+		background:#fff;
+		overflow: hidden; 
+		.margin_rnone{
+			margin-right: 0px;
+		}
+		.honor_head{
+			width:1144px;;
+			margin:auto;
+			background:#fff;
+			overflow: hidden; 
+			margin-bottom: 50px;
+			.qualification{
+				width:1144px;;
+				margin: auto;
+				overflow: hidden;
+				.qualification_center{
+					&>a{
+						float:left;
+						height:243px;
+						width: 260px;
+						text-align: center;
+						margin-right: 32px;
+						margin-top:30px;
+						position: relative;
+						&:nth-child(4n+0){
+							margin-right: 0px;
+						}
+						&>img{
+							height:190px;
+							width: 260px;
+							background: #ddd;
+							border:1px solid #ddd;
+						}
+						&>p{
+							margin-top: 6px;
+							font-size: 14px;
+							text-align: left;						}	
+						&:hover{
+							
+						}
+					}
+				}
+			}
+			&>p{
+				width: 1144px;;
+			    margin: auto;
+			    text-align: center;
+			    border: 1px solid #f2f2f2;
+			    a{
+		    	    display: inline-block;
+				    width: 1144px;;
+				    padding: 15px 0;
+				    text-align: center;
+					color:#999;
+					font-size:16px;
+				    &:hover{
+				    	background: #ddd;
+				    }
+			    }
+			}
+		}
+		.honor_center{
+			width:100%;
+			background: #fafafa;
+			padding-bottom: 50px;
+			.computer{
+				background: #fff;
+				height:70px;
+				line-height: 70px;
+				&>p{
+					width: 1144px;;
+	   				margin: auto;
+	   				font-size: 24px;
+	   				color:#333;
+				}
+			}
+			.certificate{
+				width: 1144px;; 
+				margin: auto;
+				margin-top: 35px;
+				overflow: hidden;
+				&>a{
+					width:242px;
+					height: 310px;
+					float: left;
+	    			margin-right:56px;
+	    			margin-bottom: 35px;
+	    			text-align: center;
+	    			img{
+	    				width: 210px;
+	    				height: 287px;
+	    			}
+	    			&:nth-child(4){
+						margin-right: 0px;
+					}
+					&:nth-child(8){
+						margin-right: 0px;
+					}
+	    			&>p{
+	    				color:#333;
+	    				margin-top: 15px;
+	    			}
+				}
+				&>p{
+					text-align: center;
+					margin-bottom: 40px;
+				    a{
+			    	    display: inline-block;
+				    	width: 1198px;
+					    padding: 15px 0;
+				    	border: 1px solid #f2f2f2;
+				    	text-align: center;
+						color:#999;
+						font-size:16px;
+					    &:hover{
+					    	background: #ddd;
+					    }
+				    }
+				}
+			}
+		}
+	}
+}
+
+#fzlc{
+	&>div{
+		&>p{
+			width:1144px; 
+			margin:auto;
+			height: 24px;
+			border-bottom: 1px solid #f2f2f2;
+			overflow: hidden;
+		    padding-top: 28px;
+	    	padding-bottom: 18px;
+			.fl{
+				color:#333;
+				font-size: 24px;
+			}
+			.fr{
+				color:#999;
+				margin-top: 12px;
+				&>a{
+					color:#999;
+					margin-top: 12px;
+					&>img{
+
+					}
+				}
+			}
+		}
+	}
+}
+//导航公用样式
+#hsfw,#shgy,#shfw,#tlfc,#xwd1,#xwd2,#flsm,#yssm,#ysfwtk,#fzlc,#development_child{
+	min-height: 500px;
+	overflow: hidden;
+	width:1144px;
+	margin: auto;
+	padding-bottom: 50px;
+	&>p{
+		width:1144px; 
+		margin:auto;
+		height: 24px;
+		border-bottom: 1px solid #f2f2f2;
+		overflow: hidden;
+	    padding-top: 28px;
+    	padding-bottom: 18px;
+		.fl{
+			color:#333;
+			font-size: 24px;
+		}
+		.fr{
+			color:#999;
+			margin-top: 12px;
+			&>a{
+				color:#999;
+				margin-top: 12px;
+			}
+		}
+	}
+}
+//服务范畴-回收服务
+#hsfw{
+	&>.titl{
+		line-height: 26px;
+	    font-size: 16px;
+	    margin: 20px 0;
+	}
+	.batch_buy{
+		height:270px;
+		background: #fafafa;
+		border: 1px solid #f3f3f3;
+		box-sizing: border-box;
+		padding:30px 30px 25px 32px;
+		margin-bottom: 20px;
+		&>p{
+			margin-right: 60px;
+			width: 385px;
+			height: 210px;
+			overflow: hidden;
+		}
+		img{
+			width: 385px;
+			height: 210px;
+		}
+		&>div{
+			width: 632px;
+			&>p{
+				font-size: 24px;
+				color:#333;
+			}
+			&>span{
+				display: inline-block;
+				margin-top: 25px;
+				// margin-bottom: 90px; 
+				line-height: 25px;
+			}
+			&>a{
+				color:#0eb83b;
+			}
+		}
+	}
+}
+//服务范畴-社会服务
+#shfw{
+	&>.titl{
+		line-height: 26px;
+		font-size: 16px;
+	    margin: 20px 0;
+	}
+	.cooperation{
+		height:271px;
+		background: #fafafa;
+		border: 1px solid #f3f3f3;
+		box-sizing: border-box;
+		padding:30px 35px 25px 30px;
+		margin-bottom: 20px;
+		.cooperation_left{
+			width: 631px;
+			margin-right: 60px;
+
+			&>p{
+				font-size: 24px;
+				color:#333;
+				margin-bottom: 20px;
+			}
+			span{
+				display:block;
+				line-height: 26px;
+				margin-bottom: 90px;
+			}
+			a{
+				color:#0eb83b;
+			}
+		}
+		.cooperation_right{
+			width: 385px;
+			height: 210px;
+			overflow: hidden;
+			&>a{
+				img{
+					width: 385px;
+					height: 210px;
+				}
+			}
+		}
+	}
+}
+//新闻动态-淘绿动态
+#xwd1,#xwd2{
+	&>p{
+		margin-bottom: 20px;
+	}
+	&>div{
+		border-bottom: 1px dashed #f2f2f2;
+		overflow: hidden;
+		padding-bottom: 27px;
+		margin-bottom: 35px;
+		.dynamic_left{
+			margin-right: 30px;
+			&>a{
+				&>img{
+					width:225px;
+					height: 145px;
+				}
+			}
+		}
+		.dynamic_right{
+			width:888px;
+			height: 145px;
+			overflow: hidden;
+			&>h3{
+				font-size: 18px;
+				color:#333;
+				font-weight: bold;
+			}
+			&>span{
+				font-family: "宋体";
+				font-size: 12px;
+				color:#666;
+				display: inline-block;
+				margin-top: 15px;
+				line-height: 24px;	
+			}
+			&>p{
+				margin-top: 19px;
+				font-size: 12px;
+				color:#999;
+			}
+		}
+	}
+	&>.xs{
+		display: inline-block;
+		border: 1px solid #f2f2f2;
+		height:50px;
+		line-height: 50px;
+		width: 1140px;
+		text-align: center;
+		color:#999;
+		font-size:16px;
+	}	
+	&>a{
+		display: inline-block;
+		border: 1px solid #f2f2f2;
+		height:50px;
+		line-height: 50px;
+		width: 1140px;
+		text-align: center;
+		color:#999;
+		font-size:16px;
+		&:hover{
+			background: #f2f2f2;
+		}
+	}
+}
+//新闻动态-社会公益
+#shgy,#tlfc{
+	&>span{
+		display: inline-block;
+		margin-top:15px;
+		margin-bottom: 30px;
+		font-size: 16px;
+		line-height: 26px;
+	}
+	&>h3{
+		font-size: 20px;
+		color:#333;
+		margin-bottom: 25px;
+	}
+	.public{
+		width: 360px;
+		text-align: center;
+		float: left;
+		margin-right: 21px;
+		margin-bottom: 35px;
+		img{
+			width: 360px;
+			height: 220px;
+		}
+		&>p{
+			color:#333;
+			font-size: 16px;
+			margin-top:15px;
+			white-space: nowrap;
+		    text-overflow: ellipsis;
+		    overflow: hidden;
+		    display: block;	
+		}
+	}
+	&>.xs{
+		display: inline-block;
+		border: 1px solid #f2f2f2;
+		height:50px;
+		line-height: 50px;
+		width: 1140px;
+		text-align: center;
+		color:#999;
+		font-size:16px;
+	}
+	&>a{
+		display: inline-block;
+		border: 1px solid #f2f2f2;
+		height:50px;
+		line-height: 50px;
+		width: 1140px;
+		text-align: center;
+		color:#999;
+		font-size:16px;
+		&:hover{
+			background: #f2f2f2;
+		}
+	}
+}
+//新闻动态-媒体报道
+#xwd2{
+	padding-bottom: 0px;
+	&>div{
+		border:none;
+		margin-bottom: 0px;
+	}
+	&>.fl{
+		text-align: center;
+		margin-right: 10px;
+		&>p{
+			margin-top:15px;
+		}
+	}
+}
+//隐私与授权-法律声明
+#flsm{
+	&>div{
+		span{
+			display: inline-block;
+	    	margin-top: 15px;
+		    margin-bottom: 25px;
+		    font-size: 16px;
+		    line-height: 26px;
+		}
+	}
+	dl{
+		margin-bottom: 15px;
+		dt{
+			font-size: 18px;
+			color:#333;
+			margin-bottom: 10px;
+		}
+		dd{
+			margin-left:35px;
+			line-height: 25px;
+			a{
+				display: inline-block;
+				margin-bottom: 5px;
+			}
+			.colo{
+				color:#0eb83b;
+			}
+			.aft{
+				display: inline-block;
+			    height: 5px;
+			    width: 5px;
+			    background: #0eb83b;
+			    margin-bottom: 1px;
+			    margin-right: 10px;
+			}
+			.colo.mtop{
+				margin-top: 100px;
+			}
+		}
+	}
+}
+//隐私与授权-隐私声明
+#yssm{
+	&>div{
+		span{
+			display: inline-block;
+	    	margin-top: 15px;
+		    margin-bottom: 25px;
+		    font-size: 16px;
+		    line-height: 26px;
+		}
+	}
+	dl{
+		margin-bottom: 15px;
+		dt{
+			font-size: 18px;
+			color:#333;
+			margin-bottom: 10px;
+			.rft{
+				display: inline-block;
+			    height: 16px;
+			    width: 4px;
+			    background: #0eb83b;
+			    margin-bottom: 0px;
+			    margin-right: 10px;
+			}
+		}
+		dd{
+			line-height: 25px;
+		}
+	}
+}
+//隐私与授权-服务条款
+#ysfwtk{
+	&>div{
+		&>div{
+			float: left;
+			width: 359px;
+			height: 245px;
+			border: 1px solid #f2f2f2;
+			margin-top:18px;
+			text-align: center;
+			margin-right: 30px;
+			cursor: pointer;
+			&>img{
+				margin-top: 48px;
+			}
+			&>p{
+				margin-top: 25px;
+			}
+		}
+	}
+	
+	.maginone{
+		margin-right: 0px;
+	}
+}
+//人才招聘上
+.rczp{
+	min-height: 500px;
+	&>p{
+		width:1144px; 
+		margin:auto;
+		height: 24px;
+		border-bottom: 1px solid #f2f2f2;
+		overflow: hidden;
+	    padding-top: 28px;
+    	padding-bottom: 18px;
+		margin-bottom: 17px;
+		.fl{
+			color:#333;
+			font-size: 24px;
+		}
+		.fr{
+			color:#999;
+			margin-top: 12px;
+		}
+	}
+}
+.talent_top{
+	background:#fff;
+	width: 1144px;
+	margin: auto;
+	.talent_head{
+		margin-bottom:45px;
+		p{
+			margin-bottom:25px;
+		}
+	}
+	.four_steps{
+		overflow: hidden;
+		margin-bottom: 80px;
+		&>.fl{
+			width:730px;
+			dl{
+				margin-bottom: 23px;
+				dt{
+					font-size: 18px;
+					color:#333;
+					font-weight: bold;
+					margin-bottom: 15px;
+				}
+				dd{
+					line-height: 26px;
+				}
+			}
+		}
+	}
+	.want_you{
+		text-align: center;
+		margin-bottom: 90px;
+		p{
+			font-weight: bold;
+			font-size: 48px;
+			color: #333;
+		}
+		&>span{
+			display:block;
+			font-size: 23px;
+			margin-bottom: 40px;
+		}
+	}
+}
+//人才招聘-产品经理
+.product_back,.graphic_back,.front_back{
+	background: #f5f5f5;
+	box-sizing: border-box;
+	padding-top: 65px;
+	padding-bottom: 40px;
+	// height: 500px;
+	overflow: hidden;
+	.product,.graphic,.front{
+		width: 1144px;
+		margin:auto;
+		&:after{
+			content: '';
+			display: block;
+			clear: both;
+		}
+		&>p{
+			float: left;
+			width: 385px;
+			overflow: hidden;
+			margin-top: 0px;
+		}
+		&>div{
+			width:730px;
+			float: left;
+			margin-left: 28px;
+			p{
+				overflow: hidden;
+				// margin-bottom: 15px;
+				&>i{
+					font-size: 16px;
+					color:#333;
+					display: inline-block;
+				    float: left;
+				}
+				&>span{
+					font-size: 14px;
+					color:#666;
+					float: left;
+  					width: 100%;
+  					line-height: 25px;
+				}
+			}
+		}
+	}
+	.front{
+		&>div{
+			margin-left: 26px;
+		}
+	}
+}
+.graphic_back{
+	background: #fff;
+	.graphic{
+		&>div{
+			margin-left:27px;
+		}
+	}
+}
+.talent_foot{
+	width:1144px;
+	margin:auto;
+	text-align: center;
+	&>p{
+		margin-top: 30px;
+		font-size: 18px;
+		color:#333;
+	}
+	.foot_figure{
+		 overflow:hidden;
+		 width:871px;
+		 margin:auto;
+		 margin-top:40px;
+		 margin-bottom: 50px;
+		&>p{
+			font-size: 18px;
+		 	color:#333;
+		 	box-sizing: border-box;
+		 	padding-left:80px;
+		 	line-height: 65px;
+		 	margin-right: 105px;
+		 	background: url(../../images/about/zhon.png) no-repeat;
+		}
+		.phon{
+			background: url(../../images/about/phon.png) no-repeat;
+		}
+	}
+}
+//联系我们
+.contact{
+	background:#fff;
+	width: 1144px;
+	margin: auto;
+	&>p{
+		width:1144px; 
+		margin:auto;
+		height: 24px;
+		border-bottom: 1px solid #f2f2f2;
+		overflow: hidden;
+	    padding-top: 28px;
+    	padding-bottom: 18px;
+		margin-bottom: 17px;
+		.fl{
+			color:#333;
+			font-size: 24px;
+		}
+		.fr{
+			color:#999;
+			margin-top: 12px;
+		}
+	}
+	&>span{
+		color:#333;
+		font-size:18px;
+		display: inline-block;
+		margin-bottom: 25px;
+	}
+	.contact_head{
+		&>span{
+			display: inline-block;
+		    width: 431px;
+		    margin-bottom: 13px;
+		    padding-left: 20px;
+		    position: relative;
+			i{
+				display: inline-block;
+			    height: 16px;
+			    width: 16px;
+			    position: absolute;
+			    top: 2px;
+			    left: 0px;
+			}
+			
+		}
+	}
+	.route{
+		overflow: hidden;
+		margin-bottom: 40px;
+		&>p{
+			padding-bottom:15px; 
+			color:#333;
+			font-size:18px;
+			margin-bottom:25px;
+		}
+		&>div{
+			float: left;
+			height: 88px;
+    		padding-left: 190px;
+    		background: url(../../images/about/dit.png) no-repeat 0px 0px;
+    		margin-right:155px;
+    		&>span{
+    			display: inline-block;
+    		}
+    		.route_head{
+    			font-size: 24px;
+    			color: #0eb83b;
+    			margin-bottom: 10px;
+    		}
+		}
+		.che{
+    		background: url(../../images/about/che.png) no-repeat 0px 0px;
+    		padding-left: 215px;
+    		margin-right:0px;
+    	}
+    	.gonj{
+    		margin-top: 50px;
+    		background: url(../../images/about/gonj.png) no-repeat 0px 0px;
+    		margin-right:0px;
+    	}
+	}
+}
+
+.xg_video_ul{
+	&:after{
+		display: block;
+		clear: both;
+		content: "";
+	}
+	li{
+		margin-right: 14px;
+		width: 275px;
+		
+		
+		&>a{
+			display: block;
+			width: 100%;
+			height: 210px;
+			overflow: hidden;
+		}
+		&>a:hover{
+	    	img{
+	    		-webkit-transform: scale(1.2);
+				-moz-transform: scale(1.2);
+				-transform: scale(1.2);
+	    	}
+	    }
+		img{
+			width: 100%;
+			height: 100%;
+			transform-origin: 190px 100px;
+	    	-webkit-transition: transform 0.6s;
+			-moz-transition: transform 0.6s;
+			-o-transition: transform 0.6s;
+			transition: transform 0.6s;
+		}
+		p{
+			width: 275px;
+			margin-top: 10px;
+			white-space: nowrap;
+		    text-overflow: ellipsis;
+		    overflow: hidden;
+		    a{
+		    	&:hover{
+		    		color: #0eb83a;
+		    	}
+		    }	
+		}
+	}
+}
+//滚动
+.slideTxtBox{width: 1139px;height: 100%;overflow:hidden;position: relative;}
+
+.slideTxtBox>a{position: absolute;width: 60px;height: 40px;background: rgba(0,0,0,0.2);top: 50%;margin-top: -20px;font-family: '宋体';text-align: center;line-height: 40px;font-size: 26px;color: #fff;-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66000000', endColorstr='#66000000');
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66000000', endColorstr='#66000000');display: none;}
+.slideTxtBox>a.prev{left: 0;border-radius: 0 3px 3px 0;}
+.slideTxtBox>a.next{right: 0px;border-radius: 3px 0 0 3px;}

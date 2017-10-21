@@ -1,0 +1,39 @@
+<style type="text/css">
+    .wrapBtn{
+        width: 1200px;
+        height: 100%;
+        margin: 0 auto;
+        position: relative;
+    }
+    .wrapBtn a{
+        width: 200px;
+        height: 54px;
+        display: inline-block;
+        margin: 0 35px;
+        margin-top: 350px;
+        text-align: center;
+        line-height: 54px;
+        color: #fff;
+        font-size: 24px;
+        background: url(<%= require('images/zt/sum_btn_ico.png')%>) no-repeat;
+    }
+    .wrapBtn .btn1{
+        margin-left: 360px;
+        background-position:  0 0;
+    }
+    .wrapBtn .btn1:hover{
+        background-position:  0 -108px;
+    }
+    .wrapBtn .btn2{
+        background-position:  0 -52px;
+    }
+     .wrapBtn .btn2:hover{
+        background-position:  0 -162px;
+    }
+</style>
+<div class="dis_banner" style="background: url(<%= require('images/zt/summary_banner.jpg')%>) no-repeat center center;height:647px;margin-top: -1px;">
+    <div class='wrapBtn'>
+        <a target="_blank" class='btn1' href="/page/special/sale.html"></a>
+        <a target="_blank" class='btn2' href="/page/special/purchase.html"></a>
+    </div>
+</div>

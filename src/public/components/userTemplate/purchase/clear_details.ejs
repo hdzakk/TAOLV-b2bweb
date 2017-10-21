@@ -1,0 +1,104 @@
+<!-- 采购订单详情 -->
+<div class="details">
+	<h3  class='box_head'><span>出货单详情</span> <a href="#purchase/clear_record" class='fr btn_default'>返回列表</a></h3>
+	<div class='box_body confirm_quotation'>
+		<div class='countDown' ng-show="shDetails.stateType==2&&pay">
+			<h3 class='title'>
+				您订单的货物已确认交易，请您确认是否采购，确认采购24小时内有效，请在有效时间内确认采购并支付订单总金额。
+			</h3>
+			<p class='time'>注意：确认支付剩余时间<em id="surplusTime">23时59分59秒</em>，如您未能在指定时间内支付订单总额，该订单将作废，需重新采购，谢谢。</p>
+		</div>
+		<!-- <h3 class='title' style="margin-top:15px;">订单状态：</h3> -->
+		<table class='order_state' cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th class='state{{state_num}}' colspan="6">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td ng-repeat="d in logList">{{d.time}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class='quo_table' cellspacing="0" cellpadding="0">
+			<tr>
+				<td><em>出货单号：</em><span>{{shDetails.shipmentSn}}</span></td>
+				<td><em>采购单号：</em><span>{{shDetails.buyOrderSn}}</span></td>
+				<td><em>出货时间：</em><span>{{shDetails.applyDate}}</span></td>
+				<td><em>状态：</em><span>{{shDetails.shipmentState}}</span></td>
+			</tr>
+			
+			<tr>
+				<!-- <td><em>支付方式：</em><span>{{shDetails.buyOrderPayments.paymentsType}}</span></td> -->
+				<td><em>服务费：</em><span>{{(shDetails.buyOrderShipmentRate.shipmmentServiceFee*1||0).toFixed(2)}}</span>元</td>
+				<td><em>物流费：</em><span>{{(shDetails.buyOrderShipmentRate.logisFee*1||0).toFixed(2)}}</span>元</td>
+				<td><em>送货费：</em><span style="max-width: 340px;">{{(shDetails.buyOrderShipmentRate.barnFee*1||0).toFixed(2)}}</span>元</td>
+			</tr>
+		</table>
+		<!--   ng-show="shDetails.stateType==2&&pay" -->
+		<h3 class='title'>收货信息：<a ng-show="shDetails.stateType==2&&pay" href="javascript:;" class="modify" ng-click="modifyOpen();">[修改地址]</a></h3>
+		<table class='quo_table' cellspacing="0" cellpadding="0" style="margin-top:10px;">
+			<tr>
+				<td><em>{{shDetails.buyOrderLogis.extractWay==1?'自提':'收货人'}}：</em><span>{{shDetails.buyOrderLogis.recoverUser}}</span></td>
+				<td><em>联系方式：</em><span>{{shDetails.buyOrderLogis.recoverPhone}}</span></td>
+				<!-- <td><em>发货批次：</em><span>{{shDetails.buyOrderLogis.batchesNum}}次</span></td> -->
+				<td colspan="2"><em>{{shDetails.buyOrderLogis.extractWay==1==1?'取货':'收货'}}地址：</em><span style="max-width: 340px;">{{shDetails.buyOrderLogis.recoverDetailsAddress}}</span></td>
+			</tr>
+			
+		</table>
+		<h3 class='title'>出货明细：</h3>
+		<table cellspacing="0" cellpadding="0" style="margin-top:10px;">
+			<thead>
+				<tr>
+					<th>货物名称 </th>
+					<th>等级</th>
+					<th>出货数量</th>
+					<th>单位</th>
+					<th>价格（元）</th>
+					<th>总价（元）</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="d in shDetails.shipmentDetailList">
+					<td>{{d.goodsName}}</td>
+					<td>{{d.gradeName}}</td>
+					<td>{{d.shipmentNum}}</td>
+					<td>{{d.goodsUnit}}</td>
+					<td>{{(d.goodsPrice*1||0).toFixed(2)}}</td>
+					<td>{{(d.shipmentTotal*1||0).toFixed(2)}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="title">支付与费用信息： </p>
+		<table class='pay_info' cellspacing="0" cellpadding="0" style="margin-top:10px;">
+			<tbody>
+				<tr>
+					<td>出货数量：{{shDetails.buyOrderShipmentRate.goodsTotalNum}}</td>
+					<td>出货总价：{{(shDetails.buyOrderShipmentRate.goodsTotalFee*1||0).toFixed(2)}}元</td>
+					<td>应付费用：{{(shDetails.buyOrderShipmentRate.logisFee*1+shDetails.buyOrderShipmentRate.barnFee*1+shDetails.buyOrderShipmentRate.shipmmentServiceFee*1).toFixed(2)}} 元</td>
+					<td ng-if="shDetails.buyOrderShipmentRate.guarantyIf==1">定金金额：{{(shDetails.buyOrderShipmentRate.guarantyFee*1).toFixed(2)}} 元</td>
+					<td>应付金额：{{(shDetails.buyOrderShipmentRate.logisFee*1+shDetails.buyOrderShipmentRate.barnFee*1+shDetails.buyOrderShipmentRate.goodsTotalFee*1+shDetails.buyOrderShipmentRate.shipmmentServiceFee*1-shDetails.buyOrderShipmentRate.guarantyFee*1).toFixed(2)}} 元</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div style="margin-top:30px;text-align: center;" ng-show="shDetails.stateType==2&&pay">
+		<a href="javascript:;" class="btn_default" ng-click="confirm_pay()">确认支付</a>
+	</div>
+
+	<script type="text/html" id="confirm_pay_layer" ng-show="shDetails.stateType==2">
+		<div class='confirm_pay_layer'>
+			<p><span class='fl'>出货总价：</span><span class='fr'>{{(shDetails.buyOrderShipmentRate.goodsTotalFee*1).toFixed(2)}}元</span></p>
+			<p><span class='fl'>应付费用：</span><span class='fr'>{{(shDetails.buyOrderShipmentRate.logisFee*1+shDetails.buyOrderShipmentRate.barnFee*1+shDetails.buyOrderShipmentRate.shipmmentServiceFee*1).toFixed(2)}}元</span></p>
+			<p ng-if="shDetails.buyOrderShipmentRate.guarantyIf==1"><span class='fl'>定金金额：</span><span class='fr'>{{shDetails.buyOrderShipmentRate.guarantyFee}}元</span></p>
+			<p><span class='fl'>应付金额：</span><span class='fr'>{{(shDetails.buyOrderShipmentRate.logisFee*1+shDetails.buyOrderShipmentRate.barnFee*1+shDetails.buyOrderShipmentRate.goodsTotalFee*1+shDetails.buyOrderShipmentRate.shipmmentServiceFee*1-shDetails.buyOrderShipmentRate.guarantyFee*1).toFixed(2)}}元</span></p>
+			<div>您本次应付金额为<i> {{(shDetails.buyOrderShipmentRate.logisFee*1+shDetails.buyOrderShipmentRate.barnFee*1+shDetails.buyOrderShipmentRate.goodsTotalFee*1+shDetails.buyOrderShipmentRate.shipmmentServiceFee*1-shDetails.buyOrderShipmentRate.guarantyFee*1).toFixed(2)}} </i> 元，确认支付吗？</div>
+		</div>
+	</script>
+	<style type="text/css">
+		.wrap_confirm_pay .layui-layer-content{
+			max-height:150px!important;
+		}
+	</style>
+</div>

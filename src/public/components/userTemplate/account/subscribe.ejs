@@ -1,0 +1,47 @@
+<h3 class='box_head'>消息订阅</h3>
+<div class='box_body user_subscribe'>
+	<p class='sub_title'>请勾选您需要的消息类型和接收方式。为了您能准确收到消息，请确认您的手机号和邮箱是否正确。</p>
+	<div class="sub_revise">
+		<p>
+			<span>手机号码：</span>
+			<em>{{phone}}<font ng-show="userData.ckPhone==1">（已验证）</font><i ng-show="userData.ckPhone==0">（未验证）</i></em>
+			<a href="#account/safe?id=modifyPhone">修改</a>
+		</p>
+		<p>
+			<span>邮箱：</span>
+			<em>{{email}}<font ng-show="userData.ckEmail==1">（已验证）</font><i ng-show="userData.ckEmail==0">（未验证）</i></em>
+			<a href="#account/safe?id=modifyMail">{{userData.ckEmail==1?'修改':'点此验证'}}</a>
+		</p>
+	</div>
+	<table cellspacing="0" cellpadding="0">
+		<thead>
+			<tr>
+				<th>消息提醒 <!-- <span>如果要修改，请在相应的选框内勾选，为了您保证您收到相关信息，请至少选择一种方式接受</span> --></th>
+				<th>短信</th>
+				<th>邮箱</th>
+				<th>淘绿APP</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="d in msgData">
+				<td>{{d.name}}</td>
+				<td><input ng-checked="d.PUSH001" ng-model="d.PUSH001" type="checkbox"></td>
+				<td><input ng-checked="d.PUSH002" ng-model="d.PUSH002" type="checkbox"></td>
+				<td><input ng-checked="d.PUSH003" ng-model="d.PUSH003" type="checkbox"></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4"><span>温馨提示：</span>如果要修改，请在相应的选框内勾选，为了您保证您收到相关信息，请至少选择一种方式接收</td>
+			</tr>
+		</tfoot>
+	</table>
+	<p class='sub_btn'>
+		<button class='main_btn' ng-click="modifyUserSet()">确定</button>
+	</p>
+</div>
+<script type="text/javascript">
+	function account_subscribe($scope){
+		
+	}
+</script>

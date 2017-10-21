@@ -1,0 +1,138 @@
+<%= nav %>
+<div id="sell_content" class='tl_w hide' ng-class="{show:pageLoading}">
+	<div class='good_screen'>
+		<div class='sell_title'>
+			<span>我要卖货</span>
+			<p class="fl left_tip">
+				<em>找不到合适的货物？</em> 
+				你可以按统货下单卖货
+			</p>
+			<div class='fl query_con'>
+				<input type="text" validate-number-letter ng-model="gradelessNum"  placeholder="请输入统货数量"> 个
+				<a class='btn1' href="javascript:;" ng-click="gradelessXiad()">立即下单</a>
+				<a class='btn2' href="/page/sell/category.html">我要按品类下单卖货</a>
+			</div>
+		</div>
+		<p class='screen_title'>信息筛选</p>
+		<ul class='screen_cen'>
+			<li>
+				<span>货物分类：</span>
+				<div class='wrap_btn'>
+					<a class='cur' ng-click="getSellClassifyInfo('all',$event,$index)">所有</a>
+					<a ng-repeat="d in categoryList" ng-click="getSellClassifyInfo(d.typeName,$event,$index)">{{d.typeName}}</a>
+				</div>
+			</li>
+			<li class='drop_down' id="goods_down" style="display: none;margin-bottom: 15px;">
+				<a class='cur' ng-click="getGoodName('',$event)">所有</a>
+				<a ng-repeat="d in goodsList" ng-click="getGoodName(d.classifyName,$event)">{{d.classifyName}}</a>
+				<span class="openBtn" ng-click="showMore($event)">更多<i>∨</i></span><!-- ˇ> -->
+			</li>
+			<!-- 二手货物 -->
+			<!-- <li class='drop_down' id="second_down" style="display: none;">
+				
+			</li> -->
+			<li>
+				<span>状态：</span>
+				<div class='wrap_btn'>
+					<a class='cur' ng-click="getsellState('',$event)">所有</a>
+					<a ng-click="getsellState('0',$event)">采购中</a>
+				<!-- 	<a ng-click="getsellState('3',$event)">已关闭</a> -->
+					<a ng-click="getsellState('1',$event)">已结束</a>
+					<a ng-click="getsellState('3',$event)">已完成</a>
+					<a ng-click="getsellState('2',$event)">暂停</a>
+					<!-- <a ng-click="getsellState('6',$event)">已下线</a> -->
+				</div>
+			</li>
+			<li>
+				<span>交货地：</span>
+				<div class='wrap_btn'>
+					<a class='cur' ng-click="getPlaceDelivery('',$event)">所有</a>
+					<a ng-click="getPlaceDelivery(d.sendCity,$event)" ng-repeat="d in sendCity">{{d.sendCity}}</a>
+				</div>
+			</li>
+			<li style="padding-top: 5px;border-top: 1px dashed #ececec;margin-top:5px;">
+				<!-- <div class='wrap_select'>
+					<span>品牌：</span>
+					<select class="form-control" ng-change="getPhoneModel()" ng-model='phoneModel' ng-options="d.brand for d in secondList">
+						<option value="">请选择</option>
+					</select>
+				</div>
+				<div class='wrap_select'>
+					<span>型号：</span>
+					<select class="form-control" ng-change="getSecondGoodsName()" ng-model='secondGoodsName' ng-options="d.promodelName for d in modelList">
+						<option value="">请选择</option>
+					</select>
+				</div> -->
+				<div class='wrap_select'>
+					<span>关键字：</span>
+					<em>
+						<input ng-model="searchText" type="text" placeholder="请输入你要查询的内容">
+						<button ng-click="goodsSearch()">搜索</button>
+					</em>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+
+	<div class='result_data'>
+		<div class='res_title'>
+			<p class='fl'>
+				{{listTitle}}&nbsp;&nbsp;&nbsp;共 <span>{{buyOrderList.recordsFiltered||0}}</span> 条数据      
+			</p>
+			<!-- <div class='fr page'>
+				<span class="last"></span>
+				1/199
+				<span class="next"></span>
+			</div> -->
+		</div>
+		<!-- <div class='can_good'>
+			<p class='fl img'>
+				<img src="/images/sell/can_good.png">
+			</p>
+			<div class='fl query_con'>
+				<input type="text" validate-number-letter ng-model="gradelessNum"  placeholder="请输入统货数量"> 个
+				<a class='btn1' href="javascript:;" ng-click="gradelessXiad()">立即下单</a>
+				<a class='btn2' href="/page/sell/category.html">我要按品类下单卖货</a>
+			</div>
+		</div> -->
+		<ul class='result_content_ul'>
+			<li ng-if="buyOrderList.data.length==0" style="padding-bottom: 25px;text-align: center;">找不到您要的货物~请重新筛选~</li>
+			<li class='item' ng-repeat="d in buyOrderList.data">
+				<div class='up'>
+					<p class='fl name'>{{d.buyOrderDetail.goodsName}}</p>
+					<div class='fl num_price'>
+						<p class='num'>采购数量：<em>{{d.buyNum}}</em> {{d.buyOrderDetail.goodsUnit}} </p>
+						<p class='price'>采购价钱：<em>{{(d.buyPrice*1||0).toFixed(2)}}</em> 元/{{d.buyOrderDetail.goodsUnit}} </p>
+					</div>
+					<p class='fl time'>
+						剩余时间：   <em>{{d.remainTime}}</em>    天
+					</p>
+					<p class='fl state'>
+						状态：<em>{{d.BuyOrder.orderState}}</em>
+					</p>
+					<p class='fl state'>
+						等级：<em style="color:#0eb83a;">{{d.gradeName}}</em>
+					</p>
+					<p class='fr btn'>
+						<button ng-if="d.remainTime!=0&&d.finishDegree!=100&&d.isStorage==0" ng-click="supplyCommodityBtn(d)">我要供货</button>
+						<button class='not' ng-if="(d.remainTime==0&&d.finishDegree<100)||d.finishDegree==100||d.isStorage!=0">我要供货</button>
+					</p>
+				</div>
+				<div class='down'>
+					<span class='fl user'>采购方：{{d.BuyOrder.menberName | filterName}}</span>
+					<span class='fl local'>交货地：{{d.buyOrderLogis.sendCity}}</span>
+					<span class='fl time'>发布时间：<i>{{d.gradeCreate.substring(0,10)}}</i></span> <!-- | toDate -->
+					<span class='fl cycle'>采购周期：{{d.buyCycle}}天</span>
+					<div class='fl complete'>完成度：
+						<span class="speed "><i percent="d.finishDegree"></i></span>
+						<font>{{d.finishDegree}}%</font>
+					</div>
+					<span class='fr tr'>信息编号：{{d.detailGradeSn}}</span>
+				</div>
+			</li>
+		</ul>
+		<!-- 分页 -->
+		<div id="Pagination" class="page-pagination"><!-- 这里显示分页 --></div>
+	</div>
+</div>

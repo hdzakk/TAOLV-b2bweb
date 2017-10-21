@@ -1,0 +1,189 @@
+@charset "utf-8";
+.dis_banner{
+	width: 100%;
+	height: 300px;
+	background: url(../../images/zt/dis_banner.jpg) no-repeat center center;
+}
+.dis_content{
+	width: 100%;
+	padding-bottom: 20px;
+	.wrap_dis{
+		width: 1000px;
+		margin: 0 auto;
+		padding-bottom: 30px;
+		h3{
+			text-align: center;
+			padding-top: 40px;
+			span{
+				display: inline-block;
+				padding-left: 30px;
+				font-size: 28px;
+				color: #333;
+				background: url(../../images/zt/dis_y.png) no-repeat left 8px;
+			}
+			p{
+				color: #666666;
+				padding-top: 15px;
+				font-size: 18px;
+				padding-bottom: 50px;
+			}
+		}
+	}
+}
+
+//销售服务
+.sal_content{
+	width: 100%;
+	padding-bottom: 20px;
+	.wrap_sal{
+		width: 1200px;
+		margin: 0 auto;
+		padding-bottom: 50px;
+		overflow: hidden;
+		h3{
+			text-align: center;
+			padding-top: 40px;
+			padding-bottom: 50px;
+			span{
+				display: inline-block;
+				font-size: 24px;
+				color: #333;
+				position: relative;
+				&:after,&:before{
+					position: absolute;
+					content: '';
+					top: 40%;
+					height: 8px;
+					width: 420px;
+				}
+				&:after{
+					right: -430px;
+					background: url(../../images/zt/sal_title_right.png) no-repeat left center
+				}
+				&:before{
+					left: -430px;
+					background: url(../../images/zt/sal_title_left.png) no-repeat right center
+				}
+			}
+			p{
+				color: #666666;
+				padding-top: 15px;
+				font-size: 18px;
+				padding-bottom: 50px;
+			}
+		}
+	}
+}
+
+// 服务中心
+.cen_content{
+	width: 100%;
+	padding-bottom: 20px;
+	.wrap_sal{
+		width: 1200px;
+		margin: 0 auto;
+		padding-bottom: 50px;
+		overflow: hidden;
+		position: relative;
+		h3{
+			text-align: center;
+			padding-top: 40px;
+			padding-bottom: 50px;
+			span{
+				display: inline-block;
+				font-size: 24px;
+				color: #333;
+				position: relative;
+				height: 50px;
+				line-height: 48px;
+				border-bottom: 1px solid #DDDDDD;
+				border-top: 1px solid #DDDDDD;
+				box-sizing: border-box;
+				&:after,&:before{
+					position: absolute;
+					content: '';
+					top: -2px;
+					height: 52px;
+					width: 420px;
+				}
+				&:after{
+					right: -420px;
+					background: url(../../images/zt/cen_title_right.png) no-repeat left center
+				}
+				&:before{
+					left: -420px;
+					background: url(../../images/zt/cen_title_left.png) no-repeat right center
+				}
+			}
+			p{
+				color: #666666;
+				padding-top: 15px;
+				font-size: 18px;
+				padding-bottom: 50px;
+			}
+		}
+		&>a{
+			position: absolute;
+			width: 420px;
+			height: 100px;
+			left: 690px;
+			&.btn1{
+				top: 140px;
+			}
+			&.btn2{
+				top: 255px;
+			}
+			&.btn3{
+				top: 368px;
+			}
+		}
+	}
+}
+//买家服务
+.buy_content{
+	width: 100%;
+	padding-bottom: 20px;
+	.wrap_sal{
+		width: 1200px;
+		margin: 0 auto;
+		padding-bottom: 50px;
+		overflow: hidden;
+		h3{
+			text-align: center;
+			padding-top: 40px;
+			padding-bottom: 50px;
+			span{
+				display: inline-block;
+				font-size: 24px;
+				color: #333;
+				position: relative;
+				&:after,&:before{
+					position: absolute;
+					content: '';
+					top: 40%;
+					height: 8px;
+					width: 420px;
+				}
+				&:after{
+					right: -430px; 
+					background: url(../../images/zt/sal_title_right.png) no-repeat left center
+				}
+				&:before{
+					left: -430px;
+					background: url(../../images/zt/sal_title_left.png) no-repeat right center
+				}
+				&.it{
+					&:before{
+						left: -415px;
+					}
+				}
+			}
+			p{
+				color: #666666;
+				padding-top: 15px;
+				font-size: 18px;
+				padding-bottom: 50px;
+			}
+		}
+	}
+}

@@ -1,0 +1,23 @@
+<%= nav%>
+<div id="user_content" class='tl_w hide' ng-class="{show:pageLoading}">
+	<div class='user_sidebar'>
+		<div class='user_panel'>
+			<p class='user_image'>
+				<img id="user_image" src="<%= require('images/user/user_image.png')%>" height="90" width="90">
+			</p>
+			<!-- <p class='user_integral'>
+				<a class='user_f' href="">10000</a>
+				<a class='user_j' href="">5</a>
+			</p> -->
+		</div>
+		<dl class='user_menu'>
+			<dt>委托销售</dt>
+			<dd class='cur'><a href="#sales_order">销售订单</a></dd>
+			<dd><a href="#trading">交易记录</a></dd>
+			<dd><a href="#refund_cargo">退货记录</a></dd>
+			<dd><a href="#my_inventory">暂存记录</a></dd>
+			<!-- <dd><a href="#rebate_admin">返点管理</a></dd> -->
+		</dl>
+	</div>
+	<div class='user_content_view' ng-view></div>
+</div>

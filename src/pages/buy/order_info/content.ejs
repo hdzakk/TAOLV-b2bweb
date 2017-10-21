@@ -1,0 +1,203 @@
+<%= nav %>
+<div id="buy_order_content" class='tl_w hide' ng-class="{show:pageLoading}">
+	<p class='title'>确认订单信息</p>
+	<div class='order_content'>
+		<div class='wrap_info'>
+			<p class='info_title'>1.基本信息</p>
+			<p class='order_num'>
+				<span>订单号：{{buyOrder.orderSn}}</span>
+				<!-- <span style="margin-left:100px;">下单时间：{{buyOrder.createDateStr}}</span>  -->
+				<span style="margin-left:100px;">采购总数：{{typeList | units}}</span> 
+				<span style="margin-left:100px;">货款总额：{{typeList | totalMoney}} 元</span> 
+			</p>
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>货物名称</th>
+						<th>等级</th>
+						<th>采购数量</th>
+						<th>单位</th>
+						<th>报价（元）</th>
+						<th>总价（元）</th>
+						<th>采购周期（天）</th>
+						<th ng-if="!typeList[0].goodsExplainJson">货物说明</th>
+						<th ng-if="!!typeList[0].goodsExplainJson">接受扣款原因</th>
+						<!-- <th>提货地址</th> -->
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="d in typeList track by $index" ng-init="index=$index">
+						<td>{{d.classifyName}}</td>
+						<td>{{d.grade?d.grade:'E'}}</td>
+						<td>
+							<input ng-model="d.number" type="text" value="375200">
+						</td>
+						<td>{{d.unitValue}}</td>
+						<td><input type="text" ng-model="d.maxPrice" value="3.35"></td>
+						<td>{{d.maxPrice*d.number?d.maxPrice*d.number:0 | parseFloat}}</td>
+						<td><input ng-model="d.buyCycle" type="text" value="10"></td>
+
+						<td ng-if="!d.goodsExplainJson"><input style="width:350px;" type="text" ng-model="d.goodsExplain" value="备注"></td>
+						<td ng-if="!!d.goodsExplainJson" style="width:210px;">
+							<!-- 接受扣款原因 -->
+							{{d.goodsExplainJson | debitReason:d.resource}}
+							<a ng-if="!d.resource&&d.goodsExplainJson.length!=0" ng-click="reason_modify(d.goodsExplainJson,index)" class='reason_modify' href="javascript:;">修改</a>
+						</td>
+						<!-- <td>深圳分拣中心<a class='modify' href="javascript:;">修改</a></td> -->
+					</tr>
+				
+				</tbody>
+			</table>
+		</div>
+		<div class='wrap_take '>
+			<p class='info_title'>2.收货信息</p>
+			<div class='take_address'>
+				<p class='add_title'>选择收货地址</p>
+				<ul class='wrap_address addressUl' ng-class="{hidden:addressAll.length!=0}">
+					<p ng-if="!addressAll||addressAll.length=='0'" style="color:#999;padding-top:10px;text-align: center;">您还未添加收货地址！</p>
+					<li ng-style="{'marginRight':($index+1)%4==0?0:''}" class='{{$index==0?"cur":""}}' ng-repeat="d in addressAll" ng-click="selectAddress(d,$event,0)">
+						<p class='name'>{{d.name}}</p>
+						<p class='phone'>{{d.phone}}</p>
+						<p class='address'>{{d.province}}省 {{d.city}}市 {{d.district}} {{d.address}}</p>
+					</li>
+				</ul>
+				<p class='address_btn'>
+					<a href="javascript:;" class='fl showWhole' ng-if="addressAll.length>4">显示全部地址</a>
+					<a target="_blank" href="/page/user/#/account/address" class='fr administration' data-key="storage_address">管理收货地址</a>
+				</p>
+				<p class='add_title'>如果您要自提，请选择以下地址：</p>
+				<ul class='wrap_address' ng-show="pickAddress">
+					<li ng-click="selectAddress(pickAddress,$event,1)">
+						<p class='name'>{{pickAddress.name}}</p>
+						<p class='phone'>{{pickAddress.phone}}</p>
+						<p class='address'>{{pickAddress.province}}省 {{pickAddress.city}}市 {{pickAddress.district}} {{pickAddress.address}}</p>
+					</li>
+				</ul>
+				<p class='add_title'>选择发货方式</p>
+				<div class='deliver_mode'>
+					<p>
+						<label ng-click="frequency('0')">
+							<input type="radio" name="mode" checked value="0">
+							分批发货
+						</label>
+						<input ng-disabled="inhibit" ng-model="buyOrder.buyOrderLogis.batchesNum"  type="text" placeholder="请输入分多少批发货">
+					</p>
+					<p>
+						<label ng-click="frequency('1')">
+							<input type="radio"  name="mode" value="1">
+							一次性全部发货
+						</label>
+					</p>
+					<p class='tips'>温馨提示：如果订的货量比较大，为了能够实现更好的资金周转，请选择分批发货。</p>
+				</div>
+			</div>
+		</div>
+		<!-- <div class='wrap_make'>
+			<p class='info_title'>3.支付方式</p>
+			<div class='wrap_credit'>
+				<table cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>持卡所属</th>
+							<th>持卡账号</th>
+							<th>持卡人姓名</th>
+							<th>持卡人手机号</th>
+							<th>备注</th>
+							<th>选择</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="d in accountList">
+							<td>{{$index+1}}</td>
+							<td>{{d.bankName}}</td>
+							<td>{{d.bankAccount}}</td>
+							<td>{{d.belongsName}}</td>
+							<td>{{d.belongsPhone}}</td>
+							<td>{{d.bewrite}}</td>
+							<td class='noBor'><input type="radio" ng-click="choiceAccount(d)" value="{{$index}}" name='credit' ng-checked="$index==0?true:false"> </td>
+						</tr>
+					</tbody>
+					<tfoot ng-if="!accountList||accountList.length=='0'">
+						<tr>
+							<td style="color:#999;padding: 10px 0;" colspan="7">您还未添加支付信息</td>
+						</tr>
+					</tfoot>
+				</table>
+				<p class='foot_txt'>
+					<a target="_blank" href="/page/user/#/account/payment" class='fr administration' data-key="storage_account">管理账户信息</a>
+				</p>
+			</div>
+		</div> -->
+		<!-- <div class='wrap_card'>
+			<p class='info_title'>4.使用卡卷</p>
+			<p>您现在没有任何可用卡券。</p>
+		</div> -->
+		<div class='wrap_remark'>
+			<p class='info_title'>3.订单备注</p>
+			<textarea ng-model="buyOrder.orderRemark"></textarea>
+		</div>
+		<div class="wrap_careful">
+			<em>注意事项： </em>请各位用户依法自行办理回收、拆解等经营相关的业务资质，并自行审核交易对方所需业务资质，合法规范经营。公司本网站仅向客户提供废旧电子产品的线上回收交易服务，用户需自行承担因未妥善办理相关经营业务资质而遭受的处罚及发生相关纠纷的风险，公司不承担任何责任。如有不便，敬请谅解。
+		</div>
+		<div class='submit_order'>
+			<label>
+				<input type="checkbox" checked id="orderChecked" />
+				我接受<a href="">《淘绿网平台委托采购用户协议》</a>
+			</label>
+			<div class='btn'>
+				<a href="javascript:;" ng-click="buySubmitOrser()">提交订单</a>
+				<a href="/page/buy/index.html">返回</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 分拣中心修改弹窗 -->
+<div class='sorting_core' style="display: none;">
+	<p class='t'>选择分拣中心</p>
+	<div class='sorting_centent'>
+		<div class='fl div_select'>
+			<select class="form-control">
+				<option value="">北京市</option>
+				<option value="0">深圳市</option>
+			</select>
+			<select class="form-control">
+				<option value="">xxx区</option>
+			</select>
+			<select class="form-control">
+				<option value="">xxx街</option>
+			</select>
+		</div>
+		<div class='fl take_info'>
+			<p><span>收货人：</span>淘绿网</p>
+			<p><span>邮编：</span>518031</p>
+			<p><span>联系电话：</span>400-188-5167</p>
+			<p><span>邮寄地址：</span>深圳市福田区上步中路1013号工会大厦A座淘绿网一楼</p>
+		</div>
+	</div>
+	<div class='sorting_btn'>
+		<a href="javascript:;">确定</a>
+		<a href="javascript:LOAD.remove();">取消</a>
+	</div>
+	<a href="javascript:LOAD.remove();" class='iconfont'>&#xe652;</a>
+</div>
+<!-- 接受扣款原因修改弹窗 -->
+<div class='larey_bg'  style="display: {{reason?'block':'none'}};">
+	<div class='debit_reason'>
+		<p class='t'>选择您可以接受的扣款原因</p>
+		<div class='reason_centent'>
+			<!-- <p style="color:#F6331A;">说明：默认选择1,2,3,4,5,8.</p> -->
+			<div class='wrap_label'>
+				<label ng-repeat="d in reason">
+					<input value="checkbox" ng-checked="d.checked" ng-model="d.checked" type="checkbox"/>
+					<span ng-bind="d.name"></span>
+				</label>
+			</div>
+		</div>
+		<div class='reason_btn'>
+			<a href="javascript:;" ng-click="determineReason()">确定</a>
+			<a href="javascript:;" ng-click="reason=false">取消</a>
+		</div>
+		<a href="javascript:;" ng-click="reason=false" class='close iconfont'>&#xe652;</a>
+	</div>
+</div>

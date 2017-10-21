@@ -1,0 +1,95 @@
+<%= nav %>
+<div style='min-height:1000px;'>
+	<div class='hide' ng-class="{show:pageLoading}">
+		<div class="about_banner" style="background: url(<%= require('images/about/new_banner.jpg')%>) no-repeat center;">
+			<!-- <p >全面化的环保回收服务，推进中国再生资源产业发展</p> -->
+		</div>
+		<div  class="about_heade">
+			<ul style="width:680px;">
+				<li ng-repeat="d in about_data" class='{{$index==about_data.length-1?"lyshi":""}}' id="a_{{d.code | idtxt}}" ng-click="about_click($event,d.sn)">
+					<a href="#about_{{d.code}}/{{d.sn}}" class="{{d.sn}}">{{d.showName}}</a>
+				</li>
+			</ul>		
+		</div>
+		<div ng-view style='min-height=800px;'></div>
+		<!-- 社会公益 -->
+		<script type="text/html" id="xwd1_view">
+			<div id="shgy">
+				<p>
+					<span class="fl" ng-bind="about_data[0].showName" ></span>
+				</p>
+				<span>
+					公益事业是所有成功企业的份内事，是一项长久的事业。淘绿环保自成立以来，不仅致力于为用户提供优质的服务，也致力于社会公益环保事业的积极驱动。公司成立至今，一直积极与政府机构、社区街道及社会各类公益组织机构进行广泛合作，为社会公益事业作出应有的贡献。
+				</span>
+				<h3>公益环保，从淘绿开始！</h3>
+				<div class="public" ng-repeat="d in total_article">
+					<a href="{{d | bitUrl:about_data[0].sn:about_data[0].showName}}" target="_blank">
+						<img ng-src="{{d.imageUrl}}" alt=""/>
+					</a>
+					<p ng-bind="d.newsTitle"></p>
+				</div>
+				<a href='{{about_data[0].jumpUrl}}' ng-show='about_data[0].jumpUrl'  target="_blank">点击加载更多</a>
+			</div>
+		</script>
+		<!-- 淘绿动态 -->
+		<script type="text/html" id="xwd2_view">
+			<div id="xwd1" >
+				<p>
+					<span class="fl" ng-bind="about_data[1].showName"></span>
+				</p>
+				<div ng-repeat="d in total_article">
+					<p class="fl dynamic_left">
+						<a href="{{d | bitUrl:about_data[1].sn:about_data[1].showName}}" target="_blank">
+							<img ng-src="{{d.imageUrl}}" alt="" />
+						</a>
+					</p>
+					<div class="fl dynamic_right">
+						<h3 ng-bind="d.newsTitle"></h3>
+						<span ng-bind-html="d.webText">
+						</span>
+						<p>发布时间：<span>{{d.releaseDate.substring(0,10)}}</span></p>
+					</div>
+				</div>
+				<a href='{{about_data[1].jumpUrl}}' ng-show='about_data[1].jumpUrl'  target="_blank">点击加载更多</a>
+			</div>
+		</script>
+		<!-- 媒体报道 -->
+		<script type="text/html" id="xwd3_view">
+			<div id="xwd2">
+				<p>
+					<span class="fl" ng-bind="about_data[2].showName"></span>
+				</p>
+				<div ng-repeat="d in total_article">
+					<p class="fl dynamic_left">
+						<a href="{{d | bitUrl:about_data[2].sn:about_data[2].showName}}" target="_blank">
+							<img ng-src="{{d.imageUrl}}" alt="" />
+						</a>
+					</p>
+					<div class="fl dynamic_right">
+						<h3 ng-bind="d.newsTitle"></h3>
+						<span ng-bind-html="d.webText">
+						</span>
+						<p>发布时间：<span>{{d.releaseDate.substring(0,10)}}</span></p>
+					</div>
+				</div>
+				<a href='{{about_data[2].jumpUrl}}' ng-show='about_data[2].jumpUrl'  target="_blank">点击加载更多</a>
+				<p>
+					<span class="fl" ng-bind="hgsp_data.showName"></span>
+				</p>
+				<div class="slideTxtBox" style="display:block;">
+				    <div class="bd">
+						 <ul class='xg_video_ul'>
+							<li class="fl" ng-repeat="c in hgsp_data.newsList">
+								<a href="{{c | bitUrl:hgsp_data.sn:hgsp_data.showName}}" target="_blank">
+									<img ng-src="{{c.imageUrl}}" alt=""/></a>
+									<p><a href="{{c | bitUrl:hgsp_data.sn:hgsp_data.showName}}" target="_blank">{{c.newsTitle}}</a></p>
+							</li>
+						</ul>
+				    </div>
+				    <a class="prev" href="javascript:void(0)">&lt;</a>
+					<a class="next" href="javascript:void(0)">&gt;</a>
+				</div>	
+			</div>
+		</script>
+	</div>
+</div>

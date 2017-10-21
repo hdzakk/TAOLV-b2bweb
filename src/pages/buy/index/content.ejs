@@ -1,0 +1,116 @@
+<%= nav %>
+<div id="buy_content" class='tl_w hide' ng-class="{show:pageLoading}">
+	<!-- 资源筛选 -->
+	<div class='good_screen'>
+		<div class='buy_title'>
+			<span>我要买货</span>
+			<p class="fl left_tip">
+				<em>找不到合适的货物？</em> 
+				你可以下单买货
+				<a href="/page/buy/category.html">立即下单</a>
+			</p>
+		</div>
+		<p class='screen_title'>信息筛选</p>
+		<ul class='screen_cen'>
+			<li>
+				<span>货物分类：</span>
+				<div class='wrap_btn'>
+					<a class='cur' ng-click="getBuyClassifyInfo('all',$event,$index)">所有</a>
+					<a ng-repeat="d in categoryList" ng-click="getBuyClassifyInfo(d.typeName,$event,$index)">{{d.typeName}}</a>
+				</div>
+			</li>
+			<li class='drop_down' id="goods_down" style="display: none;margin-bottom: 15px;">
+				<a ng-class='{cur:cur}' ng-click="getGoodName('',$event)">所有</a>
+				<a title="{{d.classifyName}}" ng-repeat="d in goodsList" ng-click="getGoodName(d.classifyName,$event)">{{d.classifyName}}</a>
+				<span class="openBtn" ng-click="showMore($event)">更多<i>∨</i></span><!-- ˇ> -->
+			</li>
+			<li>
+				<span>所在地：</span>
+				<div class='wrap_btn'>
+					<a class='cur' ng-click="getPlaceDelivery('',$event)">所有</a>
+					<a ng-click="getPlaceDelivery(d.recoverCity,$event)" ng-repeat="d in cityList">{{d.recoverCity}}</a>
+				</div>
+			</li>
+			<li style="padding-top: 5px;border-top: 1px dashed #ececec;margin-top:5px;">
+				<div class='wrap_select'>
+					<span>品牌：</span>
+					<select class="form-control" ng-change="getPhoneModel()" ng-model='phoneModel' ng-options="d.brand for d in secondList">
+						<option value="">请选择</option>
+					</select>
+				</div>
+				<div class='wrap_select'>
+					<span>型号：</span>
+					<select class="form-control" ng-change="getSecondGoodsName()" ng-model='secondGoodsName' ng-options="d.promodelName for d in modelList">
+						<option value="">请选择</option>
+						 <!-- ng-selected="$first" -->
+					</select>
+				</div>
+				<div class='wrap_select'>
+					<span>关键字：</span>
+					<em>
+						<input ng-model="searchText" type="text" placeholder="请输入你要查询的内容">
+						<button ng-click="goodsSearch()">搜索</button>
+					</em>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!-- 资源列表 -->
+	<div class="resources_list">
+		<!-- 数据头部 -->
+		<div class="list_head">
+			<p class="fl left_tip">
+				<b>资源列表</b>
+				共<span style="color: #f62d13;"> {{buyOrderList.recordsTotal||0}} </span>条数据 
+				<!-- <em>找不到合适的货物？</em> 
+				你可以下单买货
+				<a href="/page/buy/category.html">立即下单</a> -->
+			</p>
+			<!-- <p class="fr right_tip">
+				<i class="btn_left"></i>
+				<span>1/923</span>
+				<i class="btn_right"></i>
+			</p> -->
+			<p class="fr center_tip">
+				<span>每页显示：</span>
+				<a class="on" data-num='10'>10条</a>
+				<a data-num='20'>20条</a>
+				<a data-num='30'>30条</a>
+			</p>
+		</div>
+		<!-- 表格数据 -->
+		<table cellpadding="0" cellspacing="0" border="0" class="list_conter">
+			<thead class="conter_head">
+				<tr>
+					<th>委托销售单号</th>
+					<th>货物名称</th>
+					<th >等级</th>
+					<th>数量<!-- <i></i> --></th>
+					<th>单位</th>
+					<th>参考价(元)</th>
+					<th>所在地</th>
+					<th>货物说明</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody class="data_list">
+				<tr ng-if="buyOrderList.data.length==0">
+					<td style="padding: 20px 0;font-size: 14px;" colspan="9">找不到您要的货物~请重新筛选~</td>
+				</tr>
+				<tr ng-repeat="d in buyOrderList.data">
+					<td>{{d.saleOrderSn}}</td>
+					<td>{{d.goodsName}}</td>
+					<td>{{d.gradeName}}</td>
+					<td>{{d.goodsNum}}</td>
+					<td>{{d.goodsUnit}}</td>
+					<td>{{(d.goodsPrice*1||0).toFixed(2)}}</td>
+					<td>{{d.recoverCity}}</td>
+					<td>{{d.goodsExplain}}</td>
+					<td><a href="javascript:;" ng-click="goGoodPurchaseBtn(d)">我要采购</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- 分页 -->
+		<div id="Pagination" class="page-pagination"><!-- 这里显示分页 --></div>
+	</div>
+</div>

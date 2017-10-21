@@ -1,0 +1,36 @@
+<%= nav %>
+<div id="sell_category_content" class='tl_w hide' ng-class="{show:pageLoading}">
+	<p class="prompt">操作提示：请在需要进行委托销售的货物后面输入对应的供货数量，选择完了之后点击委托销售进行下单；</p>
+	<div class="navigation">
+		<a ng-click="getSellClassifyInfo(d.typeName,$event)" ng-repeat="d in categoryList" href="javascript:;" class="{{$index==0?'active':''}}">{{d.typeName}}</a>
+	</div>
+	<div id="gradeless" class='gradeless'>
+		<table class="cargo_box" >
+			<thead>
+				<th>货物名称</th>
+				<th>货物说明</th>
+				<th>参考价（元） </th>
+				<th>单位</th>
+				<th>供货数量</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="d in typeList">
+					<td style="width:210px;">{{d.classifyName}}</td>
+					<td style="width:530px;" class='txt'>{{d.goodsExplain}}</td>
+					<td style="width:180px;">{{d.referencePrice||'无'}}</td>
+					<td style="width:60px;">{{d.unitValue||'无'}}</td>
+					<td style="width:220px;"><input type="text" ng-model="d.number" value="23541"></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="5" class=" view tc">
+						<!-- <a class='entrust' href="/page/sell/order_info.html">委托销售</a> -->
+						<a class='entrust' href="javascript:;" ng-click="go_order_info()">委托销售</a>
+						<a class='view' href="/page/sell/index.html">查看采购信息</a>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>
