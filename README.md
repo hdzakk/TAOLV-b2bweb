@@ -29,13 +29,9 @@ $ npm run start
 ## CLI命令(npm scripts)
 | 命令            | 作用&效果          |
 | --------------- | ------------- |
-| npm run build   | 根据`webpack.config.js`，build出一份生产环境的代码 |
-| npm run dev     | 根据`webpack.dev.config.js`，build出一份开发环境的代码 |
+| npm run dist   | 根据`webpack.config.js`，打包出一份生产环境的代码 |
+| npm run dev     | 根据`webpack.dev.config.js`，打包出一份开发环境的代码 |
 | npm run start   | 开启webpack-dev-server并自动打开浏览器，自动监测源码变动并实现LiveReload，**推荐实际开发时使用此项** |
-| npm run profile | 显示编译过程中每一项资源的耗时，用来调优的 |
-| npm run dll     | 生成Dll文件，每次升级第三方库时都需要重新执行一遍 |
-| npm run analyse  | 生成打包文件结构的可视化分析报告；注意请在`npm run build`或`npm run dev`后再执行 |
-| npm run analyze | 作用同上 |
 
 ## 目录结构说明
 ```
@@ -82,41 +78,3 @@ $ npm run start
         ├─libs # 与业务逻辑无关的库都可以放到这里
         └─logic # 业务逻辑
 ```
-
-## 更新日志
-### 2.1.0 (2017-07-26)
-更新了一批浏览器缓存相关配置，详情请看[webpack多页应用架构系列（十六）：善用浏览器缓存，该去则去，该留则留](https://segmentfault.com/a/1190000010317802)
-
-### 2.0.0 (2017-03-05)
-webpack及webpack-dev-server升级到v2版本，并相应修改webpack配置文件。
-
-### 1.4.1 (2017-01-24)
-支持js/css/less文件的热更新，但暂未支持模板文件。
-
-### 1.3.1 (2016-12-01)
-改为利用`webpack --json`来生成**webpack-bundle-analyzer**生成包文件结构的可视化分析报告所需的json文件。
-
-### 1.3.0 (2016-11-22)
-引入**webpack-bundle-analyzer**，用以生成打包文件结构的可视化分析报告。
-
-### 2.0.0 (2016-10-21)
-把基础设施从项目里抽离出来，实现多项目共用同一套架构/基础设施。由于本项目肩负有教程示例的责任，且2.x版本变化极大，因此另辟一个新repo（[Array-Huang/webpack-seed-v2](https://github.com/Array-Huang/webpack-seed-v2)）来放置。
-
-### 1.2.2 (2016-10-16)
-考虑到多个页面可能会共用html/js/css（例如**添加页面**和**修改页面**），在自动查找页面入口时，忽略以`_`开头的目录，因此，可以使用以`_`开头的目录来放置页面复用的资源。
-
-### 1.2.0 (2016-10-14)
-利用[`isaacs/node-glob`](https://github.com/isaacs/node-glob)根据约定好的文件目录结构自动查找页面入口，取代过去手动指定的做法（但如果在调试过程中希望只编译某些页面，仍然可以通过手动指定来实现）。
-
-### 1.1.0
-引入Dll的概念，将第三方库进行预打包，那么在打包我们的业务代码的时候，就不需要重复打包这些第三方库了。这尤其能提现在bootstrap上，可以省一大半的时间。
-- 如果修改了Dll所包含的第三方库，比如说升级之类的，请使用`npm run dll`重新打包Dll文件。注意：系统会在打包Dll前先清空Dll目录。
-- 如果重新打包了Dll，那么也请重新打包你的业务代码，使用`npm run build`或`npm run dev`。
-
-### 1.0.2
-- 编译文件前先清空build目录。
-- 分拆webpack配置文件，避免配置文件日益臃肿。
-- 分开生产环境和开发环境的webpack配置文件。其中，`npm run build`会调用生产环境的webpack配置文件(webpack.config.js)，而`npm run dev`和`npm run watch`会调用开发环境的配置文件。
-
-### 1.0.0
-由于此脚手架已具备投入生产环境的能力，故直接定义版本号为1.0.0
