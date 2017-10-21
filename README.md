@@ -36,34 +36,32 @@ $ npm run start
 ├─webpack.config.js # 生产环境的webpack配置文件（无实质内容，仅为组织整理）
 ├─webpack.dev.config.js # 开发环境的webpack配置文件（无实质内容，仅为组织整理）
 ├─src # 当前项目的源码
-    ├─pages # 各个页面独有的部分
-    │  ├─index(首页) # 业务模块
-    │  │  └─index 
-    │  │     ├─content.ejs # ejs模板放置html部分
-    │  │  	 ├─html.js # els模板针对的js文件
-    │  │     └─page.js # 页面的业务逻辑js
-    │  │
-    │  └─ ...(后面很多类似)
-    │
-    └─public # 各个页面使用到的公共资源
-        ├─components # ejs组件，比如头部、底部需要需要include的小模块
+    ├─pages # 各个页面独有的部分，如入口文件、只有该页面使用到的css、模板文件等
+    │  ├─alert # 业务模块
+    │  │  └─index # 具体页面
+    │  ├─index # 业务模块
+    │  │  ├─index # 具体页面
+    │  │  └─login # 具体页面
+    │  │      └─templates # 如果一个页面的HTML比较复杂，可以分成多块再拼在一起
+    │  └─user # 业务模块
+    │      ├─edit-password # 具体页面
+    │      └─modify-info # 具体页面
+    └─public-resource # 各个页面使用到的公共资源
+        ├─components # 组件，可以是纯HTML，也可以包含js/css/image等，看自己需要
         │  ├─footer # 页尾
         │  ├─header # 页头
-        │  ├─top # 各页面头部菜单
-        │  ├─nav # 各页面头部顶部导航条
-        │  ├─aboutNav # 关于我们头部菜单
-        │  ├─userNav # 会员中心头部菜单
-        │  ├─zixunNav # 资讯头部菜单
-        │  └─userTemplate # 会员中心各个页面的模板
-        │  
+        │  ├─side-menu # 侧边栏
+        │  └─top-nav # 顶部菜单
         ├─config # 各种配置文件
         ├─iconfont # iconfont的字体文件
-        ├─images # 公用的图片资源
+        ├─imgs # 公用的图片资源
         ├─layout # UI布局，组织各个组件拼起来，因应需要可以有不同的布局套路
         │  ├─layout # 具体的布局套路
         │  └─layout-without-nav # 具体的布局套路
-        ├─less # less文件
-        ├─script # 各页面的业务逻辑js文件
+        ├─less # less文件，用sass的也可以，又或者是纯css
+        │  ├─base-dir
+        │  ├─components-dir # 如果组件本身不需要js的，那么要加载组件的css比较困难，我建议可以直接用less来加载
+        │  └─base.less # 组织所有的less文件
         ├─libs # 与业务逻辑无关的库都可以放到这里
-        └─logic # 
+        └─logic # 业务逻辑
 ```
