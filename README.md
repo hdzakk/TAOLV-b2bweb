@@ -1,30 +1,17 @@
 # 淘绿web
 
-## 注意
-本项目master分支已升级到`webpack2`版本，如需查看`webpack1`版本，请查看[webpack1_version](https://github.com/Array-Huang/webpack-seed/tree/webpack1_version)分支。
-
-## 项目介绍
-本项目是一个基于webpack架构的**web app**脚手架，其特点如下：
-- 更适合多页应用。
-- 既可实现全后端分离，也可以生成后端渲染所需要的模板。
-- 引入layout和component的概念，方便多页面间对布局、组件的重用，妈妈再也不用担心我是选SPA呢还是Iframe了，咱们都！不！需！要！
-- 编译后的程序不依赖于外部的资源（包括css、font、图片等资源都做了迁移），可以整体放到CDN上。
-- 整合Bootstrap3及主题SB-Admin，但其实换掉也很简单，或者干脆不用CSS框架也行。
-- 不含Js框架（jQuery不算框架，谢谢）。
-- 本项目基于 ***webpack v2*** 和 ***webpack-dev-server v2***，全局和项目局部依赖都一样。
-
 ## 使用说明
 - 本项目使用包管理工具NPM，因此需要先把本项目所依赖的包下载下来：
 ```
 $ npm install
 ```
 
-- 启动服务器，推荐直接使用webpack-dev-server
+- 启动服务器
 ```
 $ npm run start
 ```
 
-- 理论上来说，webpack-dev-server会自动帮你打开浏览器并展示示例页面；如果没有的话，请手动打开浏览器，在地址栏里输入`http://localhost:8080`，Duang！页面就出来了！
+- 理论上来说，webpack-dev-server会自动帮你打开浏览器并展示示例页面；如果没有的话，请手动打开浏览器，在地址栏里输入`ip:端口`。
 
 ## CLI命令(npm scripts)
 | 命令            | 作用&效果          |
@@ -49,20 +36,23 @@ $ npm run start
 ├─webpack.config.js # 生产环境的webpack配置文件（无实质内容，仅为组织整理）
 ├─webpack.dev.config.js # 开发环境的webpack配置文件（无实质内容，仅为组织整理）
 ├─src # 当前项目的源码
-    ├─pages # 各个页面独有的部分，如入口文件、只有该页面使用到的css、模板文件等
-    │  ├─alert # 业务模块
-    │  │  └─index # 具体页面
-    │  ├─index # 业务模块
-    │  │  ├─index # 具体页面
-    │  │  └─login # 具体页面
-    │  │      └─templates # 如果一个页面的HTML比较复杂，可以分成多块再拼在一起
-    │  └─user # 业务模块
-    │      ├─edit-password # 具体页面
-    │      └─modify-info # 具体页面
-    └─public-resource # 各个页面使用到的公共资源
-        ├─components # 组件，可以是纯HTML，也可以包含js/css/image等，看自己需要
+    ├─pages # 各个页面独有的部分
+    │  ├─index(首页) # 业务模块
+    │  │  └─index 
+    │  │     ├─content.ejs # ejs模板放置html部分
+    │  │  	 ├─html.js # els模板针对的js文件
+    │  │     └─page.js # 页面的业务逻辑js
+    │  │
+    │  └─ ...(后面很多类似)
+    │
+    └─public # 各个页面使用到的公共资源
+        ├─components # ejs组件，比如头部、底部需要需要include的小模块
         │  ├─footer # 页尾
         │  ├─header # 页头
+        │  ├─side-menu # 侧边栏
+        │  ├─side-menu # 侧边栏
+        │  ├─side-menu # 侧边栏
+        │  ├─side-menu # 侧边栏
         │  ├─side-menu # 侧边栏
         │  └─top-nav # 顶部菜单
         ├─config # 各种配置文件
